@@ -2,7 +2,7 @@
 @use "../library/variables" as v;
 @use "../base/reset";
 
-.footer__container{
+.footer{
         margin: 0px;
         padding: 20px;
         width: 100%;
@@ -17,11 +17,11 @@
         flex-direction: column;
         align-items: center;
 
-        .footer__headtext{
+        h3{
             font-size: 24px;
         }
 
-        .footer__sub{
+        ul{
             display: flex;
             list-style-type: none;
             padding: 5px;
@@ -41,7 +41,7 @@
         flex-direction: column;
         align-items: center;
         
-        &__logo{
+        a{
             padding: 10px;
             color: v.$landingpage-text-color;
             text-decoration: none;
