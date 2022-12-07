@@ -39,7 +39,7 @@ header {
             display: none;
             &:checked + .hamburgerLogo .hamburgerLogo__topBun {
               transform: rotate(-45deg);
-              top: 15px;
+              top: 17px;
             }
             &:checked + .hamburgerLogo .hamburgerLogo__middleBun {
               opacity: 0;
