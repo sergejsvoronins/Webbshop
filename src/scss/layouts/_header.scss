@@ -1,4 +1,4 @@
-@use "../library/mixins";
+@use "../library/mixins" as m;
 @use "../library/variables" as v;
 @use "../base/reset";
 
@@ -10,7 +10,17 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
-
+    @include m.desktop{
+        justify-content: space-between;
+        padding: 0 5%;
+    }
+    h2 {
+        color: v.$logo-color;
+        font-size: 1.4em;
+        @include m.desktop{
+            font-size: 3em;
+        }
+    }
     nav {
         .hamburgerLogo {
             position: absolute;
@@ -24,6 +34,9 @@ header {
             z-index: 5;
             top: 0;
             left: 0;
+            @include m.desktop{
+                display: none;
+            }
             &:hover{
               cursor: pointer;
             }
@@ -66,6 +79,10 @@ header {
             width: 100%;
             justify-content: center;
             align-items: center;
+            @include m.desktop{
+                display:  flex;
+                position: static;
+            }
             ul {
                 display: flex;
                 height: 100%;
@@ -74,7 +91,10 @@ header {
                 justify-content: center;
                 gap: 10px;
                 padding: 4em;
-                
+                @include m.desktop{
+                    flex-direction: row;
+                    gap: 5em;
+                }
                 li{
                   list-style: none;
                    a {
@@ -83,6 +103,7 @@ header {
                     color: v.$landingpage-text-color;
                     font-size: 1.4em;
                     text-transform: uppercase;
+                    letter-spacing: 0.2em;
                     &:hover {
                         border-bottom: 3px solid v.$landingpage-text-color;
                     }
@@ -93,14 +114,14 @@ header {
         }
     }
 
-    h2 {
-        color: v.$logo-color;
-        font-size: 1.4em;
-    }
-    > div{
+
+    section {
         position: absolute;
         right: 0;
         padding: 2em;
+        @include m.desktop{
+            padding: 3em;
+        }
         i {
             font-size: 2em;
             color: v.$landingpage-text-color;
