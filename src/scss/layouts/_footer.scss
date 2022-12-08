@@ -43,21 +43,37 @@
             display: flex;
             list-style-type: none;
             padding: 5px;
+            margin: 2px;
             align-items: center;
             flex-direction: column;
 
             @include m.desktop{
                 align-items: flex-start;
                 position: relative;
-                left: -12px;
+                left: -8px;
               }
 
             li{
-                padding: 8px;
-                font-size: 22px;
+                margin: 6px;
 
                 @include m.desktop{
-                    font-size: 20px;
+                    margin: 2px;
+                }
+            
+                a{
+                    letter-spacing: 2px;
+                    font-size: 18px;
+                    color: v.$landingpage-text-color;
+                    text-decoration: none;
+
+                    &:hover{
+                        border-bottom: 1px solid v.$landingpage-text-color;
+                        
+                    }
+
+                    @include m.desktop{
+                        font-size: 18px;
+                    }
                 }
             }
         }
