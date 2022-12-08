@@ -4,84 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="scss/main.scss">
-    <script src="ts/main.ts" defer type="module"></script>
+    <link rel="stylesheet" href="/src/scss/layouts/_productpage-body.scss">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <input id="toggle" type="checkbox"></input>
-            <label for="toggle" class="hamburgerLogo">
-                <div class="hamburgerLogo__topBun"></div>
-                <div class="hamburgerLogo__middleBun"></div>
-                <div class="hamburgerLogo__bottomBun"></div>
-            </label>
-    
-          <div class="menu">
-            <ul>
-              <li>
-                <a href="#mobil">
-                  Mobil
-                </a></li>
-              <li>
-                <a href="#tablet">
-                  Tablet
-                </a>
-              </li>
-              <li>
-                <a href="#Laptop">
-                  Laptop
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+ <section class="filter">
+      <ul>
+        <li><a href="#" class="make-link">Tillverkare
+        <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Apple</a></li>
+            <li><a href="#">Samasung</a></li>
+            <li><a href="#">...</a></li>
+          </ul>
+        </li>
+      </ul>
+  
+      <ul>
+        <li><a href="#" class="color-link">Färg
+        <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Grön</a></li>
+            <li><a href="#">Röd</a></li>
+            <li><a href="#">Blå</a></li>
+          </ul>
+        </li>
+      </ul>
+  
+      <ul>
+        <li><a href="#" class="sort-link">Sortera efter
+        <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Lägsta pris</a></li>
+            <li><a href="#">Högsta pris</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-        <h2>Case it</h2>
-        <div>
-            <i class="fa-solid fa-bag-shopping"></i>
-        </div>
-    </header>
-
-    <main>
-    </main>
-
-    <footer>
-        <div class="footer">
-            <div class="footer__primary">
-                <h3>Support</h3>
-                <ul>
-                    <li>Kontakt</li>
-                    <li>Vanliga frågor</li>
-                    <li>Spåra order</li>
-                </ul>
-            </div>
-            <div class="footer__primary">
-                <h3>Brand</h3>
-                <ul>
-                    <li>Om oss</li>
-                    <li>För återförsäljning</li>
-                    <li>Design</li>
-                </ul>
-            </div>
-            <div class="footer__social">
-                <a href="">
-                    <i class="fa-brands fa-instagram"></i>
-                    Instagram
-                </a>
-
-                <a href="">
-                    <i class="fa-brands fa-facebook"></i>
-                    Facebook
-                </a>
-                
-            </div>
-        </div>
-
-    </footer>
+    <section class="products"></section>
+    </section>
     
 </body>
 </html>
