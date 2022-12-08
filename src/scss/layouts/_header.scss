@@ -19,7 +19,7 @@ header {
         color: v.$logo-color;
         font-size: 1.4em;
         @include m.desktop{
-            font-size: 3em;
+            font-size: 2em;
         }
     }
     nav {
@@ -31,7 +31,7 @@ header {
             justify-content: center;
             height: 100%;
             padding: 0 20px;
-            gap: 13px;
+            gap: 10px;
             z-index: 5;
             top: 0;
             left: 0;
@@ -43,8 +43,8 @@ header {
             }
             .hamburgerLogo__topBun, .hamburgerLogo__middleBun, .hamburgerLogo__bottomBun {
               position: relative;
-              width: 2.5em;
-              height: 3px;
+              width: 2em;
+              height: 2px;
               background-color: v.$landingpage-text-color;
               transition: all 0.2s ease-in-out;
             }
@@ -53,19 +53,20 @@ header {
             display: none;
             &:checked + .hamburgerLogo .hamburgerLogo__topBun {
               transform: rotate(-45deg);
-              top: 17px;
+              top: 6px;
             }
             &:checked + .hamburgerLogo .hamburgerLogo__middleBun {
               opacity: 0;
+              display: none;
             }
             &:checked + .hamburgerLogo .hamburgerLogo__bottomBun {
               transform: rotate(45deg);
-              top: -15px;
+              top: -6px;
             }
             &:checked  +.hamburgerLogo +  .menu{
               display: block;
               top: 0;
-              z-index: 4;
+
             }
         }
         .menu {
@@ -80,6 +81,7 @@ header {
             width: 100%;
             justify-content: center;
             align-items: center;
+            z-index: 4;
             @include m.desktop{
                 display:  flex;
                 position: static;
@@ -102,11 +104,11 @@ header {
                     text-align: center;
                     text-decoration: none;
                     color: v.$landingpage-text-color;
-                    font-size: 1.4em;
+                    font-size: 0.8em;
                     text-transform: uppercase;
                     letter-spacing: 0.2em;
                     &:hover {
-                        border-bottom: 3px solid v.$landingpage-text-color;
+                        border-bottom: 1px solid v.$landingpage-text-color;
                     }
                   }
                 }
@@ -119,12 +121,9 @@ header {
     .cartIcon {
         position: absolute;
         right: 0;
-        padding: 2em;
-        @include m.desktop{
-            padding: 3em;
-        }
+        padding: 1em;
         i {
-            font-size: 2em;
+            font-size: 1.2em;
             color: v.$landingpage-text-color;
         }
         &:hover {

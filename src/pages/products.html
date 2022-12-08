@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="scss/main.scss">
     <script src="ts/main.ts" defer type="module"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <title>Products Page</title>
 </head>
 
 <body>
@@ -48,6 +48,41 @@
 
     <main>
     </main>
+
+    <section class="filter">
+      <ul>
+        <li><a href="#" class="make-link">Tillverkare
+        <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Apple</a></li>
+            <li><a href="#">Samasung</a></li>
+            <li><a href="#">...</a></li>
+          </ul>
+        </li>
+      </ul>
+  
+      <ul>
+        <li><a href="#" class="color-link">Färg
+        <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Grön</a></li>
+            <li><a href="#">Röd</a></li>
+            <li><a href="#">Blå</a></li>
+          </ul>
+        </li>
+      </ul>
+  
+      <ul>
+        <li><a href="#" class="color-link">Pris
+        <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <input type="range" class="price-range" min="0" value="" max="1000"/>
+            <p class="price-value"></p>
+          </ul>
+        </li>
+      </ul>
+      </section>
+      <hr>
 
     <footer>
         <div class="footer">
