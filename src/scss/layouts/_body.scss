@@ -13,6 +13,7 @@
   position: relative;
   @include m.desktop {
     background-position: bottom;
+    background-image: url(/src/images/Nina-Hero-Desktop.png);
   }
 
   &__text-box {
