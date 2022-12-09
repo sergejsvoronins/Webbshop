@@ -11,22 +11,22 @@
 </head>
 
 <body>
- <section class="filter">
-      <ul>
-        <li><a href="#" class="make-link">Tillverkare
+ <section class="filter" id="products-page">
+  <div>
+      <ul class="filter__container">
+        <li><a href="#">Tillverkare
         <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown">
+          <ul class="filter--dropdown">
             <li><a href="#">Apple</a></li>
             <li><a href="#">Samasung</a></li>
-            <li><a href="#">...</a></li>
           </ul>
         </li>
       </ul>
   
-      <ul>
-        <li><a href="#" class="color-link">Färg
+      <ul class="filter__container">
+        <li><a href="#">Färg
         <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown">
+          <ul class="filter--dropdown">
             <li><a href="#">Grön</a></li>
             <li><a href="#">Röd</a></li>
             <li><a href="#">Blå</a></li>
@@ -34,18 +34,20 @@
         </li>
       </ul>
   
-      <ul>
-        <li><a href="#" class="sort-link">Sortera efter
+      <ul class="filter__container">
+        <li><a href="#">Sortera efter
         <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown">
+          <ul class="filter--dropdown">
             <li><a href="#">Lägsta pris</a></li>
             <li><a href="#">Högsta pris</a></li>
           </ul>
         </li>
       </ul>
+    </div>
     </section>
 
     <section class="products"></section>
+    <div></div>
     </section>
     
 </body>

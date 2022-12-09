@@ -3,26 +3,42 @@
 @use "../library/variables" as v;
 
 body {
+  box-sizing: border-box;
   background-color: #eaeaea;
 }
 
 .filter {
   margin: 3rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid v.$hr-line;
+
+  &__container {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  &--dropdown {
+    visibility: hidden;
+    opacity: 0;
+    min-width: 5rem;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    left: 0;
+    display: none;
+  }
 }
 
 a {
   text-decoration: none;
   color: black;
+  font-size: 0.8rem;
   &:hover {
     text-decoration: underline;
   }
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-  text-align: center;
 }
 
 li {
@@ -41,17 +57,6 @@ li {
   }
 }
 
-.dropdown {
-  visibility: hidden;
-  opacity: 0;
-  min-width: 5rem;
-  position: absolute;
-  transition: all 0.5s ease;
-  margin-top: 1rem;
-  left: 0;
-  display: none;
-}
-
 ul li:hover > ul,
 ul li ul:hover {
   visibility: visible;
@@ -62,4 +67,8 @@ ul li ul:hover {
 ul li ul li {
   clear: both;
   width: 100%;
+}
+
+.products {
+  margin: 10px;
 }
