@@ -6,7 +6,6 @@
 .cartContainer {
     width: 100%;
     height: auto;
-    
     z-index: 5;
     display: flex;
     flex-direction: column;
@@ -75,14 +74,15 @@
             font-size: 1.5em;
         }
     }
-    &__toCheckOut {
+    &__submitBtn {
         text-decoration: none;
         @include m.desktop {
             width: 50%;
             margin: 0 auto;
         }
-        div {
+        button {
             text-align: center;
+            width: 100%;
             background-color: v.$green-btn;
             color: #fff;
             font-size: 1em;

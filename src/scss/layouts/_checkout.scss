@@ -10,7 +10,7 @@
         width: 100%;
         justify-content: space-between;
         border-bottom: 2px solid v.$hr-line;
-        padding: 1em 0;
+        padding-bottom: 0.4em;
         text-transform: uppercase;
         span {
             font-size: 0.6em;
@@ -18,34 +18,37 @@
     }
     &__freightOption {
         > span {
-            font-size: 1em;
+            @include m.checkoutSectionTitel;
         }
-        div {
-            display: flex;
-            width: 100%;
-            padding: 1em 0;
-            padding-left: 1em;
-            input {
-                min-width: 10%;
-                min-height: 1em;
-            }
-            label {
+        > div {
+            @include m.checkoutSectionBorder;
+            > div {
                 display: flex;
-                width: 90%;
-                justify-content: space-between;
-                padding-left: 1em;
-                span {
-                    font-size: 0.8em;
+                width: 100%;
+                padding: 1em;
+                input {
+                    min-width: 10%;
+                    min-height: 1em;
+                }
+                label {
+                    display: flex;
+                    width: 90%;
+                    justify-content: space-between;
+                    span {
+                        font-size: 0.8em;
+                    }
                 }
             }
         }
     }
     &__formSection {
+        > span {
+            @include m.checkoutSectionTitel;
+        }
         &__inputSection {
             display: flex;
             flex-wrap: wrap;
-            border: 1px solid v.$form-label-color;
-            padding: 2em 0.5em;
+            @include m.checkoutSectionBorder;
             div {
                 width: 100%;
                 padding: 0.3em;
@@ -73,9 +76,13 @@
         }
     }
     &__payOption {
+        > span {
+            @include m.checkoutSectionTitel;
+        }
         > div {
+            @include m.checkoutSectionBorder;
             > span {
-                @include m.checkoutSectionTitle;
+                @include m.checkoutPayOptionTitle;
             }
             > div {
                 width: 100%;
