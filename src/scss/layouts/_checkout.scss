@@ -1,0 +1,130 @@
+@use "../layouts/cart";
+@use "../library/mixins" as m;
+@use "../library/variables" as v;
+@use "../base/reset";
+
+.cartContainer {
+    height: auto;
+    &__moms {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        border-bottom: 2px solid v.$hr-line;
+        padding: 1em 0;
+        text-transform: uppercase;
+        span {
+            font-size: 0.6em;
+        }
+    }
+    &__freightOption {
+        > span {
+            font-size: 1em;
+        }
+        div {
+            display: flex;
+            width: 100%;
+            padding: 1em 0;
+            padding-left: 1em;
+            input {
+                min-width: 10%;
+                min-height: 1em;
+            }
+            label {
+                display: flex;
+                width: 90%;
+                justify-content: space-between;
+                padding-left: 1em;
+                span {
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+    &__formSection {
+        &__inputSection {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid v.$form-label-color;
+            padding: 2em 0.5em;
+            div {
+                width: 100%;
+                padding: 0.3em;
+                background-color: #fff;
+                &:nth-child(1) {
+                    width: 50%;
+                }
+                &:nth-child(2) {
+                    width: 50%;
+                }
+                border: 1px solid v.$form-label-color;
+                border-radius: 2px;
+                label {
+                    color: v.$form-label-color;
+                }
+                input {
+                    border: none;
+                    width: 100%;
+                    padding: 0.2em;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+    &__payOption {
+        > div {
+            > div {
+                width: 100%;
+                padding: 0.3em;
+                background-color: #fff;
+                display: flex;
+                width: 100%;
+                padding: 1em 0;
+                padding-left: 1em;
+                align-items: center;
+                input {
+                    width: 10%;
+                    height: 1em;
+                }
+                label {
+                    display: flex;
+                    width: 90%;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 1em;
+                    span {
+                        width: 80%;
+                        font-size: 0.8em;
+                    }
+                    div {
+                        width: 10%;
+                        img {
+                            width: 100%;
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__priceToPay {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 2em 0;
+        &__header {
+            font-size: 0.8em;
+        }
+        &__totalPrice {
+            font-size: 2em;
+        }
+        
+    }
+    &__moms, &__freightOption, &__formSection, &__payOption, &__priceToPay {
+        @include m.desktop {
+            width: 50%;
+            margin: 0 auto;
+        }
+    }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../scss/main.scss">
+    <script src="../ts/main.ts" defer type="module"></script>
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <section class="cartContainer">
+            <div class="cartContainer__header">
+                <h2>kassa</h2>
+                <a href="#"><i class="fa-solid fa-xmark"></i></a> 
+            </div>
+            <div class="cartContainer__products"></div>
+            <div class="cartContainer__priceProducts">
+                <span>produkter</span>
+                <span>0:-</span>
+            </div>
+            <div class="cartContainer__priceFreight">
+                <span>frakt</span>
+                <span>0:-</span>
+            </div>
+            <div class="cartContainer__totalPrice">
+                <span>totalt</span>
+                <span>0:-</span>
+            </div>
+            <div class="cartContainer__moms">
+                <span>inklusive</span>
+                <span>25% moms</span>
+            </div>
+            <div class="cartContainer__freightOption">
+                <span>Leveransalternative</span>
+                <div>
+                    <input type="radio" name="post" id="postBox">
+                    <label for="postBox">
+                        <span>Hemleverans till brevlåda</span>
+                        <span>49:-</span>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" name="post" id="postOffice">
+                    <label for="postOffice">
+                        <span>Leverans till Ombud</span>
+                        <span>Grattis</span>
+                    </label>
+                </div>
+            </div>    
+            <form class="cartContainer__formSection" id="form">
+                <span>Dina uppgifter</span>
+                <div class="cartContainer__formSection__inputSection">
+                    <div>
+                        <label for="name">Förnamn</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div>
+                        <label for="secondname">Efternamn</label>
+                        <input type="text" id="secondname">
+                    </div>
+                    <div>
+                        <label for="">Adress</label>
+                        <input type="text">
+                    </div>
+                    <div>
+                        <label for="">Postnummer</label>
+                        <input type="text">
+                    </div>
+                    <div>
+                        <label for="">Mobil</label>
+                        <input type="text">
+                    </div>
+                    <div>
+                        <label for="">E-post</label>
+                        <input type="text">
+                    </div>
+
+                </div>
+            </form>  
+            <div class="cartContainer__payOption">
+                <span>Betalningssätt</span>
+                <div>
+                    <span>Klarna</span>
+                    <div>
+                        <input type="radio" name="payAlt" id="klarna">
+                        <label for="klarna">
+                            <span>Få först betala sen</span>
+                            <div>
+                                <img src="./../images/klarna-logo.png" alt="Klarna logo">
+                            </div>
+                        </label>
+                    </div>
+                    <span>Swish</span>
+                    <div>
+                        <input type="radio" name="payAlt" id="swish">
+                        <label for="swish">
+                            <span>Betala direkt</span>
+                            <div>
+                                <img src="./../images/swish-logo.svg" alt="Swish logo">
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="cartContainer__priceToPay">
+                <span class="cartContainer__priceToPay__header">Totalbelopp inkl. moms</span>
+                <span id="totalPrice" class="cartContainer__priceToPay__totalPrice">698kr</span>
+            </div>
+            <a href="#" class="cartContainer__toCheckOut">
+                <div>betala köp</div>
+            </a>
+
+            
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
