@@ -77,17 +77,29 @@
                 padding: 0.3em;
                 background-color: #fff;
                 display: flex;
-            width: 100%;
-            padding: 1em 0;
-            input {
-                min-width: 10%;
-                min-height: 1em;
-            }
-            label {
-                display: flex;
-                width: 90%;
-                justify-content: space-between;
-            }
+                width: 100%;
+                padding: 1em 1em;
+                align-items: center;
+                input {
+                    width: 10%;
+                    height: 2em;
+                }
+                label {
+                    display: flex;
+                    width: 90%;
+                    justify-content: space-between;
+                    align-items: center;
+                    span {
+                        width: 80%;
+                    }
+                    div {
+                        width: 10%;
+                        img {
+                            width: 100%;
+                            
+                        }
+                    }
+                }
             }
         }
     }
