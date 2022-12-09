@@ -2,29 +2,38 @@
 @use "../library/variables" as v;
 @use "../base/reset";
 
-
+header {
+    display: none;
+}
 .cartContainer {
-    position: fixed;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 100vh;
-    background-color: v.$body-color;
+    height: auto;
+    
     z-index: 5;
     display: flex;
     flex-direction: column;
     padding: 1em;
-    * {
-        text-transform: uppercase;
-    }
     &__header {
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         padding-bottom: 1em;
-        border-bottom: 2px solid v.$hr-line;
+        @include m.desktop {
+            h2 {
+                width: 100%;
+                text-align: center;
+            }
+            a {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
         h2 {
             font-size: 1.5em;
+            text-transform: uppercase;
+
         }
         a {
             &:hover {
@@ -41,7 +50,19 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 15px 0;
+        padding: 1em 0;
+        text-transform: uppercase;
+        @include m.desktop {
+            width: 50%;
+            margin: 0 auto;
+        }
+    }
+    &__products {
+        border-top: 2px solid v.$hr-line;
+        @include m.desktop {
+            width: 50%;
+            margin: 0 auto;
+        }
     }
     &__priceProducts, &__priceFreight {
         span {
@@ -56,18 +77,29 @@
             font-size: 1.5em;
         }
     }
-
-    &__btnToCheckOut {
-        background-color: v.$green-btn;
-        color: #fff;
-        font-size: 1em;
-        padding: 15px;
-        letter-spacing: 0.2em;
-        &:hover {
-            cursor: pointer;
+    &__toCheckOut {
+        text-decoration: none;
+        @include m.desktop {
+            width: 50%;
+            margin: 0 auto;
         }
-        &:active {
-            transform: scale(0.99);
+        div {
+            text-align: center;
+            background-color: v.$green-btn;
+            color: #fff;
+            font-size: 1em;
+            padding: 1em;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            &:hover {
+                cursor: pointer;
+            }
+            &:active {
+                transform: scale(0.99);
+            }
         }
     }
+}
+footer {
+    display: none;
 }
