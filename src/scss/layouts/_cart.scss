@@ -33,12 +33,17 @@
 
         }
         a {
+            
             &:hover {
                 cursor: pointer;
+                i {
+                    color: v.$hr-line; 
+                }
             }
             i {
-                color: #000;
+                color: v.$nav-color;
                 font-size: 1.5em;
+                transition: color 0.1s ease-in-out;
             }
         }
     }
@@ -55,7 +60,7 @@
         }
     }
     &__products {
-        border-top: 2px solid v.$hr-line;
+        border-top: v.$horisontalLine;
         @include m.desktop {
             width: 50%;
             margin: 0 auto;
@@ -67,7 +72,7 @@
         }
     }
     &__priceProducts {
-        border-bottom: 2px solid v.$hr-line;
+        border-bottom: v.$horisontalLine;
     }
     &__totalPrice {
         span {
@@ -84,6 +89,8 @@
             text-align: center;
             width: 100%;
             background-color: v.$green-btn;
+            box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.3);
+            border: none;
             color: #fff;
             font-size: 1em;
             padding: 1em;

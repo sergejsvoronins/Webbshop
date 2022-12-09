@@ -9,7 +9,7 @@
         display: flex;
         width: 100%;
         justify-content: space-between;
-        border-bottom: 2px solid v.$hr-line;
+        border-bottom: v.$horisontalLine;
         padding-bottom: 0.4em;
         text-transform: uppercase;
         span {
@@ -26,6 +26,7 @@
                 display: flex;
                 width: 100%;
                 padding: 1em;
+                gap: 0.3em;
                 input {
                     min-width: 10%;
                     min-height: 1em;
@@ -53,14 +54,13 @@
                 width: 100%;
                 padding: 0.3em;
                 background-color: #fff;
+                border: 1px solid v.$form-label-color;
                 &:nth-child(1) {
                     width: 50%;
                 }
                 &:nth-child(2) {
                     width: 50%;
                 }
-                border: 1px solid v.$form-label-color;
-                border-radius: 2px;
                 label {
                     color: v.$form-label-color;
                 }
@@ -110,8 +110,7 @@
                     div {
                         width: 10%;
                         img {
-                            width: 100%;
-                            
+                            width: 100%;  
                         }
                     }
                 }
@@ -128,8 +127,7 @@
         }
         &__totalPrice {
             font-size: 2em;
-        }
-        
+        }  
     }
     &__moms, &__freightOption, &__formSection, &__payOption, &__priceToPay {
         @include m.desktop {
