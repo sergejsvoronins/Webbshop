@@ -15,11 +15,14 @@ header {
         justify-content: space-between;
         padding: 0 5%;
     }
-    >h2 {
-        color: v.$logo-color;
-        font-size: 1.4em;
-        @include m.desktop{
-            font-size: 2em;
+    >a {
+        text-decoration: none;
+        >h2 {
+            color: v.$logo-color;
+            font-size: 1.4em;
+            @include m.desktop{
+                font-size: 2em;
+            }
         }
     }
     nav {
