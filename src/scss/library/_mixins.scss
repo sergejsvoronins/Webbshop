@@ -3,22 +3,3 @@
     @content;
   }
 }
-
-@mixin button($bg, $padding, $border-radius) {
-  background-color: $bg;
-  padding: $padding;
-  border-radius: $border-radius;
-
-  &:hover {
-    background: darken($bg, 10%);
-    transition: all 0.3s ease;
-    transform: translateY(-3px);
-    box-shadow: 0 1rem 2.5rem rgba(v.$dark-btn, 0.3);
-    text-decoration: none;
-  }
-  &:active {
-    background: darken($bg, 25%);
-    transform: translateY(-1px);
-    box-shadow: 0 0.5rem 1.5rem rgba(v.$dark-btn, 0.3);
-  }
-}
