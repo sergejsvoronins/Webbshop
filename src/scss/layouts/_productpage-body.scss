@@ -3,21 +3,19 @@
 @use "../library/variables" as v;
 
 body {
-  box-sizing: border-box;
   background-color: #eaeaea;
 }
 
 .filter {
+  display: flex;
+  flex-direction: row;
   margin: 3rem;
-  padding-bottom: 4rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid v.$hr-line;
 
   &__container {
     list-style: none;
-    margin: 0;
-    padding-left: 0;
     text-align: center;
-    align-items: center;
   }
 
   &--dropdown {
@@ -30,43 +28,41 @@ body {
     left: 0;
     display: none;
   }
-}
-
-a {
-  text-decoration: none;
-  color: black;
-  font-size: 0.8rem;
-  &:hover {
-    text-decoration: underline;
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.8rem;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-}
+  li {
+    color: black;
+    display: block;
+    float: left;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+    transition-duration: 0.5s;
 
-li {
-  color: black;
-  display: block;
-  float: left;
-  padding: 1rem;
-  position: relative;
-  text-decoration: none;
-  transition-duration: 0.5s;
-
-  &:hover {
-    background: v.$light-btn;
-    cursor: pointer;
-    border-radius: 2px;
+    &:hover {
+      background: v.$light-btn;
+      cursor: pointer;
+      border-radius: 2px;
+    }
   }
-}
 
-ul li:hover > ul,
-ul li ul:hover {
-  visibility: visible;
-  opacity: 1;
-  display: block;
-}
+  ul li:hover > ul,
+  ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+  }
 
-ul li ul li {
-  clear: both;
-  width: 100%;
+  ul li ul li {
+    clear: both;
+    width: 100%;
+  }
 }
 
 .products {
