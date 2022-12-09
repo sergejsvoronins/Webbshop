@@ -1,5 +1,10 @@
 @mixin desktop {
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 1200px) {
     @content;
   }
+}
+@mixin checkoutSectionTitle {
+  display: flex;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
 }

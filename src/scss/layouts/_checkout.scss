@@ -74,6 +74,9 @@
     }
     &__payOption {
         > div {
+            > span {
+                @include m.checkoutSectionTitle;
+            }
             > div {
                 width: 100%;
                 padding: 0.3em;
