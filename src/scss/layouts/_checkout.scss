@@ -24,6 +24,7 @@
             display: flex;
             width: 100%;
             padding: 1em 0;
+            padding-left: 1em;
             input {
                 min-width: 10%;
                 min-height: 1em;
@@ -32,6 +33,7 @@
                 display: flex;
                 width: 90%;
                 justify-content: space-between;
+                padding-left: 1em;
                 span {
                     font-size: 0.8em;
                 }
@@ -78,19 +80,22 @@
                 background-color: #fff;
                 display: flex;
                 width: 100%;
-                padding: 1em 1em;
+                padding: 1em 0;
+                padding-left: 1em;
                 align-items: center;
                 input {
                     width: 10%;
-                    height: 2em;
+                    height: 1em;
                 }
                 label {
                     display: flex;
                     width: 90%;
                     justify-content: space-between;
                     align-items: center;
+                    padding: 0 1em;
                     span {
                         width: 80%;
+                        font-size: 0.8em;
                     }
                     div {
                         width: 10%;
@@ -116,5 +121,10 @@
         }
         
     }
-
+    &__moms, &__freightOption, &__formSection, &__payOption, &__priceToPay {
+        @include m.desktop {
+            width: 50%;
+            margin: 0 auto;
+        }
+    }
 }

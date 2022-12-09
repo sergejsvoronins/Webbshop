@@ -1,4 +1,5 @@
 @use "../library/mixins";
+@use "../library/variables" as v;
 
 * {
   margin: 0;
@@ -7,4 +8,7 @@
   scroll-behavior: smooth;
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
+}
+body {
+    background-color: v.$body-color;
 }
