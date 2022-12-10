@@ -55,48 +55,37 @@
 }
 
 .btn {
-  &:link,
-  &:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    display: inline-block;
-    border-radius: 2px;
-    position: relative;
-    background-color: v.$light-btn;
-    color: #000;
-    font-weight: 600;
+  &--white {
+    &:link,
+    &:visited {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      border-radius: 2px;
+      position: relative;
+      background-color: v.$light-btn;
+      color: #000;
+      font-weight: 600;
 
-    @include m.desktop {
-      padding: 0.8rem 3rem;
-      letter-spacing: 0.4rem;
+      @include m.desktop {
+        padding: 0.8rem 3rem;
+        letter-spacing: 0.4rem;
+      }
     }
-  }
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 
-    &::after {
-      transform: scaleX(1.4) scaleY(1.6);
-      opacity: 0;
+      &::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+      }
     }
-  }
 
-  &:active {
-    transform: translateY(-1px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-  }
-
-  &::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all 0.4s;
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    }
   }
 }
