@@ -8,10 +8,15 @@ body {
 
 .filter {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   margin: 3rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid v.$hr-line;
+
+  @include m.desktop {
+    justify-content: flex-start;
+  }
 
   &__container {
     list-style: none;
