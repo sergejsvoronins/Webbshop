@@ -69,3 +69,36 @@ body {
     width: 100%;
   }
 }
+
+/*------Products-----*/
+.products {
+  padding: 1rem 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+.products_center {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 2rem;
+}
+
+.img-container {
+  position: relative;
+}
+.bag-btn {
+  position: absolute;
+}
+.product-img {
+  display: block;
+  width: 50%;
+  min-height: 12rem;
+}
