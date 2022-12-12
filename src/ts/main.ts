@@ -1,16 +1,7 @@
 import { Product } from "./models/product";
 
 let productList : Product [] = [];
-
-// let product : Product = new Product (
-//     "Thin Case",
-//     "",
-//     "Apple",
-//     "röd",
-//     "349",
-//     0
-// );
-// productList.push(product);
+let cartList : Product [] = [];
 createProduct("Thin Case","","Apple","röd","349",0);
 createProduct("Thin Case","","Apple","grön","349",0);
 createProduct("Thin Case","","Apple","blå","349",0);
