@@ -5,6 +5,7 @@
     "@parcel/validator-typescript": "^2.8.0",
     "buffer": "^5.7.1",
     "parcel": "^2.8.1",
+    "parcel-reporter-static-files-copy": "^1.4.0",
     "process": "^0.11.10"
   },
   "dependencies": {
@@ -12,5 +13,10 @@
   },
   "scripts": {
     "start": "npx parcel src/index.html src/pages/products.html src/pages/productinfo.html src/pages/cart.html src/pages/checkout.html --no-cache"
+  },
+  "staticFiles": {
+    "staticPath": "src/assets/img",
+    "staticOutPath": "assets/img"
+
   }
 }
