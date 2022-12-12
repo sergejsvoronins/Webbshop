@@ -1,5 +1,14 @@
+import { loadFromlocalStorage } from "./main";
+import { Product } from "./models/product";
+import { productList } from "./main";
+
+let cartList : Product [] = [];
+loadFromlocalStorage();
+console.log(productList);
+
+
 // createCartHtml(productList);
-// let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
+let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
 // function createCartHtml (someList:Product []) {
 //     for (let i=0; i<someList.length;i++){
 //         let productImgDiv : HTMLDivElement = document.createElement("div");
