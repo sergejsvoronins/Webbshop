@@ -14,10 +14,10 @@ let cartProductPrice = document.getElementById("cartProductsPrice") as HTMLSpanE
 let cartTotalPrice = document.getElementById("cartTotalPrice") as HTMLSpanElement;
 
 createCartHtml(productList);
-function createCartHtml (someList:Product []) {
+function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
     cartPrice = 0;
-    for (let i=0; i<someList.length;i++){
+    for (let i=0; i<products.length;i++){
         // if (someList[i].buyAmount > 0){
             let productDiv : HTMLDivElement = document.createElement("div");
             productDiv.classList.add("cartContainer__products__itemContainer")
@@ -28,13 +28,13 @@ function createCartHtml (someList:Product []) {
             productDiv.appendChild(productInfoDiv);
             let productImg : HTMLImageElement = document.createElement("img");
             productImgDiv.appendChild(productImg);
-            productImg.src = someList[i].url;
+            productImg.src = products[i].url;
             let productTitle : HTMLParagraphElement = document.createElement("p");
-            productTitle.innerHTML = someList[i].title;
+            productTitle.innerHTML = products[i].title;
             let productColor : HTMLParagraphElement = document.createElement("p");
-            productColor.innerHTML = someList[i].color;
+            productColor.innerHTML = products[i].color;
             let productPrice : HTMLParagraphElement = document.createElement("p");
-            productPrice.innerHTML = someList[i].price+":-";
+            productPrice.innerHTML = products[i].price+":-";
             let productAmountDiv : HTMLDivElement = document.createElement("div");
             productInfoDiv.appendChild(productTitle);
             productInfoDiv.appendChild(productColor);
@@ -43,23 +43,23 @@ function createCartHtml (someList:Product []) {
             let increaseBtn : HTMLButtonElement = document.createElement("button");
             increaseBtn.innerHTML = "+";
             let productAmountNumber : HTMLDivElement = document.createElement ("div");
-            productAmountNumber.innerHTML = (someList[i].buyAmount).toString();
+            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
             decreaseBtn.innerHTML = "-";
             productAmountDiv.appendChild(increaseBtn);
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(decreaseBtn);
-            cartPrice += (+someList[i].price*someList[i].buyAmount);
+            cartPrice += (+products[i].price*products[i].buyAmount);
             cartProductPrice.innerHTML = cartPrice.toString()+":-";
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             increaseBtn.addEventListener("click", ()=>{
-                someList[i].buyAmount = someList[i].buyAmount+1;
-                createCartHtml(someList);
+                products[i].buyAmount = products[i].buyAmount+1;
+                createCartHtml(products);
                 
             })
             decreaseBtn.addEventListener("click", ()=>{
-                someList[i].buyAmount = someList[i].buyAmount-1;
-                createCartHtml(someList);
+                products[i].buyAmount = products[i].buyAmount-1;
+                createCartHtml(products);
                 
             })
         // }
