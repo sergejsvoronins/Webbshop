@@ -8,7 +8,23 @@ createProduct("Thin Case","","Apple","blå","349",0);
 createProduct("Thin Case","","Samsung","röd","349",0);
 createProduct("Thin Case","","Samsung","grön","349",0);
 createProduct("Thin Case","","Samsung","blå","349",0);
-console.log(productList);
+
+
+loadToLocalStorage(productList);
+loadFromloaclStorage();
+
+
+
+function loadToLocalStorage (someList: Product []){
+    localStorage.setItem ("productList", JSON.stringify(someList));
+}
+
+function loadFromloaclStorage () {
+    let products : [] = JSON.parse(localStorage.getItem("productList") || "[]");
+    let productList = products.map (( products:Product )=>{
+        return new Product (products.title,products.url, products.brand, products.color, products.price, products.buyAmount)
+    })
+}
 
 
 function createProduct (
@@ -17,5 +33,8 @@ function createProduct (
     let product : Product = new Product (title,url,brand,color,price,amount);
     productList.push(product);
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> develop

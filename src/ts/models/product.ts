@@ -5,6 +5,6 @@ export class Product {
         public brand: string,
         public color: string,
         public price: string,
-        public buyAmount:number,
+        public buyAmount: number,
     ){}
 }
