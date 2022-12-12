@@ -2,10 +2,6 @@
 @use "../library/variables" as v;
 @use "../base/reset";
 
-*{
-    margin: 0;
-    background-color: v.$body-color;
-
 
     .back-arrow{
         
@@ -179,4 +175,3 @@
         }
 
     }
-}
