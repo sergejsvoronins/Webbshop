@@ -12,6 +12,7 @@ createProduct("Thin Case","","Samsung","blå","349",0);
 
 loadToLocalStorage(productList);
 loadFromloaclStorage();
+export {productList};
 
 
 
