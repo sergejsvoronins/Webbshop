@@ -33,8 +33,5 @@ function createProduct (
     let product : Product = new Product (title,url,brand,color,price,amount);
     productList.push(product);
 }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> develop
