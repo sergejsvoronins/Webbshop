@@ -100,7 +100,7 @@ header {
                 @include m.desktop{
                     flex-direction: row;
                     gap: 5em;
-                    padding: 0;
+                    padding: 0 4em;
                 }
                 li{
                   list-style: none;
