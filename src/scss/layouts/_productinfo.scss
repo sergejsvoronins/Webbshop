@@ -1,0 +1,177 @@
+@use "../library/mixins" as m;
+@use "../library/variables" as v;
+@use "../base/reset";
+
+
+    .back-arrow{
+        
+        a{
+            i{
+                font-size: 35px;
+                padding: 25px;
+                color: v.$dark-btn;
+
+                @include m.desktop{
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+
+    .hero-container{
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+
+        @include m.desktop{
+            justify-content: start;
+            height: auto;
+        }
+
+        img{
+            height: 350px;
+            width: 350px;
+
+            @include m.desktop{
+                height: 500px;
+                width: 500px;
+            }
+        }
+
+        .hero-product{
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            
+            @include m.desktop{
+                display: flex;
+                flex-direction: row;
+                justify-content: center ;
+            }
+
+            .hero-detail-container{
+                padding-top: 20px;
+                margin: 0px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                
+                @include m.desktop{
+                    margin-left: 50px;
+                    width: 20%;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: flex-end;
+                }
+
+                .hero-detail-name{
+                    font-weight: bold;
+                    padding: 10px;
+                }
+
+                .hero-detail-color{
+                    padding: 10px;
+                }
+
+                .hero-detail-variants{
+                        display: flex;
+                        justify-content: space-evenly;
+                        flex-direction: row;
+
+                    .color1{
+                        margin: 10px;
+                        background-color: #29283D;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        border: 2px solid black;
+
+                        @include m.desktop{
+                            width: 50px;
+                            height: 50px;
+                        }
+                    }
+                    .color2{
+                        margin: 10px;
+                        background-color: #e24a4a;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+
+                        @include m.desktop{
+                            width: 50px;
+                            height: 50px;
+                        }
+                    }
+                    .color3{
+                        margin: 10px;
+                        background-color: #449263;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+
+                        @include m.desktop{
+                            width: 50px;
+                            height: 50px;
+                        }
+                    }
+                }
+            }
+        }
+
+        //**==== Svarta knappen ====**//
+        .btn--black {
+            &:link,
+            &:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            margin: 20px;
+            display: inline-block;
+            border-radius: 2px;
+            position: relative;
+            background-color: v.$dark-btn;
+            color: v.$light-btn;
+            font-weight: lighter;
+        
+            @include m.desktop {
+                padding: 1.8rem 4rem;
+                letter-spacing: 0.4rem;
+            }
+            }
+            &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+        
+            &::after {
+                transform: scaleX(1.4) scaleY(1.6);
+                opacity: 0;
+            }
+            }
+        
+            &:active {
+            transform: translateY(-1px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+            }
+        
+            &::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 10rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.4s;
+            }
+        
+            &--animated {
+            animation: moveInBottom 0.5s ease-out 0.75s;
+            animation-fill-mode: backwards;
+            }
+        }
+
+    }
