@@ -5,7 +5,7 @@
 .main {
   width: 100%;
   height: 90vh;
-  background-image: url(/src/images/landingpage-img.png);
+  background-image: url(/src/assets/img/landingpage-img.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@
   position: relative;
   @include m.desktop {
     background-position: bottom;
-    background-image: url(/src/images/Nina-Hero-Desktop.png);
+    background-image: url(/src/assets/img/Nina-Hero-Desktop.png);
   }
 
   &__text-box {

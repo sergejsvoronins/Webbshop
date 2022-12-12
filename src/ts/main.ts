@@ -2,7 +2,7 @@ import { Product } from "./models/product";
 
 let productList : Product [] = [];
 let cartList : Product [] = [];
-createProduct("Thin Case","","Apple","röd","349",0);
+createProduct("Thin Case","/assets/img/iphone-green.png","Apple","röd","349",0);
 createProduct("Thin Case","","Apple","grön","349",0);
 createProduct("Thin Case","","Apple","blå","349",0);
 createProduct("Thin Case","","Samsung","röd","349",0);
