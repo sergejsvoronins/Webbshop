@@ -3,7 +3,7 @@ import { productList } from "./main";
 
 
 
-let productCenter: HTMLDivElement = document.querySelector("product-container") as HTMLDivElement;
+let productCenter: HTMLDivElement = document.querySelector("hero-container") as HTMLDivElement;
 displayProduct(productList);
 
 function displayProduct(someList:Product []){
