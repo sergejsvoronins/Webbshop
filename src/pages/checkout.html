@@ -11,38 +11,32 @@
 </head>
 <body>
     <main>
-        <section class="cartContainer">
-            <div class="cartContainer__header">
+        <section class="checkOutContainer">
+            <div class="checkOutContainer__header">
                 <h2>kassa</h2>
                 <a href="./products.html"><i class="fa-solid fa-xmark"></i></a> 
             </div>
-            <div class="cartContainer__products"></div>
-            <div class="cartContainer__priceProducts">
+            <div class="checkOutContainer__products" id="checkOutContainer">
+            </div>
+            <div class="checkOutContainer__priceProducts"  >
                 <span>produkter</span>
-                <span>0:-</span>
+                <span id="checkOutProductsPrice">0:-</span>
             </div>
-            <div class="cartContainer__priceFreight">
+            <div class="checkOutContainer__priceFreight" >
                 <span>frakt</span>
-                <span>0:-</span>
+                <span id="checkOutFreightPrice">0:-</span>
             </div>
-            <div class="cartContainer__totalPrice">
+            <div class="checkOutContainer__totalPrice">
                 <span>totalt</span>
-                <span>0:-</span>
+                <span id="checkOutTotalPrice">0:-</span>
             </div>
-            <div class="cartContainer__moms">
+            <div class="checkOutContainer__moms">
                 <span>inklusive</span>
                 <span>25% moms</span>
             </div>
-            <div class="cartContainer__freightOption">
+            <div class="checkOutContainer__freightOption">
                 <span>Leveransalternative</span>
                 <div>
-                    <div>
-                        <input type="radio" name="post" id="postBox">
-                        <label for="postBox">
-                            <span>Hemleverans till brevlåda</span>
-                            <span>49:-</span>
-                        </label>
-                    </div>
                     <div>
                         <input type="radio" name="post" id="postOffice">
                         <label for="postOffice">
@@ -50,11 +44,18 @@
                             <span>Grattis</span>
                         </label>
                     </div>
+                    <div>
+                        <input type="radio" name="post" id="postBox">
+                        <label for="postBox">
+                            <span>Hemleverans till brevlåda</span>
+                            <span>49:-</span>
+                        </label>
+                    </div>
                 </div>
             </div>    
-            <form class="cartContainer__formSection" id="form">
+            <form class="checkOutContainer__formSection" id="form">
                 <span>Dina uppgifter</span>
-                <div class="cartContainer__formSection__inputSection">
+                <div class="checkOutContainer__formSection__inputSection">
                     <div>
                         <label for="name">Förnamn</label>
                         <input type="text" id="name">
@@ -82,7 +83,7 @@
 
                 </div>
             </form>  
-            <div class="cartContainer__payOption">
+            <div class="checkOutContainer__payOption">
                 <span>Betalningssätt</span>
                 <div>
                     <span>Klarna</span>
@@ -107,11 +108,11 @@
                     </div>
                 </div>
             </div>
-            <div class="cartContainer__priceToPay">
-                <span class="cartContainer__priceToPay__header">Totalbelopp inkl. moms</span>
-                <span id="totalPrice" class="cartContainer__priceToPay__totalPrice">698kr</span>
+            <div class="checkOutContainer__priceToPay">
+                <span class="checkOutContainer__priceToPay__header">Totalbelopp inkl. moms</span>
+                <span id="checkOutOrderPrice" class="checkOutContainer__priceToPay__totalPrice">698kr</span>
             </div>
-            <a href="./../index.html" class="cartContainer__submitBtn">
+            <a href="./../index.html" class="checkOutContainer__submitBtn">
                 <button type="button">Betala köp</button>
             </a>
 

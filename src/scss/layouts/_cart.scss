@@ -54,10 +54,7 @@
         justify-content: space-between;
         padding: 1em 0;
         text-transform: uppercase;
-        @include m.desktop {
-            width: 50%;
-            margin: 0 auto;
-        }
+        @include m.cartContainersDesktopWidth;
     }
     &__products {
         border-top: v.$horisontalLine;
@@ -65,10 +62,7 @@
         flex-direction: column;
         padding: 1em;
         gap: 1em;
-        @include m.desktop {
-            width: 50%;
-            margin: 0 auto;
-        }
+        @include m.cartContainersDesktopWidth;
         &__itemContainer {
             width: 100%;
             display: flex;
@@ -86,6 +80,9 @@
                     box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.2);
                     border-radius: 2px;
                     width: 60%;
+                    @include m.desktop {
+                        padding: 2em;
+                    }
                 }
                 &:nth-child(2){
                     border-radius: 2px;
@@ -132,28 +129,6 @@
         }
     }
     &__submitBtn {
-        text-decoration: none;
-        @include m.desktop {
-            width: 50%;
-            margin: 0 auto;
-        }
-        button {
-            text-align: center;
-            width: 100%;
-            background-color: v.$green-btn;
-            box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.3);
-            border: none;
-            color: #fff;
-            font-size: 1em;
-            padding: 1em;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            &:hover {
-                cursor: pointer;
-            }
-            &:active {
-                transform: scale(0.99);
-            }
-        }
+        @include m.submitGreenBtn;
     }
 }

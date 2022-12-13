@@ -19,5 +19,41 @@
   border-radius: 0.1em;
   padding: 1em 0.4em;
 }
+@mixin submitGreenBtn {
+  text-decoration: none;
+  @include desktop {
+      width: 50%;
+      margin: 0 auto;
+  }
+  button {
+      text-align: center;
+      width: 100%;
+      background-color: v.$green-btn;
+      box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.3);
+      border: none;
+      color: #fff;
+      font-size: 1em;
+      padding: 1em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      &:hover {
+          cursor: pointer;
+      }
+      &:active {
+          transform: scale(0.99);
+      }
+  }
+}
 
-
+@mixin cartContainersDesktopWidth {
+  @include desktop {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+@mixin checkOutContainersDesktopWidth {
+  @include desktop {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

@@ -1,10 +1,159 @@
-@use "../layouts/cart";
 @use "../library/mixins" as m;
 @use "../library/variables" as v;
 @use "../base/reset";
 
-.cartContainer {
+.checkOutContainer {
+    width: 100%;
     height: auto;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    &__header {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 1em;
+        @include m.desktop {
+            h2 {
+                width: 100%;
+                text-align: center;
+            }
+            a {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+        h2 {
+            font-size: 1.5em;
+            text-transform: uppercase;
+
+        }
+        a {
+            
+            &:hover {
+                cursor: pointer;
+                i {
+                    color: v.$hr-line; 
+                }
+            }
+            i {
+                color: v.$nav-color;
+                font-size: 1.5em;
+                transition: color 0.1s ease-in-out;
+            }
+        }
+    }
+    &__priceProducts, &__priceFreight, &__totalPrice{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1em 0;
+        text-transform: uppercase;
+        @include m.checkOutContainersDesktopWidth;
+    }
+    &__products {
+        border-top: v.$horisontalLine;
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        gap: 1em;
+        @include m.checkOutContainersDesktopWidth;
+        &__itemContainer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 1em;
+            gap: 1em;
+            position: relative;
+            &__deleteIcon {
+                position: absolute;
+                top: 0.2em;
+                right: 0.2em;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            @include m.desktop {
+                justify-content: flex-start;
+            }
+            >  div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 1em;
+                padding: 0.6em;
+                @include m.desktop {
+                    justify-content: flex-start;
+                }
+                &:nth-child(1){
+                    background-color: #fff;
+                    box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.2);
+                    border-radius: 2px;
+                    width: 40%;
+                    @include m.desktop {
+                        padding: 1em;
+                        width: 20%;
+                    }
+                }
+                &:nth-child(2){
+                    border-radius: 2px;
+                    width: 40%;
+                }
+                img {
+                    width: 100%;
+                }
+                p {
+                    font-weight: 700;
+                    font-size: 0.7em;
+                    @include m.desktop {
+                        font-size: 1em;
+                    }
+                    &:nth-child(2), &:nth-child(3){
+                        text-transform: uppercase;
+                        font-weight: 400;
+                        font-size: 0.6em;
+                        @include m.desktop {
+                            font-size: 0.8em;
+                        }
+                    }
+                }
+                > div {
+                    display: flex;
+                    width: 100%;
+                    button {
+                        width: 20%;
+                        border: none;
+                    }
+                    div {
+                        width: 60%;
+                        text-align: center;
+                        background-color: white;
+                        margin: 0 0.6em;
+                        @include m.desktop {
+                            width: 20%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__priceProducts, &__priceFreight {
+        span {
+            font-size: 1em;
+        }
+    }
+    &__priceProducts {
+        border-bottom: v.$horisontalLine;
+    }
+    &__totalPrice {
+        span {
+            font-size: 1.5em;
+        }
+    }
     &__moms {
         display: flex;
         width: 100%;
@@ -130,9 +279,9 @@
         }  
     }
     &__moms, &__freightOption, &__formSection, &__payOption, &__priceToPay {
-        @include m.desktop {
-            width: 50%;
-            margin: 0 auto;
-        }
+        @include m.checkOutContainersDesktopWidth;
+    }
+    &__submitBtn {
+        @include m.submitGreenBtn;
     }
 }

@@ -2,6 +2,7 @@ import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { Product } from "./models/product";
 import { productList } from "./main";
 import { cartList } from "./main";
+import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 
 
 loadFromlocalStorage(productList);
@@ -53,14 +54,16 @@ function createCartHtml (products:Product []) {
             cartProductPrice.innerHTML = cartPrice.toString()+":-";
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             increaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount = products[i].buyAmount+1;
+                products[i].buyAmount ++;
                 createCartHtml(products);
+                loadToLocalStorage(products);
+                
                 
             })
             decreaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount = products[i].buyAmount-1;
+                products[i].buyAmount --;
                 createCartHtml(products);
-                
+                loadToLocalStorage(products);
             })
         // }
     }
