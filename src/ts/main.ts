@@ -1,33 +1,42 @@
 import { Product } from "./models/product";
+import { loadToLocalStorage } from "./functions/loadtolocalstorage";
+import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
+import { createProduct } from "./functions/createproduct";
 
 let productList : Product [] = [];
 let cartList : Product [] = [];
-createProduct("Thin Case","/assets/img/iphone-green.png","Apple","röd","349",0);
-createProduct("Thin Case","","Apple","grön","349",0);
-createProduct("Thin Case","","Apple","blå","349",0);
-createProduct("Thin Case","","Samsung","röd","349",0);
-createProduct("Thin Case","","Samsung","grön","349",0);
-createProduct("Thin Case","","Samsung","blå","349",0);
+<<<<<<< HEAD
+createProduct("Thin Case","/assets/img/iphone-green.png","apple","grön","349",0);
+createProduct("Thin Case","/assets/img/iphone-red.png","apple","röd","349",0);
+createProduct("Thin Case","/assets/img/iphone-blue.png","apple","blå","349",0);
+createProduct("Thin Case","/assets/img/galaxy-green.png","apple","grön","349",0);
+createProduct("Thin Case","/assets/img/galaxy-red.png","apple","röd","349",0);
+createProduct("Thin Case","/assets/img/galaxy-blue.png","apple","blå","349",0);
+
+=======
+createProduct("Thin Case","/assets/img/iphone-red.png","Apple","röd","349",0);
+createProduct("Thin Case","/assets/img/iphone-green","Apple","grön","349",0);
+createProduct("Thin Case","/assets/img/iphone-blue","Apple","blå","349",0);
+createProduct("Thin Case","/assets/img/galaxy-red","Samsung","röd","349",0);
+createProduct("Thin Case","/assets/img/galaxy-green","Samsung","grön","349",0);
+createProduct("Thin Case","/assets/img/galaxy-blue","Samsung","blå","349",0);
+>>>>>>> products-page
 
 
 loadToLocalStorage(productList);
-loadFromlocalStorage();
+loadFromlocalStorage(productList);
 export {productList};
+export {cartList};
 
 
 
-export function loadToLocalStorage (someList: Product []){
-    localStorage.setItem ("productList", JSON.stringify(someList));
-}
-
-export function loadFromlocalStorage () {
-    let products : [] = JSON.parse(localStorage.getItem("productList") || "[]");
-    productList = products.map (( products:Product )=>{
-        return new Product (products.title,products.url, products.brand, products.color, products.price, products.buyAmount)
-    })
-}
 
 
+
+
+
+
+<<<<<<< HEAD
 function createProduct (
     title:string,url:string,brand:string,color:string, price:string,amount:number
 ) {
@@ -36,3 +45,5 @@ function createProduct (
 }
 
 
+=======
+>>>>>>> develop
