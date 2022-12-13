@@ -1,14 +1,9 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
-import { Product } from "./models/product";
-import { productList } from "./main";
-import { cartList } from "./main";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
+import { Product } from "./models/product";
 
 
-loadFromlocalStorage(productList);
-console.log(productList);
-
-
+let productList : Product [] = loadFromlocalStorage();
 let cartPrice : number = 0;
 let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
 let cartProductPrice = document.getElementById("cartProductsPrice") as HTMLSpanElement;
@@ -19,7 +14,7 @@ function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
     cartPrice = 0;
     for (let i=0; i<products.length;i++){
-        // if (someList[i].buyAmount > 0){
+        if (products[i].buyAmount > 0){
             let productDiv : HTMLDivElement = document.createElement("div");
             productDiv.classList.add("cartContainer__products__itemContainer")
             cartProductsCont.appendChild(productDiv);
@@ -65,6 +60,6 @@ function createCartHtml (products:Product []) {
                 createCartHtml(products);
                 loadToLocalStorage(products);
             })
-        // }
+        }
     }
 }

@@ -1,7 +1,5 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { Product } from "./models/product";
-import { productList } from "./main";
-import { cartList } from "./main";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 
 
@@ -19,7 +17,7 @@ let checkOutPrice : number = 0;
 klarnaPayOption.checked = true;
 postOfficeOption.checked = true;
 
-loadFromlocalStorage(productList);
+let productList : Product [] = loadFromlocalStorage();
 createCheckOutHtml(productList);
 
 function createCheckOutHtml (products: Product []) {

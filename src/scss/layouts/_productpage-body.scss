@@ -76,21 +76,27 @@ body {
   .section-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 2rem;
   }
 
   .products_center {
-    width: 90vw;
-    margin: 0 auto;
+    width: 60vw;
+    margin: 2rem auto;
     max-width: 1170px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     grid-column-gap: 1.5rem;
     grid-row-gap: 2rem;
 
+    .product {
+      //border: 1px solid black;
+    }
+
+    @include m.desktop {
+      width: 90vw;
+    }
     .img-container {
       position: relative;
-      overflow: hidden;
+      box-shadow: 0 0 2px rgba(#000000, 0.2);
     }
     img {
       display: block;
@@ -102,31 +108,34 @@ body {
       }
     }
 
-    .product {
-      width: 70%;
+    .info-container {
       text-transform: capitalize;
-
+      padding-top: 1rem;
       h3 {
-        margin: 1rem;
         font-size: 1rem;
         letter-spacing: 2px;
         text-align: left;
+        margin-bottom: 0.5rem;
       }
       h4 {
         font-size: 1rem;
         font-weight: 400;
         text-align: left;
-        margin: 1rem;
+        margin-bottom: 0.5rem;
       }
-    }
-    button {
-      position: absolute;
-      margin: -10% 50%;
-      border: none;
-      cursor: pointer;
-    }
-    .fa-bag-shopping {
-      font-size: 1.5rem;
+
+      .button {
+        position: relative;
+
+        .fa-bag-shopping {
+          font-size: 1.5rem;
+          border: none;
+          cursor: pointer;
+          @include m.desktop {
+            position: relative;
+          }
+        }
+      }
     }
   }
 }
