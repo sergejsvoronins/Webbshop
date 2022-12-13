@@ -1,4 +1,4 @@
-import { productList } from "./main";
+import { cartList, productList } from "./main";
 import { Product } from "./models/product";
 
 
@@ -40,8 +40,13 @@ function displayProducts(someList: Product []) {
     let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
     addToCart.className = "button"
     addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping"></i>`
+    
     addToCart.addEventListener('click', () => {
-        console.log("clicked")
+        for(let i = 0; i < 1; i++){
+            cartList.push(productList[i])
+        }
+        
+      console.log(cartList)
     });
     
     infoContainer.appendChild(productTitle);
