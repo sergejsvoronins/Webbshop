@@ -126,6 +126,9 @@ header {
         position: absolute;
         right: 0;
         padding: 1em;
+        @include m.desktop {
+            padding: 2em;
+        }
         i {
             font-size: 1.2em;
             color: v.$landingpage-text-color;
