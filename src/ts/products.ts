@@ -1,6 +1,10 @@
-import { cartList, productList } from "./main";
+import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
+import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 
+let productList : Product [] = loadFromlocalStorage();
+
+console.log(productList);
 
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 displayProducts(productList);
@@ -42,11 +46,8 @@ function displayProducts(someList: Product []) {
     addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping"></i>`
     
     addToCart.addEventListener('click', () => {
-        for(let i = 0; i < 1; i++){
-            cartList.push(productList[i])
-        }
-        
-      console.log(cartList)
+        someList[i].buyAmount++;
+        loadToLocalStorage(someList);
     });
     
     infoContainer.appendChild(productTitle);
