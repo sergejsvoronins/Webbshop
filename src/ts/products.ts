@@ -7,13 +7,13 @@ displayProducts(productList);
 
 function displayProducts(someList: Product []) {
     for(let i = 0; i < someList.length; i++){
-	let productContainer : HTMLDivElement = document.createElement("div");
-    productContainer.className = "product";
+	let imgContainer : HTMLDivElement = document.createElement("div");
+    imgContainer.className = "product";
 
 	let infoContainer : HTMLDivElement = document.createElement("div");
     infoContainer.className = "product";
 
-	productsCenter.appendChild(productContainer);
+	productsCenter.appendChild(imgContainer);
     productsCenter.appendChild(infoContainer);
 	
 	let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
@@ -26,15 +26,15 @@ function displayProducts(someList: Product []) {
     let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
 	productPrice.innerHTML = someList[i].price;
     productPrice.innerHTML += " SEK"
-
-
-	infoContainer.appendChild(productTitle);
-    	infoContainer.appendChild(productPrice);
     
     let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
     addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping"></i>`
+    addToCart.addEventListener('click', () => {
+        console.log("clicked")
+    });
     
-    
+    infoContainer.appendChild(productTitle);
+    infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
 	
     }
