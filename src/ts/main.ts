@@ -5,22 +5,12 @@ import { createProduct } from "./functions/createproduct";
 
 let productList : Product [] = [];
 let cartList : Product [] = [];
-<<<<<<< HEAD
-createProduct("Thin Case","/assets/img/iphone-green.png","apple","grön","349",0);
-createProduct("Thin Case","/assets/img/iphone-red.png","apple","röd","349",0);
-createProduct("Thin Case","/assets/img/iphone-blue.png","apple","blå","349",0);
-createProduct("Thin Case","/assets/img/galaxy-green.png","apple","grön","349",0);
-createProduct("Thin Case","/assets/img/galaxy-red.png","apple","röd","349",0);
-createProduct("Thin Case","/assets/img/galaxy-blue.png","apple","blå","349",0);
-
-=======
-createProduct("Thin Case","/assets/img/iphone-red.png","Apple","röd","349",0);
-createProduct("Thin Case","/assets/img/iphone-green","Apple","grön","349",0);
-createProduct("Thin Case","/assets/img/iphone-blue","Apple","blå","349",0);
-createProduct("Thin Case","/assets/img/galaxy-red","Samsung","röd","349",0);
-createProduct("Thin Case","/assets/img/galaxy-green","Samsung","grön","349",0);
-createProduct("Thin Case","/assets/img/galaxy-blue","Samsung","blå","349",0);
->>>>>>> products-page
+createProduct("Thin Case","/assets/img/iphone-green.png","apple","grön","349",0, false, "mobile");
+createProduct("Thin Case","/assets/img/iphone-red.png","apple","röd","349",0, false, "mobile");
+createProduct("Thin Case","/assets/img/iphone-blue.png","apple","blå","349",0, false, "mobile");
+createProduct("Thin Case","/assets/img/galaxy-green.png","apple","grön","349",0, false, "mobile");
+createProduct("Thin Case","/assets/img/galaxy-red.png","apple","röd","349",0, false, "mobile");
+createProduct("Thin Case","/assets/img/galaxy-blue.png","apple","blå","349",0, false, "mobile");
 
 
 loadToLocalStorage(productList);
@@ -30,20 +20,3 @@ export {cartList};
 
 
 
-
-
-
-
-
-
-<<<<<<< HEAD
-function createProduct (
-    title:string,url:string,brand:string,color:string, price:string,amount:number
-) {
-    let product : Product = new Product (title,url,brand,color,price,amount);
-    productList.push(product);
-}
-
-
-=======
->>>>>>> develop
