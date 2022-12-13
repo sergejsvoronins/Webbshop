@@ -87,6 +87,10 @@ body {
     grid-column-gap: 1.5rem;
     grid-row-gap: 2rem;
 
+    .product {
+      //border: 1px solid black;
+    }
+
     @include m.desktop {
       width: 90vw;
     }

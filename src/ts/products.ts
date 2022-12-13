@@ -23,6 +23,9 @@ function displayProducts(someList: Product []) {
 	let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
     imgContainer.appendChild(imgProduct);
 	imgProduct.src = someList[i].url;
+    imgProduct.addEventListener('click', () => {
+        console.log("clicked")
+    });
 	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
