@@ -69,6 +69,9 @@ function displayProducts(someList: Product []) {
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
+    productContainer.addEventListener('click', () => {
+        console.log("clicked")
+    });
 
 	let imgContainer : HTMLDivElement = document.createElement("div");
     imgContainer.className = "img-container";

@@ -88,7 +88,7 @@ body {
     grid-row-gap: 2rem;
 
     .product {
-      //border: 1px solid black;
+      cursor: pointer;
     }
 
     @include m.desktop {
@@ -100,7 +100,6 @@ body {
     }
     img {
       display: block;
-      cursor: pointer;
       width: 100%;
       border-radius: 2px;
       &:hover {
