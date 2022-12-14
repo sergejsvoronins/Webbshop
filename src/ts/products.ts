@@ -2,14 +2,70 @@ import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 
+
 let productList : Product [] = loadFromlocalStorage();
 
 console.log(productList);
 
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
-displayProducts(productList);
+let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
+let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
+let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
+
+let linkUrlMobile : string = "http://localhost:1234/pages/products.html#mobil";
+let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
+let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
+
+if (linkUrlMobile === location.href){
+    let mobileList : Product [] = productList.filter(showMobile);
+    displayProducts(mobileList);
+}
+else if  (linkUrlTablet === location.href){
+    let tabletList : Product [] = productList.filter(showTablet);
+    displayProducts(tabletList);
+}
+else if (linkUrlLaptop === location.href){
+    let laptopList : Product [] = productList.filter(showLaptop);
+    displayProducts(laptopList);
+}
+else {
+    displayProducts(productList)
+}
+
+filterMobile.addEventListener("click", ()=>{
+    let mobileList : Product [] = productList.filter(showMobile);
+    displayProducts(mobileList); 
+})
+filterTablet.addEventListener("click", ()=>{
+    let tabletList : Product [] = productList.filter(showTablet);
+    displayProducts(tabletList); 
+})
+filterLaptop.addEventListener("click", ()=>{
+    let laptopList : Product [] = productList.filter(showLaptop);
+    displayProducts(laptopList); 
+})
+
+function showMobile(product: Product){
+    if (product.productType==="mobile"){
+        return product;  
+    }
+    
+}
+function showTablet(product: Product){
+    if (product.productType==="tablet"){
+        return product;  
+    }
+    
+}
+function showLaptop(product: Product){
+    if (product.productType==="laptop"){
+        return product;  
+    }
+    
+}
 
 function displayProducts(someList: Product []) {
+    productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";

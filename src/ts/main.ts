@@ -10,6 +10,7 @@ createProduct("Thin Case","/assets/img/iphone-blue.png","apple","blå","349",0, 
 createProduct("Thin Case","/assets/img/galaxy-green.png","apple","grön","349",0, false, "mobile",productList);
 createProduct("Thin Case","/assets/img/galaxy-red.png","apple","röd","349",0, false, "mobile",productList);
 createProduct("Thin Case","/assets/img/galaxy-blue.png","apple","blå","349",0, false, "mobile",productList);
+createProduct("Tablet Case","/assets/img/ipad-blue.png","apple","blå","549",0, false, "tablet",productList);
 
 loadToLocalStorage(productList);
 
