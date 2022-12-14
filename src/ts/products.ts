@@ -5,7 +5,7 @@ import { Product } from "./models/product";
 
 let productList : Product [] = loadFromlocalStorage();
 
-console.log(productList);
+
 
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;

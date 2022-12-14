@@ -1,7 +1,7 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { Product } from "./models/product";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
-
+import { countOrderPrice } from "./functions/countorderprice";
 
 
 let checkOutContainer = document.getElementById("checkOutContainer") as HTMLDivElement;
@@ -65,7 +65,8 @@ function createCheckOutHtml (products: Product []) {
             productAmountDiv.appendChild(decreaseBtn);
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(increaseBtn);
-            checkOutPrice += (+products[i].price*products[i].buyAmount);
+            // checkOutPrice += (+products[i].price*products[i].buyAmount);
+            checkOutPrice = countOrderPrice(checkOutPrice, products, i)
             checkOutProductsPrice.innerHTML = checkOutPrice.toString()+":-";
             checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
             checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;

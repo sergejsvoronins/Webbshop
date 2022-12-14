@@ -1,14 +1,14 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
-
+import { countOrderPrice } from "./functions/countorderprice";
 
 let productList : Product [] = loadFromlocalStorage();
 let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
 let cartProductPrice = document.getElementById("cartProductsPrice") as HTMLSpanElement;
 let cartTotalPrice = document.getElementById("cartTotalPrice") as HTMLSpanElement;
-createCartHtml(productList);
 
+createCartHtml(productList);
 
 function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
@@ -38,7 +38,7 @@ function createCartHtml (products:Product []) {
             productTitle.innerHTML = products[i].title;
             productColor.innerHTML = products[i].color;
             productPrice.innerHTML = products[i].price+":-";
-            cartPrice += (+products[i].price*products[i].buyAmount);
+            cartPrice = countOrderPrice(cartPrice,products,i);
             cartProductPrice.innerHTML = cartPrice.toString()+":-";
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
@@ -50,16 +50,18 @@ function createCartHtml (products:Product []) {
             productAmountDiv.appendChild(decreaseBtn);
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(increaseBtn);
-
             increaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount ++;
                 loadToLocalStorage(products);
                 createCartHtml(products);
+                console.log(products);
+                
             })
             decreaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount --;
                 loadToLocalStorage(products);
                 createCartHtml(products);
+                console.log(products);
             })
         }
     }
