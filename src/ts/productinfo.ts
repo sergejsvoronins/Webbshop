@@ -8,7 +8,7 @@ let productCenter: HTMLDivElement = document.querySelector(".hero-container") as
 displayProduct(productList);
 
 function displayProduct(someList:Product []){
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < someList.length; i++) {
         
         
         let productDetail: HTMLDivElement = document.createElement ("div");
