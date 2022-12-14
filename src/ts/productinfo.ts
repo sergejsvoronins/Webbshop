@@ -1,8 +1,7 @@
 import { Product } from "./models/product";
-import { productList } from "./main";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 
-
+let productList : Product [] = loadFromlocalStorage();
 
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
 displayProduct(productList);
