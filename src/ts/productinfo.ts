@@ -1,14 +1,13 @@
 import { Product } from "./models/product";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 
-let productsList : Product [] = loadFromlocalStorage();
-
+let productList : Product [] = loadFromlocalStorage();
 
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
-displayProduct(productsList);
+displayProduct(productList);
 
-function displayProduct(productList:Product []){
-    for (let i = 0; i < productList.length; i++) {
+function displayProduct(someList:Product []){
+    for (let i = 0; i < someList.length; i++) {
         
         
         let productDetail: HTMLDivElement = document.createElement ("div");
@@ -23,16 +22,16 @@ function displayProduct(productList:Product []){
         let productImg: HTMLImageElement = document.createElement ("img");
         productImg.className = (".product-img")
         productDetail.appendChild(productImg)
-        productImg.src = productList[i].url
+        productImg.src = someList[i].url
 
         let productName: HTMLSpanElement = document.createElement ("span")
         productName.className = (".hero-detail-name")
-        productName.innerHTML = productList[i].title
+        productName.innerHTML = someList[i].title
         
         
         let productSub: HTMLSpanElement = document.createElement ("span")
         productSub.className = (".hero-detail-sub")
-        productSub.innerHTML = productList[i].price
+        productSub.innerHTML = someList[i].price
         productSub.innerHTML += " SEK"
 
         let productColor: HTMLDivElement = document.createElement ("div")
@@ -40,7 +39,7 @@ function displayProduct(productList:Product []){
         
         let color1: HTMLAnchorElement = document.createElement ("a")
         color1.className = (".color1")
-        color1.innerHTML = productList[i].color
+        color1.innerHTML = someList[i].color
         let color2: HTMLAnchorElement = document.createElement ("a")
         color2.className = (".color2")
         let color3: HTMLAnchorElement = document.createElement ("a")
@@ -67,7 +66,7 @@ function displayProduct(productList:Product []){
 
     }
 }
-console.log(productsList);
+console.log(productList);
 
 
 /* let productContainer: HTMLDivElement =document.createElement("div")
