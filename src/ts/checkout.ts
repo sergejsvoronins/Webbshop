@@ -1,7 +1,7 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { Product } from "./models/product";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
-
+import { countOrderPrice } from "./functions/countorderprice";
 
 
 let checkOutContainer = document.getElementById("checkOutContainer") as HTMLDivElement;
@@ -24,6 +24,9 @@ function createCheckOutHtml (products: Product []) {
     checkOutContainer.innerHTML = "";
     checkOutPrice = 0;
     for (let i=0; i<products.length; i++){
+        checkOutProductsPrice. innerHTML = checkOutPrice.toString();
+        checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
+        checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
         if (products[i].buyAmount > 0) {
             let productDiv : HTMLDivElement = document.createElement("div");
             productDiv.classList.add("checkOutContainer__products__itemContainer")
@@ -53,16 +56,17 @@ function createCheckOutHtml (products: Product []) {
             productInfoDiv.appendChild(productColor);
             productInfoDiv.appendChild(productPrice);
             productInfoDiv.appendChild(productAmountDiv);
-            let increaseBtn : HTMLButtonElement = document.createElement("button");
-            increaseBtn.innerHTML = "+";
-            let productAmountNumber : HTMLDivElement = document.createElement ("div");
-            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
             decreaseBtn.innerHTML = "-";
-            productAmountDiv.appendChild(increaseBtn);
-            productAmountDiv.appendChild(productAmountNumber);
+            let productAmountNumber : HTMLDivElement = document.createElement ("div");
+            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
+            let increaseBtn : HTMLButtonElement = document.createElement("button");
+            increaseBtn.innerHTML = "+";
             productAmountDiv.appendChild(decreaseBtn);
-            checkOutPrice += (+products[i].price*products[i].buyAmount);
+            productAmountDiv.appendChild(productAmountNumber);
+            productAmountDiv.appendChild(increaseBtn);
+            // checkOutPrice += (+products[i].price*products[i].buyAmount);
+            checkOutPrice = countOrderPrice(checkOutPrice, products, i)
             checkOutProductsPrice.innerHTML = checkOutPrice.toString()+":-";
             checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
             checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
