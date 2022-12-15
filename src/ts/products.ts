@@ -5,8 +5,6 @@ import { Product } from "./models/product";
 
 let productList : Product [] = loadFromlocalStorage();
 
-
-
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
@@ -17,52 +15,28 @@ let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
 let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
 
 if (linkUrlMobile === location.href){
-    let mobileList : Product [] = productList.filter(showMobile);
-    displayProducts(mobileList);
+    displayFiltredProducts(productList,"mobile")
 }
 else if  (linkUrlTablet === location.href){
-    let tabletList : Product [] = productList.filter(showTablet);
-    displayProducts(tabletList);
+    displayFiltredProducts(productList,"tablet")
 }
 else if (linkUrlLaptop === location.href){
-    let laptopList : Product [] = productList.filter(showLaptop);
-    displayProducts(laptopList);
+    displayFiltredProducts(productList,"laptop")
 }
 else {
-    displayProducts(productList)
+    displayProducts(productList);
 }
 
 filterMobile.addEventListener("click", ()=>{
-    let mobileList : Product [] = productList.filter(showMobile);
-    displayProducts(mobileList); 
+    displayFiltredProducts(productList,"mobile")
 })
 filterTablet.addEventListener("click", ()=>{
-    let tabletList : Product [] = productList.filter(showTablet);
-    displayProducts(tabletList); 
+    displayFiltredProducts(productList,"tablet")
 })
 filterLaptop.addEventListener("click", ()=>{
-    let laptopList : Product [] = productList.filter(showLaptop);
-    displayProducts(laptopList); 
+    displayFiltredProducts(productList,"laptop")
 })
 
-function showMobile(product: Product){
-    if (product.productType==="mobile"){
-        return product;  
-    }
-    
-}
-function showTablet(product: Product){
-    if (product.productType==="tablet"){
-        return product;  
-    }
-    
-}
-function showLaptop(product: Product){
-    if (product.productType==="laptop"){
-        return product;  
-    }
-    
-}
 
 function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
@@ -114,5 +88,60 @@ function displayProducts(someList: Product []) {
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
 	
+    }
+}
+function displayFiltredProducts(someList: Product [], itemType:string) {
+    productsCenter.innerHTML = "";
+    for(let i = 0; i < someList.length; i++){
+        if (someList[i].productType === itemType){
+            let productContainer : HTMLDivElement = document.createElement("div");
+            productContainer.className = "product";
+            productContainer.addEventListener('click', () => {
+                console.log("clicked")
+            });
+        
+            let imgContainer : HTMLDivElement = document.createElement("div");
+            imgContainer.className = "img-container";
+        
+            let infoContainer : HTMLDivElement = document.createElement("div");
+            infoContainer.className = "info-container";
+            
+            productsCenter.appendChild(productContainer)
+            productContainer.appendChild(imgContainer);
+            productContainer.appendChild(infoContainer);
+            
+            let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+            imgContainer.appendChild(imgProduct);
+            imgProduct.src = someList[i].url;
+            imgProduct.addEventListener('click', () => {
+                console.log("clicked")
+            });
+            
+            let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
+            productTitle.innerHTML = someList[i].title;
+        
+            let productColor : HTMLParagraphElement = document.createElement("h4");
+            productColor.innerHTML = someList[i].color;
+        
+            let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
+            productPrice.innerHTML = someList[i].price;
+            productPrice.innerHTML += " SEK"
+            
+            let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            addToCart.className = "button"
+            addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping"></i>`
+            
+            addToCart.addEventListener('click', () => {
+                someList[i].buyAmount++;
+                loadToLocalStorage(someList);
+            });
+            
+            infoContainer.appendChild(productTitle);
+            infoContainer.appendChild(productColor);
+            infoContainer.appendChild(productPrice);
+            infoContainer.appendChild(addToCart);
+            
+        }
+
     }
 }
