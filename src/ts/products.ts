@@ -129,7 +129,7 @@ function displayProducts(someList: Product []) {
 }
 
     }
-}
+
 
 function displayFiltredProducts(someList: Product [], filterType:string) {
     productsCenter.innerHTML = "";
