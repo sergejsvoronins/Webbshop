@@ -70,7 +70,7 @@ function displayProducts(someList: Product []) {
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
 
-    productContainer.addEventListener('mousedown', (e) => {
+    productContainer.addEventListener('click', (e) => {
        console.log(e);
     }, false);
 
