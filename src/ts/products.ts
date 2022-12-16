@@ -79,9 +79,9 @@ function displayProducts(someList: Product []) {
     
     let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
     addToCart.className = "button"
-    addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping domBag"></i>`;
+    addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
 
-    
+
     addToCart.addEventListener('click', () => {
 
         someList[i].buyAmount++;
@@ -90,9 +90,8 @@ function displayProducts(someList: Product []) {
         let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
         cartN.innerHTML = (someList[i].buyAmount).toString();
     });
+    
 
-    
-    
     infoContainer.appendChild(productTitle);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
