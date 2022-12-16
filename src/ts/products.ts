@@ -79,9 +79,6 @@ function displayProducts(someList: Product []) {
     productsCenter.appendChild(productContainer)
 	productContainer.appendChild(imgContainer);
     productContainer.appendChild(infoContainer);
-
-    let productColor : HTMLParagraphElement = document.createElement("h4");
-    productColor.innerHTML = someList[i].color;
 	
 	let productBrand : HTMLParagraphElement = document.createElement("h4");
     productBrand.innerHTML = someList[i].brand;
