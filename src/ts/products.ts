@@ -70,9 +70,9 @@ function displayProducts(someList: Product []) {
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
 
-    productContainer.addEventListener('click', e => {
-        
-    });
+    productContainer.addEventListener('mousedown', (e) => {
+       console.log(e);
+    }, false);
 
 	let imgContainer : HTMLDivElement = document.createElement("div");
     imgContainer.className = "img-container";
@@ -113,13 +113,8 @@ function displayProducts(someList: Product []) {
         someList[i].buyAmount++;
         loadToLocalStorage(someList);
 
-    });
-
-    addToCart.addEventListener('click', () => {
-
         let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
         cartN.innerHTML = (someList[i].buyAmount).toString();
-       
     });
 
     
@@ -131,3 +126,4 @@ function displayProducts(someList: Product []) {
 	
     }
 }
+
