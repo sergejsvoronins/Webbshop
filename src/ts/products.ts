@@ -1,6 +1,8 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
+import { displayProduct } from "./productinfo";
+
 
 
 let productList : Product [] = loadFromlocalStorage();
@@ -66,11 +68,15 @@ function showLaptop(product: Product){
 
 function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
+
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
+
     productContainer.addEventListener('click', () => {
-        console.log("clicked")
+        someList[i]["showItem"] = true
+        loadToLocalStorage(productList);
+
     });
 
 	let imgContainer : HTMLDivElement = document.createElement("div");
@@ -87,15 +93,17 @@ function displayProducts(someList: Product []) {
     imgContainer.appendChild(imgProduct);
 	imgProduct.src = someList[i].url;
     imgProduct.addEventListener('click', () => {
-        console.log("clicked")
+        
     });
 	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
-
+    let productLink: HTMLAnchorElement = document.createElement ("a")
+    productLink.href="./productinfo.html"
+    
     let productColor : HTMLParagraphElement = document.createElement("h4");
     productColor.innerHTML = someList[i].color;
-
+    
     let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
 	productPrice.innerHTML = someList[i].price;
     productPrice.innerHTML += " SEK"
@@ -109,10 +117,12 @@ function displayProducts(someList: Product []) {
         loadToLocalStorage(someList);
     });
     
-    infoContainer.appendChild(productTitle);
+    infoContainer.appendChild(productLink);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
+    productLink.appendChild(productTitle)
 	
-    }
+}
+
 }

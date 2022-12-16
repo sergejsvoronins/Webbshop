@@ -110,11 +110,14 @@ body {
     .info-container {
       text-transform: capitalize;
       padding-top: 1rem;
-      h3 {
+      
+      a, h3 {
         font-size: 1rem;
         letter-spacing: 2px;
         text-align: left;
         margin-bottom: 0.5rem;
+        text-decoration: none;
+        color: #000;
       }
       h4 {
         font-size: 1rem;
