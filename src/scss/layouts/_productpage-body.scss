@@ -4,72 +4,63 @@
 
 body {
   background-color: v.$body-color;
+  .filter {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      padding: 1rem;
+      border-bottom: 1px solid v.$hr-line;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      @include m.desktop {
+        justify-content: flex-start;
+      }
+      &__sortAlt {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.2rem;
+        span {
+          text-transform: capitalize;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &__content{
+          position: absolute;
+          display: none;
+          flex-wrap: nowrap;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          background-color: white;
+          top: 100%;
+          left: 0;
+          
+          box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
+          2px 2px 5px rgba(94, 104, 121, 0.3);
+          z-index: 6;
+            div {
+              width: 100%;
+              padding: 0.6rem 1rem;
+              font-size: 0.8rem;
+              &:hover {
+                background-color: rgb(212, 212, 212);
+                cursor: pointer;
+              }
+            }
+
+        }
+        .show {
+          display: flex;
+        }
+
+      }
+  }
 }
 
-.filter {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  margin: 3rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid v.$hr-line;
-
-  @include m.desktop {
-    justify-content: flex-start;
-  }
-
-  &__container {
-    list-style: none;
-    text-align: center;
-  }
-
-  &--dropdown {
-    visibility: hidden;
-    opacity: 0;
-    min-width: 5rem;
-    position: absolute;
-    transition: all 0.5s ease;
-    margin-top: 1rem;
-    left: 0;
-    display: none;
-  }
-  a {
-    text-decoration: none;
-    color: black;
-    font-size: 0.8rem;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  li {
-    color: black;
-    display: block;
-    float: left;
-    padding: 1rem;
-    position: relative;
-    text-decoration: none;
-    transition-duration: 0.5s;
-    &:hover {
-      cursor: pointer;
-      border-radius: 2px;
-      background: v.$filter-color;
-    }
-  }
-
-  ul li:hover > ul,
-  ul li ul:hover {
-    visibility: visible;
-    opacity: 1;
-    display: block;
-    background: v.$filter-color;
-    width: 100%;
-  }
-
-  ul li ul li {
-    clear: both;
-    width: 100%;
-  }
-}
 
 /*------Products-----*/
 
