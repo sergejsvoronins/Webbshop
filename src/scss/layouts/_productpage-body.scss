@@ -5,9 +5,14 @@
 body {
   background-color: v.$body-color;
 }
-
+.cartIcon {
+  position: relative;
+}
 #cartCount {
-  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  z-index: 1000;
 }
 
 .filter {
