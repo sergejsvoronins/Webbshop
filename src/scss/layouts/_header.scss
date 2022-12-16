@@ -129,7 +129,7 @@ header {
       padding: 2em;
     }
     i {
-      font-size: 1.2em;
+      font-size: 1.4em;
       color: v.$landingpage-text-color;
     }
     &:hover {
@@ -137,11 +137,11 @@ header {
     }
 
     #cartCount {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       position: relative;
       z-index: 2;
-      right: 18px;
+      right: 19px;
     }
   }
 }

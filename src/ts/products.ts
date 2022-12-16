@@ -69,8 +69,9 @@ function displayProducts(someList: Product []) {
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
+
     productContainer.addEventListener('click', e => {
-        return true;
+        
     });
 
 	let imgContainer : HTMLDivElement = document.createElement("div");
@@ -108,13 +109,19 @@ function displayProducts(someList: Product []) {
 
     
     addToCart.addEventListener('click', () => {
+
         someList[i].buyAmount++;
         loadToLocalStorage(someList);
 
-    let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
-    cartN.innerHTML = (someList[i].buyAmount).toString();
-
     });
+
+    addToCart.addEventListener('click', () => {
+
+        let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
+        cartN.innerHTML = (someList[i].buyAmount).toString();
+       
+    });
+
     
     
     infoContainer.appendChild(productTitle);
