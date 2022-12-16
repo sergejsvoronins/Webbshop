@@ -124,7 +124,7 @@ header {
     position: absolute;
     right: 0;
     padding: 1em;
-    z-index: 1;
+
     @include m.desktop {
       padding: 2em;
     }
@@ -137,10 +137,10 @@ header {
     }
 
     #cartCount {
+      color: #fff;
       font-size: 10px;
       font-weight: 600;
       position: relative;
-      z-index: 2;
       right: 21px;
       bottom: 3px;
     }

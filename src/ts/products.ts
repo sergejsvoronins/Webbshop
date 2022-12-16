@@ -38,6 +38,7 @@ filterLaptop.addEventListener("click", ()=>{
 })
 
 
+
 function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
@@ -80,7 +81,6 @@ function displayProducts(someList: Product []) {
     let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
     addToCart.className = "button"
     addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
-
 
     addToCart.addEventListener('click', () => {
 
