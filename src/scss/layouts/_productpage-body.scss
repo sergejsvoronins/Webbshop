@@ -128,11 +128,14 @@ body {
     .info-container {
       text-transform: capitalize;
       border-radius: 2px;
-      h3 {
+      
+      a, h3 {
         font-size: 1rem;
         letter-spacing: 2px;
         text-align: center;
         line-height: 1.5rem;
+        text-decoration: none;
+        color: #000;
       }
       h4 {
         font-size: 0.8rem;
