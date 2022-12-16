@@ -69,8 +69,8 @@ function displayProducts(someList: Product []) {
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
-    productContainer.addEventListener('click', () => {
-        console.log("clicked")
+    productContainer.addEventListener('click', e => {
+        return true;
     });
 
 	let imgContainer : HTMLDivElement = document.createElement("div");
@@ -82,32 +82,40 @@ function displayProducts(someList: Product []) {
     productsCenter.appendChild(productContainer)
 	productContainer.appendChild(imgContainer);
     productContainer.appendChild(infoContainer);
-	
-	let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-    imgContainer.appendChild(imgProduct);
-	imgProduct.src = someList[i].url;
-    imgProduct.addEventListener('click', () => {
-        console.log("clicked")
-    });
-	
-	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
-	productTitle.innerHTML = someList[i].title;
 
     let productColor : HTMLParagraphElement = document.createElement("h4");
     productColor.innerHTML = someList[i].color;
+	
+	let productBrand : HTMLParagraphElement = document.createElement("h4");
+    productBrand.innerHTML = someList[i].brand;
+    productBrand.className = "prductBrand";
+    
+    let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+    imgContainer.appendChild(imgProduct);
+	imgProduct.src = someList[i].url;
 
+	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
+	productTitle.innerHTML = someList[i].title;
+
+    
     let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
 	productPrice.innerHTML = someList[i].price;
     productPrice.innerHTML += " SEK"
     
     let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
     addToCart.className = "button"
-    addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping"></i>`
+    addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping domBag"></i>`;
+
     
     addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
         loadToLocalStorage(someList);
+
+    let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
+    cartN.innerHTML = (someList[i].buyAmount).toString();
+
     });
+    
     
     infoContainer.appendChild(productTitle);
     infoContainer.appendChild(productColor);
