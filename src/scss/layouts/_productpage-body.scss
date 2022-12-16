@@ -151,7 +151,7 @@ body {
       }
 
       .button {
-        position: relative;
+        position: absolute;
         transform: translate(11rem, -3.5ex);
 
         @include m.desktop {
