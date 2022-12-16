@@ -76,10 +76,8 @@
                 gap: 1em;
                 padding: 1em;
                 &:nth-child(1){
-                    background-color: #fff;
-                    box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.2);
-                    border-radius: 2px;
                     width: 60%;
+                    @include m.imgContainer;
                     @include m.desktop {
                         padding: 2em;
                     }
