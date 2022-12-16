@@ -9,10 +9,24 @@ let productsCenter: HTMLDivElement = document.querySelector(".products_center") 
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
 let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
-
 let linkUrlMobile : string = "http://localhost:1234/pages/products.html#mobil";
 let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
 let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
+
+let sortBarAlt = document.getElementsByClassName("filter__sortAlt");
+let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
+let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
+let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
+let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
+for (let i=0; i<sortBarAlt.length; i++){
+    sortBarAlt[i].addEventListener("click", ()=> {
+        sortList[i].classList.toggle("show");
+    })
+    sortBarAlt[i].addEventListener("mouseleave", ()=> {
+        sortList[i].classList.remove("show");
+    })
+}
+
 
 if (linkUrlMobile === location.href){
     displayFiltredProducts(productList,"mobile")
@@ -26,7 +40,6 @@ else if (linkUrlLaptop === location.href){
 else {
     displayProducts(productList);
 }
-
 filterMobile.addEventListener("click", ()=>{
     displayFiltredProducts(productList,"mobile")
 })
@@ -90,8 +103,9 @@ function displayProducts(someList: Product []) {
         let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
         cartN.innerHTML = (someList[i].buyAmount).toString();
     });
-    
 
+    
+    
     infoContainer.appendChild(productTitle);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
@@ -99,10 +113,10 @@ function displayProducts(someList: Product []) {
 	
     }
 }
-function displayFiltredProducts(someList: Product [], itemType:string) {
+function displayFiltredProducts(someList: Product [], filterType:string) {
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
-        if (someList[i].productType === itemType){
+        if (someList[i].productType === filterType){
             let productContainer : HTMLDivElement = document.createElement("div");
             productContainer.className = "product";
             productContainer.addEventListener('click', () => {

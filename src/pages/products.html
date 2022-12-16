@@ -44,36 +44,31 @@
 
   <main>
     <section class="filter">
-      <ul class="filter__container">
-        <li><a>Tillverkare
-        <i class="fa fa-caret-down"></i></a>
-          <ul class="filter--dropdown">
-            <li id="appleBrand"><a href="#">Apple</a></li>
-            <li id="samsungBrand"><a href="#">Samasung</a></li>
-          </ul>
-        </li>
-      </ul>
-  
-      <ul class="filter__container">
-        <li><a>Färg
-        <i class="fa fa-caret-down"></i></a>
-          <ul class="filter--dropdown">
-            <li id="green"><a href="#">Grön</a></li>
-            <li id="red"><a href="#">Röd</a></li>
-            <li id="blue"><a href="#">Blå</a></li>
-          </ul>
-        </li>
-      </ul>
-  
-      <ul class="filter__container">
-        <li><a>Sortera efter
-        <i class="fa fa-caret-down"></i></a>
-          <ul class="filter--dropdown">
-            <li id="lowToHigh"><a href="#">Lägsta pris</a></li>
-            <li id="highToLow"><a href="#">Högsta pris</a></li>
-          </ul>
-        </li>
-      </ul>
+      <div class="filter__sortAlt">
+        <span>tillverkare</span>
+        <div><i class="fa fa-caret-down"></i></div>
+        <div class="filter__sortAlt__content" id="sortBarBrand">
+          <div>apple</div>
+          <div>samsung</div>
+        </div>
+      </div>
+      <div class="filter__sortAlt">
+        <span>färg</span>
+        <div><i class="fa fa-caret-down"></i></div>
+        <div class="filter__sortAlt__content" id="sortBarColor">
+          <div>röd</div>
+          <div>blå</div>
+          <div>grön</div>
+        </div>
+      </div>
+      <div class="filter__sortAlt">
+        <span>pris</span>
+        <div><i class="fa fa-caret-down"></i></div>
+        <div class="filter__sortAlt__content" id="sortBarPrice">
+          <div>sortera stigande</div>
+          <div>sortera fallande</div>
+        </div>
+      </div>
     </section>
     </main>
 
