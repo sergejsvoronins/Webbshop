@@ -2,14 +2,11 @@ import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 
-
 let productList : Product [] = loadFromlocalStorage();
-
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
 let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
-
 let linkUrlMobile : string = "http://localhost:1234/pages/products.html#mobil";
 let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
 let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
@@ -36,7 +33,6 @@ filterTablet.addEventListener("click", ()=>{
 filterLaptop.addEventListener("click", ()=>{
     displayFiltredProducts(productList,"laptop")
 })
-
 
 function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
