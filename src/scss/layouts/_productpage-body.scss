@@ -3,7 +3,7 @@
 @use "../library/variables" as v;
 
 body {
-  background-color: #eaeaea;
+  background-color: v.$body-color;
 }
 
 .filter {
@@ -49,11 +49,10 @@ body {
     position: relative;
     text-decoration: none;
     transition-duration: 0.5s;
-
     &:hover {
-      background: v.$light-btn;
       cursor: pointer;
       border-radius: 2px;
+      background: v.$filter-color;
     }
   }
 
@@ -62,6 +61,8 @@ body {
     visibility: visible;
     opacity: 1;
     display: block;
+    background: v.$filter-color;
+    width: 100%;
   }
 
   ul li ul li {
@@ -73,22 +74,31 @@ body {
 /*------Products-----*/
 
 .products {
-  .section-title {
+  &__title {
     text-align: center;
-    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
   }
 
   .products_center {
     width: 60vw;
-    margin: 2rem auto;
+    margin: 3rem auto;
     max-width: 1170px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-column-gap: 1.5rem;
     grid-row-gap: 2rem;
-
+    overflow: hidden;
+    @include m.desktop {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
     .product {
       cursor: pointer;
+      background-color: #fff;
+      box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
+        2px 2px 5px rgba(94, 104, 121, 0.3);
     }
 
     @include m.desktop {
@@ -96,7 +106,9 @@ body {
     }
     .img-container {
       position: relative;
-      box-shadow: 0 0 2px rgba(#000000, 0.2);
+      background-color: #fff;
+      border-radius: 2px;
+      padding: 2rem;
     }
     img {
       display: block;
@@ -105,31 +117,54 @@ body {
       &:hover {
         opacity: 70%;
       }
+      @include m.desktop {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .prductBrand {
+      position: absolute;
+      bottom: 15rem;
+      @include m.desktop {
+        bottom: 15.5rem;
+      }
+      text-transform: uppercase;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
     }
 
     .info-container {
       text-transform: capitalize;
-      padding-top: 1rem;
+      border-radius: 2px;
       h3 {
         font-size: 1rem;
         letter-spacing: 2px;
-        text-align: left;
-        margin-bottom: 0.5rem;
+        text-align: center;
+        line-height: 1.5rem;
       }
       h4 {
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: 400;
-        text-align: left;
-        margin-bottom: 0.5rem;
+        text-align: center;
+        line-height: 1.5rem;
       }
 
       .button {
         position: relative;
+        transform: translate(12rem, -3.5ex);
 
+        @include m.desktop {
+          transform: translate(11rem, -3.5ex);
+        }
         .fa-bag-shopping {
+          color: v.$dark-btn;
           font-size: 1.5rem;
           border: none;
           cursor: pointer;
+          &:hover {
+            color: v.$nav-color;
+          }
           @include m.desktop {
             position: relative;
           }
