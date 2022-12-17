@@ -64,7 +64,7 @@ function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
 
     for(let i = 0; i < someList.length; i++){
-    let productContainer : HTMLDivElement = document.createElement("div");
+    let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
     productContainer.className = "product";
 
     productContainer.addEventListener('click', () => {
@@ -72,31 +72,19 @@ function displayProducts(someList: Product []) {
         loadToLocalStorage(productList);
     });
 
-    /*productContainer.addEventListener('click', (e) => {
-       console.log(e);
-    }, false); */
-
-	let imgContainer : HTMLDivElement = document.createElement("div");
-    imgContainer.className = "img-container";
-
-	let infoContainer : HTMLDivElement = document.createElement("div");
+	let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
     infoContainer.className = "info-container";
     
     productsCenter.appendChild(productContainer)
-	productContainer.appendChild(imgContainer);
     productContainer.appendChild(infoContainer);
 	
-	let productBrand : HTMLParagraphElement = document.createElement("h4");
+	let productBrand : HTMLParagraphElement = document.createElement("h4") as HTMLParagraphElement;
     productBrand.innerHTML = someList[i].brand;
     productBrand.className = "prductBrand";
     
     let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-    imgContainer.appendChild(imgProduct);
+    infoContainer.appendChild(imgProduct);
 	imgProduct.src = someList[i].url;
-  
-    imgProduct.addEventListener('click', () => {
-        
-    });
 	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
@@ -111,7 +99,7 @@ function displayProducts(someList: Product []) {
     productPrice.innerHTML += " SEK"
     
     let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-    addToCart.className = "button"
+    addToCart.className = "icon-container"
     addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
 
     addToCart.addEventListener('click', () => {
@@ -121,6 +109,7 @@ function displayProducts(someList: Product []) {
 
         let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
         cartN.innerHTML = (someList[i].buyAmount).toString();
+        loadToLocalStorage(productList);
     });
 
     

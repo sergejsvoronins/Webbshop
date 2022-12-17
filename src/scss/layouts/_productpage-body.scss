@@ -5,62 +5,59 @@
 body {
   background-color: v.$body-color;
   .filter {
-      width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 1rem;
+    border-bottom: 1px solid v.$hr-line;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    @include m.desktop {
+      justify-content: flex-start;
+    }
+    &__sortAlt {
+      position: relative;
       display: flex;
-      justify-content: center;
       flex-direction: row;
-      padding: 1rem;
-      border-bottom: 1px solid v.$hr-line;
-      gap: 2rem;
-      margin-bottom: 1rem;
-      @include m.desktop {
-        justify-content: flex-start;
+      justify-content: center;
+      gap: 0.2rem;
+      span {
+        text-transform: capitalize;
+        &:hover {
+          text-decoration: underline;
+        }
       }
-      &__sortAlt {
-        position: relative;
-        display: flex;
-        flex-direction: row;
+      &__content {
+        position: absolute;
+        display: none;
+        flex-wrap: nowrap;
+        flex-direction: column;
         justify-content: center;
-        gap: 0.2rem;
-        span {
-          text-transform: capitalize;
+        align-items: flex-start;
+        background-color: white;
+        top: 100%;
+        left: 0;
+
+        box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
+          2px 2px 5px rgba(94, 104, 121, 0.3);
+        z-index: 6;
+        div {
+          width: 100%;
+          padding: 0.6rem 1rem;
+          font-size: 0.8rem;
           &:hover {
-            text-decoration: underline;
+            background-color: rgb(212, 212, 212);
+            cursor: pointer;
           }
         }
-        &__content{
-          position: absolute;
-          display: none;
-          flex-wrap: nowrap;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          background-color: white;
-          top: 100%;
-          left: 0;
-          
-          box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
-          2px 2px 5px rgba(94, 104, 121, 0.3);
-          z-index: 6;
-            div {
-              width: 100%;
-              padding: 0.6rem 1rem;
-              font-size: 0.8rem;
-              &:hover {
-                background-color: rgb(212, 212, 212);
-                cursor: pointer;
-              }
-            }
-
-        }
-        .show {
-          display: flex;
-        }
-
       }
+      .show {
+        display: flex;
+      }
+    }
   }
 }
-
 
 /*------Products-----*/
 
@@ -88,21 +85,12 @@ body {
     .product {
       cursor: pointer;
       background-color: #fff;
-      box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
-        2px 2px 5px rgba(94, 104, 121, 0.3);
+      @include m.productContainerShadow;
     }
-
     @include m.desktop {
       width: 90vw;
     }
-    .img-container {
-      position: relative;
-      background-color: #fff;
-      border-radius: 2px;
-      padding: 2rem;
-    }
     img {
-      display: block;
       width: 100%;
       border-radius: 2px;
       &:hover {
@@ -126,10 +114,13 @@ body {
     }
 
     .info-container {
-      text-transform: capitalize;
+      position: relative;
       border-radius: 2px;
-      
-      a, h3 {
+      padding: 1rem;
+      text-transform: capitalize;
+
+      a,
+      h3 {
         font-size: 1rem;
         letter-spacing: 2px;
         text-align: center;
@@ -143,25 +134,21 @@ body {
         text-align: center;
         line-height: 1.5rem;
       }
-
-      .button {
+      .icon-container {
         position: absolute;
-        transform: translate(11rem, -3.5ex);
+        top: 85%;
+        bottom: 0;
+        left: 70%;
 
         @include m.desktop {
-          transform: translate(11rem, -3.5ex);
+          position: absolute;
+          top: 87%;
         }
+
         .bi-bag {
-          color: v.$dark-btn;
           font-size: 1.5rem;
           border: none;
           cursor: pointer;
-          &:hover {
-            color: v.$nav-color;
-          }
-          @include m.desktop {
-            position: relative;
-          }
         }
       }
     }
