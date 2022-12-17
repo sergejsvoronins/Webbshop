@@ -1,6 +1,8 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
+import { displayProduct } from "./productinfo";
+
 
 
 let productList : Product [] = loadFromlocalStorage();
@@ -60,13 +62,19 @@ filterLaptop.addEventListener("click", ()=>{
 
 function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
+
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLDivElement = document.createElement("div");
     productContainer.className = "product";
 
-    productContainer.addEventListener('click', (e) => {
+    productContainer.addEventListener('click', () => {
+        someList[i]["showItem"] = true
+        loadToLocalStorage(productList);
+    });
+
+    /*productContainer.addEventListener('click', (e) => {
        console.log(e);
-    }, false);
+    }, false); */
 
 	let imgContainer : HTMLDivElement = document.createElement("div");
     imgContainer.className = "img-container";
@@ -77,9 +85,6 @@ function displayProducts(someList: Product []) {
     productsCenter.appendChild(productContainer)
 	productContainer.appendChild(imgContainer);
     productContainer.appendChild(infoContainer);
-
-    let productColor : HTMLParagraphElement = document.createElement("h4");
-    productColor.innerHTML = someList[i].color;
 	
 	let productBrand : HTMLParagraphElement = document.createElement("h4");
     productBrand.innerHTML = someList[i].brand;
@@ -88,10 +93,18 @@ function displayProducts(someList: Product []) {
     let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
     imgContainer.appendChild(imgProduct);
 	imgProduct.src = someList[i].url;
-
+  
+    imgProduct.addEventListener('click', () => {
+        
+    });
+	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
-
+    let productLink: HTMLAnchorElement = document.createElement ("a")
+    productLink.href="./productinfo.html"
+    
+    let productColor : HTMLParagraphElement = document.createElement("h4");
+    productColor.innerHTML = someList[i].color;
     
     let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
 	productPrice.innerHTML = someList[i].price;
@@ -112,13 +125,18 @@ function displayProducts(someList: Product []) {
 
     
     
-    infoContainer.appendChild(productTitle);
+    infoContainer.appendChild(productLink);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
+    productLink.appendChild(productTitle)
 	
-    }
+
 }
+
+    }
+
+
 function displayFiltredProducts(someList: Product [], filterType:string) {
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
