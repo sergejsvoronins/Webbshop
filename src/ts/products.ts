@@ -18,16 +18,22 @@ let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
+console.log(sortBarBrand.children[0].innerHTML);
+
+
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
-        sortList[i].classList.toggle("show");
+        sortList[i].classList.add("show");
     })
     sortBarAlt[i].addEventListener("mouseleave", ()=> {
         sortList[i].classList.remove("show");
     })
 }
 
-
+sortBarBrand.children[0].addEventListener("click", ()=>{
+    console.log("hej");
+    
+})
 if (linkUrlMobile === location.href){
     displayFiltredProducts(productList,"mobile")
 }
