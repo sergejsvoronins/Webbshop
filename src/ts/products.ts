@@ -60,7 +60,7 @@ filterLaptop.addEventListener("click", ()=>{
 
 
 
-function displayProducts(someList: Product []) {
+export function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
 
     for(let i = 0; i < someList.length; i++){
@@ -101,6 +101,8 @@ function displayProducts(someList: Product []) {
     let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
     addToCart.className = "icon-container"
     addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
+   
+    
 
     addToCart.addEventListener('click', () => {
 
@@ -110,9 +112,9 @@ function displayProducts(someList: Product []) {
         let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
         cartN.innerHTML = (someList[i].buyAmount).toString();
         loadToLocalStorage(productList);
-    });
 
-    
+        
+    });
     
     infoContainer.appendChild(productLink);
     infoContainer.appendChild(productColor);
@@ -130,29 +132,25 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
         if (someList[i].productType === filterType){
-            let productContainer : HTMLDivElement = document.createElement("div");
+            let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
             productContainer.className = "product";
-            productContainer.addEventListener('click', () => {
-                console.log("clicked")
-            });
-        
-            let imgContainer : HTMLDivElement = document.createElement("div");
-            imgContainer.className = "img-container";
-        
+
+              productContainer.addEventListener('click', () => {
+        someList[i]["showItem"] = true
+        loadToLocalStorage(productList);
+    });
+
+    
             let infoContainer : HTMLDivElement = document.createElement("div");
             infoContainer.className = "info-container";
             
-            productsCenter.appendChild(productContainer)
-            productContainer.appendChild(imgContainer);
+            productsCenter.appendChild(productContainer);
             productContainer.appendChild(infoContainer);
             
             let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-            imgContainer.appendChild(imgProduct);
+            infoContainer.appendChild(imgProduct);
             imgProduct.src = someList[i].url;
-            imgProduct.addEventListener('click', () => {
-                console.log("clicked")
-            });
-            
+          
             let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
             productTitle.innerHTML = someList[i].title;
         
@@ -164,8 +162,8 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             productPrice.innerHTML += " SEK"
             
             let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-            addToCart.className = "button"
-            addToCart.innerHTML = `<i class="fa-solid fa-bag-shopping"></i>`
+            addToCart.className = "icon-container"
+            addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
             
             addToCart.addEventListener('click', () => {
                 someList[i].buyAmount++;
