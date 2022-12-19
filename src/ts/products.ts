@@ -23,55 +23,64 @@ let sortBarAlt = document.getElementsByClassName("filter__sortAlt");
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
-let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
+// let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
 
-let filtredProperties : string [] = [];
 
-for (let i=0; i<sortBarAlt.length; i++){
-    sortBarAlt[i].addEventListener("click", ()=> {
-        sortList[i].classList.add("show");
-    })
-    sortBarAlt[i].addEventListener("mouseleave", ()=> {
-        sortList[i].classList.remove("show");
-    })
-}
 
-for (let i=0; i<sortList.length; i++){
-    for(let j=0; j<sortList[i].children.length; j++){
-        sortList[i].children[j].addEventListener("click", ()=>{
-            if(filtredProperties.indexOf(sortList[i].children[j].innerHTML)===-1){
-                filtredProperties.push(sortList[i].children[j].innerHTML);
-            } 
 
-        })
-    }
-}
+// let filtredProperties : string [] = [];
+
+
+// for (let i=0; i<sortBarAlt.length; i++){
+//     sortBarAlt[i].addEventListener("click", ()=> {
+//         sortList[i].classList.add("show");
+//     })
+//     sortBarAlt[i].addEventListener("mouseleave", ()=> {
+//         sortList[i].classList.remove("show");
+//     })
+// }
+
+// for (let i=0; i<sortList.length; i++){
+//     for(let j=0; j<sortList[i].children.length; j++){
+//         sortList[i].children[j].addEventListener("click", ()=>{
+//             if(filtredProperties.indexOf(sortList[i].children[j].innerHTML)===-1){
+//                 filtredProperties.push(sortList[i].children[j].innerHTML);
+//             } 
+
+//         })
+//     }
+// }
 
 if (linkUrlMobile === location.href){
-    displayFiltredProducts(productList,"mobile")
+    let mobile =  productList.filter(product => product.productType == "mobile");
+    displayProducts(mobile, "filtredListByType");
 }
 else if  (linkUrlTablet === location.href){
-    displayFiltredProducts(productList,"tablet")
+    let tablet =  productList.filter(product => product.productType == "tablet");
+    displayProducts(tablet, "filtredListByType");
 }
 else if (linkUrlLaptop === location.href){
-    displayFiltredProducts(productList,"laptop")
+    let laptop =  productList.filter(product => product.productType == "laptop");
+    displayProducts(laptop, "filtredListByType");
 }
 else {
-    displayProducts(productList);
+    displayProducts(productList, "productList");
 }
 filterMobile.addEventListener("click", ()=>{
-    displayFiltredProducts(productList,"mobile")
+    let mobile =  productList.filter(product => product.productType == "mobile");
+    displayProducts(mobile, "filtredListByType");
 })
+
 filterTablet.addEventListener("click", ()=>{
-    displayFiltredProducts(productList,"tablet")
+    let tablet =  productList.filter(product => product.productType == "tablet");
+    displayProducts(tablet, "filtredListByType");
 })
 filterLaptop.addEventListener("click", ()=>{
-    displayFiltredProducts(productList,"laptop")
+    let laptop =  productList.filter(product => product.productType == "laptop");
+    displayProducts(laptop, "filtredListByType");
 })
 
-
-
- function displayProducts(someList: Product []) {
+function displayProducts(someList: Product [], lsName: string) {
     productsCenter.innerHTML = "";
 
     for(let i = 0; i < someList.length; i++){
@@ -83,7 +92,7 @@ filterLaptop.addEventListener("click", ()=>{
 
     productContainer.addEventListener('click', () => {
         someList[i]["showItem"] = true
-        loadToLocalStorage(productList,"productList");
+        loadToLocalStorage(productList,lsName);
     });
 
 	let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
