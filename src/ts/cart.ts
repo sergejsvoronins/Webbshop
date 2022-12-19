@@ -3,7 +3,7 @@ import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 import { countOrderPrice } from "./functions/countorderprice";
 
-let productList : Product [] = loadFromlocalStorage();
+let productList : Product [] = loadFromlocalStorage("productlist");
 let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
 let cartProductPrice = document.getElementById("cartProductsPrice") as HTMLSpanElement;
 let cartTotalPrice = document.getElementById("cartTotalPrice") as HTMLSpanElement;
@@ -52,14 +52,14 @@ function createCartHtml (products:Product []) {
             productAmountDiv.appendChild(increaseBtn);
             increaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount ++;
-                loadToLocalStorage(products);
+                loadToLocalStorage(products, "productList");
                 createCartHtml(products);
                 console.log(products);
                 
             })
             decreaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount --;
-                loadToLocalStorage(products);
+                loadToLocalStorage(products, "productList");
                 createCartHtml(products);
                 console.log(products);
             })

@@ -11,7 +11,7 @@ createProduct("Thin Case","/assets/img/galaxy-green.png","samsung","grön","349"
 createProduct("Thin Case","/assets/img/galaxy-red.png","samsung","röd","349",0, false, "mobile",productList);
 createProduct("Thin Case","/assets/img/galaxy-blue.png","samsung","blå","349",0, false, "mobile",productList);
 
-loadToLocalStorage(productList);
+loadToLocalStorage(productList, "productList");
 
 
 

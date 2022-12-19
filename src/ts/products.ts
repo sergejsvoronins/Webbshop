@@ -5,7 +5,7 @@ import { displayProduct } from "./productinfo";
 
 
 
-let productList : Product [] = loadFromlocalStorage();
+let productList : Product [] = loadFromlocalStorage("productList");
 
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
@@ -20,8 +20,8 @@ let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
-console.log(sortBarBrand.children[0].innerHTML);
 
+let filtredProperties : string [] = [];
 
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
@@ -32,10 +32,17 @@ for (let i=0; i<sortBarAlt.length; i++){
     })
 }
 
-sortBarBrand.children[0].addEventListener("click", ()=>{
-    console.log("hej");
-    
-})
+for (let i=0; i<sortList.length; i++){
+    for(let j=0; j<sortList[i].children.length; j++){
+        sortList[i].children[j].addEventListener("click", ()=>{
+            if(filtredProperties.indexOf(sortList[i].children[j].innerHTML)===-1){
+                filtredProperties.push(sortList[i].children[j].innerHTML);
+            } 
+
+        })
+    }
+}
+
 if (linkUrlMobile === location.href){
     displayFiltredProducts(productList,"mobile")
 }
@@ -59,6 +66,7 @@ filterLaptop.addEventListener("click", ()=>{
 })
 
 
+
 export function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
 
@@ -68,7 +76,7 @@ export function displayProducts(someList: Product []) {
 
     productContainer.addEventListener('click', () => {
         someList[i]["showItem"] = true
-        loadToLocalStorage(productList);
+        loadToLocalStorage(productList,"productList");
     });
 
 	let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -97,20 +105,20 @@ export function displayProducts(someList: Product []) {
 	productPrice.innerHTML = someList[i].price;
     productPrice.innerHTML += " SEK"
     
-    let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
-    addToCart.className = "icon-button"
-    addToCart.innerHTML += "LÄGG TILL ";
-    addToCart.innerHTML += `<i class="bi bi-bag"></i>`;
+    let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+    addToCart.className = "icon-container"
+    addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
+   
     
 
     addToCart.addEventListener('click', () => {
 
         someList[i].buyAmount++;
-        loadToLocalStorage(someList);
+        loadToLocalStorage(someList, "productList");
 
         let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
         cartN.innerHTML = (someList[i].buyAmount).toString();
-        loadToLocalStorage(productList);
+        loadToLocalStorage(someList, "productList");
 
         
     });
@@ -134,9 +142,9 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
             productContainer.className = "product";
 
-            productContainer.addEventListener('click', () => {
-            someList[i]["showItem"] = true
-            loadToLocalStorage(productList);
+              productContainer.addEventListener('click', () => {
+        someList[i]["showItem"] = true
+        loadToLocalStorage(productList, "productList");
     });
 
     
@@ -166,7 +174,7 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             
             addToCart.addEventListener('click', () => {
                 someList[i].buyAmount++;
-                loadToLocalStorage(someList);
+                loadToLocalStorage(someList, "productList");
             });
             
             infoContainer.appendChild(productTitle);
