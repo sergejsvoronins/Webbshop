@@ -3,11 +3,7 @@ import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 
-
-
-
-let productList : Product [] = loadFromlocalStorage();
-
+let productList : Product [] = loadFromlocalStorage("productList");
 
 let cartItemAmount : number | undefined = 0;
 
