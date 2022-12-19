@@ -11,8 +11,6 @@ let productList : Product [] = loadFromlocalStorage();
 
 let cartItemAmount : number | undefined = 0;
 
-
-
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
 cartItemAmount = updateCartAmount(productList);
