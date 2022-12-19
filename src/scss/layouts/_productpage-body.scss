@@ -82,38 +82,27 @@ body {
     @include m.desktop {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-    .product {
-      cursor: pointer;
-      background-color: #fff;
-      @include m.productContainerShadow;
-    }
-    @include m.desktop {
-      width: 90vw;
-    }
-    img {
-      width: 100%;
-      border-radius: 2px;
-      &:hover {
-        opacity: 70%;
+  }
+  .product {
+    cursor: pointer;
+    background-color: #fff;
+    @include m.productContainerShadow;
+
+    &__picture {
+      min-height: 332px;
+
+      img {
+        width: 100%;
+        border-radius: 2px;
+        &:hover {
+          opacity: 70%;
+        }
       }
       @include m.desktop {
-        margin-bottom: 2rem;
+        width: 90vw;
       }
     }
-
-    .prductBrand {
-      position: absolute;
-      bottom: 15rem;
-      @include m.desktop {
-        bottom: 15.5rem;
-      }
-      text-transform: uppercase;
-      font-size: 0.5rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-    }
-
-    .info-container {
+    &__info {
       position: relative;
       border-radius: 2px;
       padding: 1rem;
@@ -143,13 +132,15 @@ body {
         background-color: v.$dark-btn;
         color: v.$filter-color;
         border-radius: 2px;
+        border: none;
         font-size: 1rem;
         font-weight: 500;
         cursor: pointer;
-        @include m.productContainerShadow;
-
-        @include m.desktop {
+        &:hover {
+          opacity: 90%;
+          border: none;
         }
+        @include m.productContainerShadow;
 
         .bi-bag {
           padding: 0;

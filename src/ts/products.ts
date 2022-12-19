@@ -1,13 +1,21 @@
+import { updateCartAmount } from "./functions/cartItemAmount";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
-import { displayProduct } from "./productinfo";
 
 
 
-let productList : Product [] = loadFromlocalStorage("productList");
+
+let productList : Product [] = loadFromlocalStorage();
+
+
+let cartItemAmount : number | undefined = 0;
 
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
+let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
+cartItemAmount = updateCartAmount(productList);
+cartN.innerHTML = cartItemAmount.toString();
+
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
 let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
@@ -67,12 +75,15 @@ filterLaptop.addEventListener("click", ()=>{
 
 
 
-export function displayProducts(someList: Product []) {
+ function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
 
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
     productContainer.className = "product";
+
+    let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+    imgContainer.className = "product__picture";
 
     productContainer.addEventListener('click', () => {
         someList[i]["showItem"] = true
@@ -80,21 +91,18 @@ export function displayProducts(someList: Product []) {
     });
 
 	let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-    infoContainer.className = "info-container";
-    
-    productsCenter.appendChild(productContainer)
-    productContainer.appendChild(infoContainer);
+    infoContainer.className = "product__info";
 	
-	let productBrand : HTMLParagraphElement = document.createElement("h4") as HTMLParagraphElement;
-    productBrand.innerHTML = someList[i].brand;
-    productBrand.className = "prductBrand";
+	//let productBrand : HTMLParagraphElement = document.createElement("h4") as HTMLParagraphElement;
+    //productBrand.innerHTML = someList[i].brand;
+    //productBrand.className = "prductBrand";
     
     let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-    infoContainer.appendChild(imgProduct);
 	imgProduct.src = someList[i].url;
 	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
+
     let productLink: HTMLAnchorElement = document.createElement ("a")
     productLink.href="./productinfo.html"
     
@@ -105,30 +113,32 @@ export function displayProducts(someList: Product []) {
 	productPrice.innerHTML = someList[i].price;
     productPrice.innerHTML += " SEK"
     
-    let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-    addToCart.className = "icon-container"
-    addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
-   
-    
+    let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
+    addToCart.className = "icon-button"
+    addToCart.innerHTML += "LÄGG TILL ";
+    addToCart.innerHTML += `<i class="bi bi-bag"></i>`;
 
     addToCart.addEventListener('click', () => {
-
         someList[i].buyAmount++;
         loadToLocalStorage(someList, "productList");
 
-        let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
-        cartN.innerHTML = (someList[i].buyAmount).toString();
+        cartItemAmount = updateCartAmount(someList);
+        cartN.innerHTML = (cartItemAmount || 0).toString();
         loadToLocalStorage(someList, "productList");
 
-        
     });
     
+    productsCenter.appendChild(productContainer)
+    productContainer.appendChild(imgContainer);
+    productContainer.appendChild(infoContainer);
+    //infoContainer.appendChild(productBrand);
+    imgContainer.appendChild(imgProduct);
+    infoContainer.appendChild(productTitle);
     infoContainer.appendChild(productLink);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
-    productLink.appendChild(productTitle)
-	
+    
 
 }
 
@@ -142,12 +152,14 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
             productContainer.className = "product";
 
+            let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            imgContainer.className = "imgContainer";
+
               productContainer.addEventListener('click', () => {
         someList[i]["showItem"] = true
         loadToLocalStorage(productList, "productList");
     });
 
-    
             let infoContainer : HTMLDivElement = document.createElement("div");
             infoContainer.className = "info-container";
             
@@ -171,11 +183,7 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
             addToCart.className = "icon-container"
             addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
-            
-            addToCart.addEventListener('click', () => {
-                someList[i].buyAmount++;
-                loadToLocalStorage(someList, "productList");
-            });
+           
             
             infoContainer.appendChild(productTitle);
             infoContainer.appendChild(productColor);
