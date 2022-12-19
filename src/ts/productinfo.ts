@@ -66,8 +66,10 @@ export function displayProduct(someList:Product []){
             console.log("du klickade påknappen")
         })
         
+        document.body.appendChild(buttonContainer)
+
         productCenter.appendChild(productDetail)
-        productDetail.appendChild(buttonContainer)
+        /* productDetail.appendChild(buttonContainer) */
         buttonContainer.appendChild(backButton)
         backButton.appendChild(backAarrow)
         productDetail.appendChild(containerImg)
@@ -82,7 +84,7 @@ export function displayProduct(someList:Product []){
         productColor.appendChild(color2)
         productColor.appendChild(color3)
         
-            for (let i = 0; i < productsList.length; i++) {
+            for (let i = 0; i < someList.length; i++) {
                     backButton.addEventListener("click",()=>{
                     productsList[i]["showItem"]=false
                     localStorage.setItem ("productList", JSON.stringify(productsList))
