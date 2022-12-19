@@ -74,27 +74,27 @@ filterLaptop.addEventListener("click", ()=>{
     let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
     productContainer.className = "product";
 
+    let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+    imgContainer.className = "product__picture";
+
     productContainer.addEventListener('click', () => {
         someList[i]["showItem"] = true
         loadToLocalStorage(productList);
     });
 
 	let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-    infoContainer.className = "info-container";
-    
-    productsCenter.appendChild(productContainer)
-    productContainer.appendChild(infoContainer);
+    infoContainer.className = "product__info";
 	
-	let productBrand : HTMLParagraphElement = document.createElement("h4") as HTMLParagraphElement;
-    productBrand.innerHTML = someList[i].brand;
-    productBrand.className = "prductBrand";
+	//let productBrand : HTMLParagraphElement = document.createElement("h4") as HTMLParagraphElement;
+    //productBrand.innerHTML = someList[i].brand;
+    //productBrand.className = "prductBrand";
     
     let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-    infoContainer.appendChild(imgProduct);
 	imgProduct.src = someList[i].url;
 	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
+
     let productLink: HTMLAnchorElement = document.createElement ("a")
     productLink.href="./productinfo.html"
     
@@ -120,11 +120,17 @@ filterLaptop.addEventListener("click", ()=>{
 
     });
     
+    productsCenter.appendChild(productContainer)
+    productContainer.appendChild(imgContainer);
+    productContainer.appendChild(infoContainer);
+    //infoContainer.appendChild(productBrand);
+    imgContainer.appendChild(imgProduct);
+    infoContainer.appendChild(productTitle);
     infoContainer.appendChild(productLink);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
-    productLink.appendChild(productTitle)
+    
 
 }
 
@@ -137,6 +143,9 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
         if (someList[i].productType === filterType){
             let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
             productContainer.className = "product";
+
+            let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            imgContainer.className = "imgContainer";
 
             productContainer.addEventListener('click', () => {
             someList[i]["showItem"] = true
