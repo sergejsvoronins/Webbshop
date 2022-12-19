@@ -3,10 +3,11 @@ import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 import { countOrderPrice } from "./functions/countorderprice";
 
-let productList : Product [] = loadFromlocalStorage("productlist");
+let productList : Product [] = loadFromlocalStorage("productList");
 let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
 let cartProductPrice = document.getElementById("cartProductsPrice") as HTMLSpanElement;
 let cartTotalPrice = document.getElementById("cartTotalPrice") as HTMLSpanElement;
+console.log(productList);
 
 createCartHtml(productList);
 

@@ -10,7 +10,13 @@ let cartItemAmount : number | undefined = 0;
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
 cartItemAmount = updateCartAmount(productList);
-cartN.innerHTML = cartItemAmount.toString();
+if (cartItemAmount === 0){
+    cartN.innerHTML = "";
+}
+else {
+    cartN.innerHTML = cartItemAmount.toString();
+}
+
 
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
@@ -125,11 +131,11 @@ function displayProducts(someList: Product [], lsName: string) {
 
     addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
-        loadToLocalStorage(someList, "productList");
+        loadToLocalStorage(someList, lsName);
 
         cartItemAmount = updateCartAmount(someList);
         cartN.innerHTML = (cartItemAmount || 0).toString();
-        loadToLocalStorage(someList, "productList");
+        loadToLocalStorage(someList, lsName);
 
     });
     
@@ -160,9 +166,9 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
             imgContainer.className = "imgContainer";
 
-              productContainer.addEventListener('click', () => {
-        someList[i]["showItem"] = true
-        loadToLocalStorage(productList, "productList");
+            productContainer.addEventListener('click', () => {
+            someList[i]["showItem"] = true
+            loadToLocalStorage(productList, "productList");
     });
 
             let infoContainer : HTMLDivElement = document.createElement("div");
