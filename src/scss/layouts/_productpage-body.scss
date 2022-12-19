@@ -143,13 +143,15 @@ body {
         background-color: v.$dark-btn;
         color: v.$filter-color;
         border-radius: 2px;
+        border: none;
         font-size: 1rem;
         font-weight: 500;
         cursor: pointer;
-        @include m.productContainerShadow;
-
-        @include m.desktop {
+        &:hover {
+          opacity: 90%;
+          border: none;
         }
+        @include m.productContainerShadow;
 
         .bi-bag {
           padding: 0;

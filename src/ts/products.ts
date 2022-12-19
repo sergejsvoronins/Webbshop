@@ -1,13 +1,23 @@
+import { updateCartAmount } from "./functions/cartItemAmount";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
-import { displayProduct } from "./productinfo";
+
 
 
 
 let productList : Product [] = loadFromlocalStorage();
 
+
+let cartItemAmount : number | undefined = 0;
+
+
+
 let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
+let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
+cartItemAmount = updateCartAmount(productList);
+cartN.innerHTML = cartItemAmount.toString();
+
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
 let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
@@ -59,7 +69,7 @@ filterLaptop.addEventListener("click", ()=>{
 })
 
 
-export function displayProducts(someList: Product []) {
+ function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
 
     for(let i = 0; i < someList.length; i++){
@@ -101,18 +111,15 @@ export function displayProducts(someList: Product []) {
     addToCart.className = "icon-button"
     addToCart.innerHTML += "LÄGG TILL ";
     addToCart.innerHTML += `<i class="bi bi-bag"></i>`;
-    
 
     addToCart.addEventListener('click', () => {
-
         someList[i].buyAmount++;
         loadToLocalStorage(someList);
 
-        let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
-        cartN.innerHTML = (someList[i].buyAmount).toString();
+        cartItemAmount = updateCartAmount(someList);
+        cartN.innerHTML = (cartItemAmount || 0).toString();
         loadToLocalStorage(productList);
 
-        
     });
     
     infoContainer.appendChild(productLink);
@@ -120,7 +127,6 @@ export function displayProducts(someList: Product []) {
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
     productLink.appendChild(productTitle)
-	
 
 }
 
@@ -139,7 +145,6 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             loadToLocalStorage(productList);
     });
 
-    
             let infoContainer : HTMLDivElement = document.createElement("div");
             infoContainer.className = "info-container";
             
@@ -167,6 +172,10 @@ function displayFiltredProducts(someList: Product [], filterType:string) {
             addToCart.addEventListener('click', () => {
                 someList[i].buyAmount++;
                 loadToLocalStorage(someList);
+        
+                cartItemAmount = updateCartAmount(someList);
+                cartN.innerHTML = (cartItemAmount || 0).toString();
+                loadToLocalStorage(productList);
             });
             
             infoContainer.appendChild(productTitle);
