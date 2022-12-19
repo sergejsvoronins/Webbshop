@@ -2,6 +2,8 @@ import { updateCartAmount } from "./functions/cartItemAmount";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
+import { sortByPriceDown } from "./functions/sortbypricedown";
+import { sortByPriceUp } from "./functions/sortbypriceup";
 
 let productList : Product [] = loadFromlocalStorage("productList");
 
@@ -29,33 +31,42 @@ let sortBarAlt = document.getElementsByClassName("filter__sortAlt");
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
-// let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
+let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
 
+for (let i=0; i<sortBarAlt.length; i++){
+    sortBarAlt[i].addEventListener("click", ()=> {
+        sortList[i].classList.add("show");
+    })
+    sortBarAlt[i].addEventListener("mouseleave", ()=> {
+        sortList[i].classList.remove("show");
+    })
+}
+let newList : Product [] = productList;
+for (let i=0; i<sortList.length; i++){
+    for(let j=0; j<sortList[i].children.length; j++){
+        sortList[i].children[j].addEventListener("click", ()=>{
+            if(i===0){
+                newList =  newList.filter(product => product.brand == sortList[i].children[j].innerHTML);
+                displayProducts(newList,"filtred");
+            }
+            else if (i===1){
+                newList =  newList.filter(product => product.color == sortList[i].children[j].innerHTML);
+                displayProducts(newList,"filtred");
+            }
+            else if (i===2){
+                if (j===0) {
+                    newList.sort(sortByPriceUp);
+                    displayProducts(newList,"filtred");
+                }
+                else {
+                    newList.sort(sortByPriceDown);
+                    displayProducts(newList,"filtred");
+                }
+            }
+        }) 
+    }
+}
 
-
-
-// let filtredProperties : string [] = [];
-
-
-// for (let i=0; i<sortBarAlt.length; i++){
-//     sortBarAlt[i].addEventListener("click", ()=> {
-//         sortList[i].classList.add("show");
-//     })
-//     sortBarAlt[i].addEventListener("mouseleave", ()=> {
-//         sortList[i].classList.remove("show");
-//     })
-// }
-
-// for (let i=0; i<sortList.length; i++){
-//     for(let j=0; j<sortList[i].children.length; j++){
-//         sortList[i].children[j].addEventListener("click", ()=>{
-//             if(filtredProperties.indexOf(sortList[i].children[j].innerHTML)===-1){
-//                 filtredProperties.push(sortList[i].children[j].innerHTML);
-//             } 
-
-//         })
-//     }
-// }
 
 if (linkUrlMobile === location.href){
     let mobile =  productList.filter(product => product.productType == "mobile");
@@ -137,8 +148,7 @@ function displayProducts(someList: Product [], lsName: string) {
         cartN.innerHTML = (cartItemAmount || 0).toString();
         loadToLocalStorage(someList, lsName);
 
-    });
-    
+    });   
     productsCenter.appendChild(productContainer)
     productContainer.appendChild(imgContainer);
     productContainer.appendChild(infoContainer);
@@ -150,58 +160,5 @@ function displayProducts(someList: Product [], lsName: string) {
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
     
-
-}
-
-    }
-
-
-function displayFiltredProducts(someList: Product [], filterType:string) {
-    productsCenter.innerHTML = "";
-    for(let i = 0; i < someList.length; i++){
-        if (someList[i].productType === filterType){
-            let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
-            productContainer.className = "product";
-
-            let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-            imgContainer.className = "imgContainer";
-
-            productContainer.addEventListener('click', () => {
-            someList[i]["showItem"] = true
-            loadToLocalStorage(productList, "productList");
-    });
-
-            let infoContainer : HTMLDivElement = document.createElement("div");
-            infoContainer.className = "info-container";
-            
-            productsCenter.appendChild(productContainer);
-            productContainer.appendChild(infoContainer);
-            
-            let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-            infoContainer.appendChild(imgProduct);
-            imgProduct.src = someList[i].url;
-          
-            let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
-            productTitle.innerHTML = someList[i].title;
-        
-            let productColor : HTMLParagraphElement = document.createElement("h4");
-            productColor.innerHTML = someList[i].color;
-        
-            let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
-            productPrice.innerHTML = someList[i].price;
-            productPrice.innerHTML += " SEK"
-            
-            let addToCart: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-            addToCart.className = "icon-container"
-            addToCart.innerHTML = `<i class="bi bi-bag"></i>`;
-           
-            
-            infoContainer.appendChild(productTitle);
-            infoContainer.appendChild(productColor);
-            infoContainer.appendChild(productPrice);
-            infoContainer.appendChild(addToCart);
-            
-        }
-
     }
 }
