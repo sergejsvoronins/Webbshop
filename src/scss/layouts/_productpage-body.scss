@@ -134,19 +134,26 @@ body {
         text-align: center;
         line-height: 1.5rem;
       }
-      .icon-container {
-        position: absolute;
-        top: 85%;
-        bottom: 0;
-        left: 70%;
+      .icon-button {
+        display: flex;
+        justify-content: space-evenly;
+        justify-items: center;
+        width: 100%;
+        padding: 0.3rem;
+        background-color: v.$dark-btn;
+        color: v.$filter-color;
+        border-radius: 2px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        @include m.productContainerShadow;
 
         @include m.desktop {
-          position: absolute;
-          top: 87%;
         }
 
         .bi-bag {
-          font-size: 1.5rem;
+          padding: 0;
+          font-size: 1rem;
           border: none;
           cursor: pointer;
         }
