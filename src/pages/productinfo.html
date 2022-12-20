@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../scss/main.scss">
     <script src="../ts/productinfo.ts" defer type="module"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>Product info page</title>
 </head>
 <body>
@@ -35,39 +37,16 @@
                 </ul>
             </div>
         </nav>
-        <section class="cartIcon">
-            <a href="./cart.html"><i class="bi bi-bag"></i></a>
-            <span id="cartCount"></span>
+        <section class="cartIcon" id="cartIcon">
+            <div>
+              <i class="bi bi-bag"></i>
+              <span id="cartCount"></span>
+            </div>
         </section>
       </header>
     
-    <!-- <div class="back-arrow">
-        <a href="#back">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-    </div> -->
     
-    
-    <div id="productInfo" class="hero-container">
-        <!-- <div class="hero-product">
-            <img class="product-img" src="../assets/img/ipad-green.png" alt="blue case">
-
-            <div class="hero-detail-container"> 
-                <span class="hero-detail-name">THIN CASE</span>
-                <span class="hero-detail-sub">349 SEK</span>
-
-                <div class="hero-detail-variants">
-                    <a href="#blue" class="color1"></a>
-                    <a href="#red" class="color2"></a>
-                    <a href="#green" class="color3"></a>
-                </div> -->
-
-                <!-- <div>
-                    <a href="#köp" class="btn btn--black btn--animated">Köp</a>
-                </div> -->
-
-            </div>
-    </div>
+    <div id="productInfo" class="hero-container"></div>
 
     <footer>
         <div class="footer">
