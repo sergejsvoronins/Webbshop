@@ -8,7 +8,7 @@ import { countOrderPrice } from "./functions/countorderprice";
 
 let productList : Product [] = loadFromlocalStorage("productList");
 let cartItemAmount : number | undefined = 0;
-let productsCenter: HTMLDivElement = document.querySelector(".products_center") as HTMLDivElement;
+let productsCenter: HTMLDivElement = document.querySelector(".products__center") as HTMLDivElement;
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
 cartItemAmount = updateCartAmount(productList);
 
@@ -144,8 +144,7 @@ function displayProducts(someList: Product [], lsName: string) {
     buttonDiv.className = "buttonDiv";
     let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
     addToCart.className = "icon-button"
-    addToCart.innerHTML += "LÄGG TILL ";
-    addToCart.innerHTML += `<i class="bi bi-bag"></i>`;
+    addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
     addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
         cartItemAmount = updateCartAmount(someList);

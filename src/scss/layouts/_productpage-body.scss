@@ -5,6 +5,7 @@
 
 body {
   background-color: v.$body-color;
+
   .filter {
     width: 100%;
     display: flex;
@@ -73,7 +74,7 @@ body {
     font-weight: 300;
   }
 
-  .products_center {
+  &__center {
     width: 60vw;
     margin: 3rem auto;
     max-width: 1170px;
@@ -111,7 +112,6 @@ body {
 
     &__info {
       position: relative;
-      border-radius: 2px;
       padding: 1rem;
       text-transform: capitalize;
 
@@ -158,7 +158,7 @@ body {
     }
 
     .bi-bag {
-      padding: 0;
+      padding: 5px;
       font-size: 1rem;
       border: none;
       cursor: pointer;

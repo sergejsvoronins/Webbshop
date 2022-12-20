@@ -62,13 +62,3 @@
   box-shadow: -5px -5px 10px v.$color-shadow-light,
     2px 2px 5px v.$color-shadow-dark;
 }
-
-@mixin imgContainer {
-  background-color: #fff;
-  padding: 2rem;
-}
-@mixin imgDesktop {
-  @include m.desktop {
-    margin-bottom: 2rem;
-  }
-}
