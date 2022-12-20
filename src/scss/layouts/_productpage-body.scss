@@ -1,6 +1,7 @@
 @use "../base/reset";
 @use "../library/mixins" as m;
 @use "../library/variables" as v;
+@use "../layouts/cart";
 
 body {
   background-color: v.$body-color;
@@ -52,9 +53,9 @@ body {
           }
         }
       }
-      .show {
-        display: flex;
-      }
+      // .show {
+      //   display: flex;
+      // }
     }
   }
 }

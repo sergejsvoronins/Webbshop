@@ -4,17 +4,27 @@
 
 
 .cartContainer {
+    position: fixed;
+    top: 0;
+    right: -200%;
+    bottom: 0;
+    opacity: 0;
     width: 100%;
-    height: auto;
     z-index: 5;
-    display: flex;
     flex-direction: column;
     padding: 1em;
+    background-color: v.$body-color;
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+    overflow: scroll;
+    @include m.desktop {
+        width: 40%;
+    }
     &__header {
         position: relative;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: start;
         padding-bottom: 1em;
         @include m.desktop {
             h2 {
@@ -32,8 +42,11 @@
             text-transform: uppercase;
 
         }
-        a {
-            
+        div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0 1em;
             &:hover {
                 cursor: pointer;
                 i {
@@ -74,12 +87,14 @@
                 flex-direction: column;
                 justify-content: center;
                 gap: 1em;
-                padding: 1em;
                 &:nth-child(1){
-                    width: 60%;
-                    @include m.imgContainer;
+                    width: 30%;
+                    padding: 0.6em;
+                    background-color: #fff;
                     @include m.desktop {
-                        padding: 2em;
+                        // @include m.imgContainer;
+                        width: 50%;
+
                     }
                 }
                 &:nth-child(2){
@@ -127,6 +142,11 @@
         }
     }
     &__submitBtn {
+        opacity: 0.3;
         @include m.submitGreenBtn;
     }
+}
+.show {
+    opacity: 1;
+    right: 0;
 }
