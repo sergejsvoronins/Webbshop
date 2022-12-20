@@ -85,12 +85,15 @@ body {
     }
   }
   .product {
-    text-decoration: none;
     padding: 1rem;
     border-radius: 3px;
     cursor: pointer;
     background-color: #fff;
     @include m.productContainerShadow;
+
+    &__infoLink {
+      text-decoration: none;
+    }
 
     &__picture {
       min-height: 200px;
@@ -126,36 +129,36 @@ body {
         font-weight: 400;
         text-align: center;
         line-height: 1.5rem;
-        &:not(:first-of-type) {
-          margin-bottom: 1rem;
-        }
       }
-      .icon-button {
-        display: flex;
-        justify-content: space-evenly;
-        justify-items: center;
-        width: 100%;
-        padding: 0.3rem;
-        background-color: v.$dark-btn;
-        color: v.$filter-color;
-        border-radius: 2px;
-        border: none;
-        font-size: 1rem;
-        font-weight: 500;
-        cursor: pointer;
-        &:hover {
-          opacity: 90%;
-          border: none;
-        }
-        @include m.productContainerShadow;
+    }
+  }
+  .buttonDiv {
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
 
-        .bi-bag {
-          padding: 0;
-          font-size: 1rem;
-          border: none;
-          cursor: pointer;
-        }
+    button {
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      width: 90%;
+      padding: 0.5rem;
+      border-radius: 3px;
+      color: v.$body-color;
+      background-color: v.$dark-btn;
+      cursor: pointer;
+      &:hover {
+        opacity: 90%;
+        border: none;
       }
+      @include m.productContainerShadow;
+    }
+
+    .bi-bag {
+      padding: 0;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
     }
   }
 }

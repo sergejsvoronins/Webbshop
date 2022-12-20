@@ -101,38 +101,39 @@ function displayProducts(someList: Product [], lsName: string) {
     productsCenter.innerHTML = "";
 
     for(let i = 0; i < someList.length; i++){
-    let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
+    let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
     productContainer.className = "product";
-    productContainer.href="./productinfo.html";
 
-    let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-    imgContainer.className = "product__picture";
+    let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
+    productInfoLink.className = "product__infoLink";
+    productInfoLink.href="./productinfo.html";
 
-    productContainer.addEventListener('click', () => {
+    productInfoLink.addEventListener('click', () => {
         someList[i]["showItem"] = true
         loadToLocalStorage(productList,lsName);
     });
 
+    let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+    imgContainer.className = "product__picture";
+
+    let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+	imgProduct.src = someList[i].url;
+
 	let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
     infoContainer.className = "product__info";
 	
-	//let productBrand : HTMLParagraphElement = document.createElement("h4") as HTMLParagraphElement;
-    //productBrand.innerHTML = someList[i].brand;
-    //productBrand.className = "prductBrand";
-    
-    let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-	imgProduct.src = someList[i].url;
-	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
-    
+  
     let productColor : HTMLParagraphElement = document.createElement("h4");
     productColor.innerHTML = someList[i].color;
     
     let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
 	productPrice.innerHTML = someList[i].price;
-    productPrice.innerHTML += " SEK"
-    
+    productPrice.innerHTML += " SEK";
+
+    let buttonDiv: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+    buttonDiv.className = "buttonDiv";
     let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
     addToCart.className = "icon-button"
     addToCart.innerHTML += "LÄGG TILL ";
@@ -148,14 +149,15 @@ function displayProducts(someList: Product [], lsName: string) {
 
     });   
     productsCenter.appendChild(productContainer)
-    productContainer.appendChild(imgContainer);
-    productContainer.appendChild(infoContainer);
-    //infoContainer.appendChild(productBrand);
+    productContainer.appendChild(productInfoLink);
+    productInfoLink.appendChild(imgContainer);
     imgContainer.appendChild(imgProduct);
+    productInfoLink.appendChild(infoContainer);
     infoContainer.appendChild(productTitle);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
-    infoContainer.appendChild(addToCart);
+    productContainer.appendChild(buttonDiv);
+    buttonDiv.appendChild(addToCart);
     
     }
 }
