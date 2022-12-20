@@ -74,7 +74,7 @@ createCartHtml(productList);
 //=========================Filter section
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
-        sortList[i].classList.add("show");
+        sortList[i].classList.toggle("show");
     })
     sortBarAlt[i].addEventListener("mouseleave", ()=> {
         sortList[i].classList.remove("show");
