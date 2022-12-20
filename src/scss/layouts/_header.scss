@@ -17,6 +17,7 @@ header {
   > a {
     text-decoration: none;
     > h2 {
+      font-family: "Caramel", cursive;
       color: v.$logo-color;
       font-size: 1.4em;
       @include m.desktop {

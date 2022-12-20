@@ -19,7 +19,7 @@ createProduct("Thin Case","/assets/img/tab-blue.png","samsung","blå","549",0, f
 createProduct("Thin Case","/assets/img/tab-rose.png","samsung","röd","549",0, false, "tablet",productList);
 
 createProduct("Thin Case","/assets/img/macbook-case.png","apple","svart","849",0, false, "desktop",productList);
-createProduct("Thin Case","/assets/img/samsung-case.png","samsung","svart","849",0, false, "desktop",productList);
+createProduct("Thin Case","/assets/img/macbook-case.png","samsung","svart","849",0, false, "desktop",productList);
 
 
 loadToLocalStorage(productList, "productList");

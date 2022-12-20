@@ -80,28 +80,28 @@ body {
     grid-row-gap: 2rem;
     overflow: hidden;
     @include m.desktop {
+      width: 90vw;
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
   }
   .product {
+    padding: 1rem;
+    border-radius: 3px;
     cursor: pointer;
     background-color: #fff;
     @include m.productContainerShadow;
 
     &__picture {
-      min-height: 332px;
+      min-height: 250px;
 
       img {
         width: 100%;
-        border-radius: 2px;
         &:hover {
           opacity: 70%;
         }
       }
-      @include m.desktop {
-        width: 90vw;
-      }
     }
+
     &__info {
       position: relative;
       border-radius: 2px;
@@ -113,7 +113,6 @@ body {
         font-size: 1rem;
         letter-spacing: 2px;
         text-align: center;
-        line-height: 1.5rem;
         text-decoration: none;
         color: #000;
       }
@@ -122,6 +121,9 @@ body {
         font-weight: 400;
         text-align: center;
         line-height: 1.5rem;
+        &:not(:first-of-type) {
+          margin-bottom: 1rem;
+        }
       }
       .icon-button {
         display: flex;
