@@ -103,6 +103,7 @@ function displayProducts(someList: Product [], lsName: string) {
     for(let i = 0; i < someList.length; i++){
     let productContainer : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
     productContainer.className = "product";
+    productContainer.href="./productinfo.html";
 
     let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
     imgContainer.className = "product__picture";
@@ -124,9 +125,6 @@ function displayProducts(someList: Product [], lsName: string) {
 	
 	let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
 	productTitle.innerHTML = someList[i].title;
-
-    let productLink: HTMLAnchorElement = document.createElement ("a")
-    productLink.href="./productinfo.html"
     
     let productColor : HTMLParagraphElement = document.createElement("h4");
     productColor.innerHTML = someList[i].color;
@@ -155,7 +153,6 @@ function displayProducts(someList: Product [], lsName: string) {
     //infoContainer.appendChild(productBrand);
     imgContainer.appendChild(imgProduct);
     infoContainer.appendChild(productTitle);
-    infoContainer.appendChild(productLink);
     infoContainer.appendChild(productColor);
     infoContainer.appendChild(productPrice);
     infoContainer.appendChild(addToCart);
