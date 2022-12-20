@@ -13,6 +13,28 @@
 </head>
 
 <body>
+  <section class="cartContainer" id="cart">
+      <div class="cartContainer__header">
+          <h2>varukorg</h2>
+          <div id="cartCloseBtn"><i class="fa-solid fa-xmark"></i></div>
+      </div>
+      <div class="cartContainer__products" id="cartProductsCont"></div>
+      <div class="cartContainer__priceProducts">
+          <span>produkter</span>
+          <span id="cartProductsPrice">0:-</span>
+      </div>
+      <div class="cartContainer__priceFreight">
+          <span>frakt</span>
+          <span>0:-</span>
+      </div>
+      <div class="cartContainer__totalPrice">
+          <span>totalt</span>
+          <span id="cartTotalPrice">0:-</span>
+      </div>
+      <a class="cartContainer__submitBtn" id="submitBtn">
+          <button type="button">Betala köp</button>
+      </a>
+  </section>
   <header>
     <a href="./../index.html"><h2>Case it</h2></a>
     <nav>
@@ -37,9 +59,11 @@
             </ul>
         </div>
     </nav>
-    <section class="cartIcon">
-        <a href="./cart.html"><i class="bi bi-bag"></i></a>
-        <span id="cartCount"></span>
+    <section class="cartIcon" id="cartIcon">
+        <div>
+          <i class="bi bi-bag"></i>
+          <span id="cartCount"></span>
+        </div>
     </section>
   </header>
 
