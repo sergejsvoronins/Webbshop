@@ -1,5 +1,6 @@
 import { Product } from "./models/product";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
+import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 
 
 
@@ -8,10 +9,10 @@ let productsList : Product [] = loadFromlocalStorage("productList");
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
 displayProduct(productsList);
 
-export function displayProduct(products:Product []){
-    for (let i = 0; i < products.length; i++) {
+export function displayProduct(someList:Product []){
+    for (let i = 0; i < someList.length; i++) {
 
-        if (products[i].showItem === true){
+        if (someList[i].showItem === true){
         
         let productDetail: HTMLDivElement = document.createElement ("div");
         productDetail.className = "hero-product";
@@ -33,16 +34,16 @@ export function displayProduct(products:Product []){
         let productImg: HTMLImageElement = document.createElement ("img");
         productImg.className = ("product-img")
         productDetail.appendChild(productImg)
-        productImg.src = products[i].url
+        productImg.src = someList[i].url
         
         let productName: HTMLSpanElement = document.createElement ("span")
         productName.className = ("hero-detail-name")
-        productName.innerHTML = products[i].title
+        productName.innerHTML = someList[i].title
         
         
         let productSub: HTMLSpanElement = document.createElement ("span")
         productSub.className = ("hero-detail-sub")
-        productSub.innerHTML = products[i].price
+        productSub.innerHTML = someList[i].price
         productSub.innerHTML += " " + " SEK"
         
         let productColor: HTMLDivElement = document.createElement ("div")
@@ -55,14 +56,14 @@ export function displayProduct(products:Product []){
         let color3: HTMLAnchorElement = document.createElement ("a")
         color3.className = ("color3")
 
-        let textContainer: HTMLDivElement = document.createElement ("div")
+        /* let textContainer: HTMLDivElement = document.createElement ("div")
         textContainer.className = ("textContainer")
         let bar1:HTMLDivElement = document.createElement ("div")
         bar1.className = ("bar1")
         let bar2:HTMLDivElement = document.createElement ("div")
         bar2.className = ("bar2")
         let bar3:HTMLDivElement = document.createElement ("div")
-        bar3.className = ("bar3")
+        bar3.className = ("bar3") */
         
 
         let productText: HTMLSpanElement = document.createElement ("span")
@@ -76,7 +77,7 @@ export function displayProduct(products:Product []){
         buyButton.className = ("blk--btn")
         buyButton.innerText = ("KÖP")
         buyButton.addEventListener( 'click', () => {
-            products[i].buyAmount++;
+            someList[i].buyAmount++;
             
         })
         productCenter.appendChild(productDetail)
@@ -98,12 +99,12 @@ export function displayProduct(products:Product []){
         buttonContainer.appendChild(backButton)
         backButton.appendChild(backAarrow)
         
-        productInfo.appendChild(textContainer)
-        productText.appendChild(productText)
+        /* productInfo.appendChild(textContainer)
+        productText.appendChild(productText) */
         
-            for (let i = 0; i < products.length; i++) {
+            for (let i = 0; i < someList.length; i++) {
                     backButton.addEventListener("click",()=>{
-                    products[i]["showItem"]=false
+                    someList[i]["showItem"]=false
                     localStorage.setItem ("productList", JSON.stringify(productsList))
                 })
 
@@ -114,6 +115,7 @@ export function displayProduct(products:Product []){
 }
 
 console.log(productsList);
+
 
 
 
