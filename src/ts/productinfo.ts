@@ -3,7 +3,7 @@ import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 
 
 
-let productsList : Product [] = loadFromlocalStorage();
+let productsList : Product [] = loadFromlocalStorage("productList");
 
 
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;

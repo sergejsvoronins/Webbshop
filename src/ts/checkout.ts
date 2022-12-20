@@ -17,7 +17,7 @@ let freightPrice : number = 0;
 klarnaPayOption.checked = true;
 postOfficeOption.checked = true;
 
-let productList : Product [] = loadFromlocalStorage();
+let productList : Product [] = loadFromlocalStorage("productList");
 createCheckOutHtml(productList);
 
 function createCheckOutHtml (products: Product []) {
@@ -73,19 +73,19 @@ function createCheckOutHtml (products: Product []) {
             deleteIconDiv.addEventListener("click", ()=> {
                 products[i].buyAmount = 0;
                 createCheckOutHtml(products);
-                loadToLocalStorage(products);
+                loadToLocalStorage(products, "productList");
             })
             increaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount ++;
                 createCheckOutHtml(products);
-                loadToLocalStorage(products);
+                loadToLocalStorage(products, "productList");
                 
                 
             })
             decreaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount --;
                 createCheckOutHtml(products);
-                loadToLocalStorage(products);
+                loadToLocalStorage(products, "productList");
             })
         }
     }
