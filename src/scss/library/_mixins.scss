@@ -62,3 +62,8 @@
   box-shadow: -5px -5px 10px v.$color-shadow-light,
     2px 2px 5px v.$color-shadow-dark;
 }
+
+@mixin paymentGreatingTitle {
+  font-size: 1rem;
+  font-weight: 400;
+}
