@@ -85,12 +85,20 @@ for (let i=0; i<sortList.length; i++){
     for(let j=0; j<sortList[i].children.length; j++){
         sortList[i].children[j].addEventListener("click", ()=>{
             if(i===0){
-                newList =  newList.filter(product => product.brand == sortList[i].children[j].innerHTML);
-                displayProducts(newList,"filtred");
+                // newList =  newList.filter(product => product.brand == sortList[i].children[j].innerHTML);
+                // displayProducts(newList,"filtred");
+                // for (let k=0; k<productList.length, k++){
+                //     if(productList[k].brand!==sortList[i].children[j].innerHTML){
+                //         productList.classList.add("hide");
+                //     }
+                // }
+                console.log(sortList[i].children[j]);
+                
             }
             else if (i===1){
-                newList =  newList.filter(product => product.color == sortList[i].children[j].innerHTML);
-                displayProducts(newList,"filtred");
+                // newList =  newList.filter(product => product.color == sortList[i].children[j].innerHTML);
+                // displayProducts(newList,"filtred");
+                console.log(sortList[i].children[j].innerHTML);
             }
             else if (i===2){
                 if (j===0) {
