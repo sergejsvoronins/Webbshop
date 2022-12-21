@@ -62,3 +62,16 @@
   box-shadow: -5px -5px 10px v.$color-shadow-light,
     2px 2px 5px v.$color-shadow-dark;
 }
+
+
+@mixin itemAmountInput {
+  width: 40%;
+  text-align: center;
+  background-color: fff;
+  margin: 0 0.4em;
+  border: none;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+  }
+}

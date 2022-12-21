@@ -7,7 +7,7 @@ import { sortByPriceUp } from "./functions/sortbypriceup";
 import { countOrderPrice } from "./functions/countorderprice";
 
 let productList : Product [] = loadFromlocalStorage();
-let cartItemAmount : number | undefined = 0;
+let cartItemAmount : string;
 let productsCenter: HTMLDivElement = document.querySelector(".products__center") as HTMLDivElement;
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
 cartItemAmount = updateCartAmount(productList);
@@ -59,12 +59,13 @@ filterLaptop.addEventListener("click", ()=>{
 cartIcon.addEventListener("click", ()=>{
     cartContainer.classList.add("show");
     document.body.style.overflow ="hidden";
+    
 })
 cartCloseBtn.addEventListener("click", ()=>{
     cartContainer.classList.remove("show");
-    document.body.style.overflow ="auto"
+    document.body.style.overflow ="auto";
 })
-createCartHtml(productList);
+
 //=========================Filter section
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
@@ -74,7 +75,7 @@ for (let i=0; i<sortBarAlt.length; i++){
         sortList[i].classList.remove("show");
     })
 }
-let newList : Product [] = productList;
+// let newList : Product [] = productList;
 // for (let i=0; i<sortList.length; i++){
 //     for(let j=0; j<sortList[i].children.length; j++){
 //         sortList[i].children[j].addEventListener("click", ()=>{
@@ -102,6 +103,7 @@ let newList : Product [] = productList;
 //=========================Functions
 function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
+    cartN.innerHTML = cartItemAmount;
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
@@ -141,22 +143,20 @@ function displayProducts(someList: Product []) {
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
         cartItemAmount = updateCartAmount(someList);
-        cartN.innerHTML = (cartItemAmount || 0).toString();
+        cartN.innerHTML = cartItemAmount.toString();
         loadToLocalStorage(someList);
         createCartHtml(someList);
         });   
-
-
-    productsCenter.appendChild(productContainer)
-    productContainer.appendChild(productInfoLink);
-    productInfoLink.appendChild(imgContainer);
-    imgContainer.appendChild(imgProduct);
-    productInfoLink.appendChild(infoContainer);
-    infoContainer.appendChild(productTitle);
-    infoContainer.appendChild(productColor);
-    infoContainer.appendChild(productPrice);
-    productContainer.appendChild(buttonDiv);
-    buttonDiv.appendChild(addToCart);
+        productsCenter.appendChild(productContainer)
+        productContainer.appendChild(productInfoLink);
+        productInfoLink.appendChild(imgContainer);
+        imgContainer.appendChild(imgProduct);
+        productInfoLink.appendChild(infoContainer);
+        infoContainer.appendChild(productTitle);
+        infoContainer.appendChild(productColor);
+        infoContainer.appendChild(productPrice);
+        productContainer.appendChild(buttonDiv);
+        buttonDiv.appendChild(addToCart);
     }
 
     
@@ -225,8 +225,9 @@ function displayFilteredProducts(someList: Product [], filter: string) {
 }
 function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
+    cartN.innerHTML = cartItemAmount.toString();
     let cartPrice : number = 0;
-    if (cartItemAmount!==0){
+    if (cartItemAmount!==""){
         submitBtn.getAttribute("href");
         submitBtn.href = "./checkout.html";
         submitBtn.style.opacity = "1";
@@ -265,37 +266,40 @@ function createCartHtml (products:Product []) {
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
             decreaseBtn.innerHTML = "-";
-            let productAmountNumber : HTMLDivElement = document.createElement ("div");
-            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
+            let productAmountNumber : HTMLInputElement = document.createElement ("input");
+            productAmountNumber.value = (products[i].buyAmount).toString();
+            productAmountNumber.type = "number";
             let increaseBtn : HTMLButtonElement = document.createElement("button");
             increaseBtn.innerHTML = "+";
             productAmountDiv.appendChild(decreaseBtn);
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(increaseBtn);
             increaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount ++;
-                cartItemAmount = updateCartAmount(products);
-                if (cartItemAmount === 0){
-                    cartN.innerHTML = "";
-                }
+                if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
+                    products[i].buyAmount ++;
+                    cartItemAmount = updateCartAmount(products);
+                    loadToLocalStorage(products);
+                    createCartHtml(products);
+                }     
+            })
+            productAmountNumber.addEventListener("input", ()=>{
+                if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
+                    products[i].buyAmount = +productAmountNumber.value;
+                    cartItemAmount = updateCartAmount(productList);
+                    loadToLocalStorage(products);
+                    createCartHtml(products);
+                } 
                 else {
-                    cartN.innerHTML = cartItemAmount.toString();
+                    productAmountNumber.value = products[i].buyAmount.toString();
                 }
-                // cartN.innerHTML = (cartItemAmount || 0).toString();
-                loadToLocalStorage(products);
-                createCartHtml(products);     
             })
             decreaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount --;
-                cartItemAmount = updateCartAmount(products);
-                if (cartItemAmount === 0){
-                    cartN.innerHTML = "";
-                }
-                else {
-                    cartN.innerHTML = cartItemAmount.toString();
-                }
-                loadToLocalStorage(products);
-                createCartHtml(products);
+                if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
+                    products[i].buyAmount --;
+                    cartItemAmount = updateCartAmount(products);
+                    loadToLocalStorage(products);
+                    createCartHtml(products);
+                }  
             })
         }
     }

@@ -58,8 +58,11 @@ function createCheckOutHtml (products: Product []) {
             productInfoDiv.appendChild(productAmountDiv);
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
             decreaseBtn.innerHTML = "-";
-            let productAmountNumber : HTMLDivElement = document.createElement ("div");
-            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
+            let productAmountNumber : HTMLInputElement = document.createElement ("input");
+            productAmountNumber.value = (products[i].buyAmount).toString();
+            productAmountNumber.type = "number";
+            productAmountNumber.min = "1";
+            productAmountNumber.max = "50";
             let increaseBtn : HTMLButtonElement = document.createElement("button");
             increaseBtn.innerHTML = "+";
             productAmountDiv.appendChild(decreaseBtn);
@@ -76,16 +79,28 @@ function createCheckOutHtml (products: Product []) {
                 loadToLocalStorage(products);
             })
             increaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount ++;
-                createCheckOutHtml(products);
-                loadToLocalStorage(products);
-                
-                
+                if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
+                    products[i].buyAmount ++;
+                    loadToLocalStorage(products);
+                    createCheckOutHtml(products);
+                }
+            })
+            productAmountNumber.addEventListener("input", ()=>{
+                if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
+                    products[i].buyAmount = +productAmountNumber.value;
+                    loadToLocalStorage(products);
+                    createCheckOutHtml(products);
+                } 
+                else {
+                    productAmountNumber.value = products[i].buyAmount.toString();
+                }
             })
             decreaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount --;
-                createCheckOutHtml(products);
-                loadToLocalStorage(products);
+                if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
+                    products[i].buyAmount --;
+                    loadToLocalStorage(products);
+                    createCheckOutHtml(products);
+                }  
             })
         }
     }
