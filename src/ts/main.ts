@@ -22,7 +22,7 @@ createProduct("Thin Case","/assets/img/macbook-case.png","apple","svart","849",0
 createProduct("Thin Case","/assets/img/macbook-case.png","samsung","svart","849",0, false, "laptop",productList);
 
 
-loadToLocalStorage(productList, "productList");
+loadToLocalStorage(productList);
 
 
 
