@@ -17,10 +17,10 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         if (someList[i].showItem === true){
 
         let productDetail: HTMLDivElement = document.createElement ("div")
-        productDetail.className = "hero-product";
+        productDetail.className = "productInfo__Container";
 
         let buttonContainer: HTMLDivElement = document.createElement ("div")
-        buttonContainer.className = "buttonContainer back-arrow"
+        buttonContainer.className = "productInfo__arrow"
         let backButton: HTMLAnchorElement = document.createElement ("a")
         backButton.className = "backButton"
         backButton.href = "./products.html"
