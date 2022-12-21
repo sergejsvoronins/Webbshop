@@ -6,15 +6,16 @@ import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 
 let productsList : Product [] = loadFromlocalStorage();
 
-let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
-displayProductInfo(productsList);
+let productCenter: HTMLDivElement = document.querySelector("productInfo") as HTMLDivElement;
 
-export function displayProductInfo(someList:Product []){
+export function displayProductInfo(someList:Product[], container:HTMLDivElement){
+
+    container.innerHTML=""
+
     for (let i = 0; i < someList.length; i++) {
 
         if (someList[i].showItem === true){
-        
-        /* let productDetail:HTMLDivElement = document.getElementById ("productInfo") as HTMLDivElement */
+
         let productDetail: HTMLDivElement = document.createElement ("div")
         productDetail.className = "hero-product";
 
@@ -67,8 +68,8 @@ export function displayProductInfo(someList:Product []){
             someList[i].buyAmount++;
             
         })
-        productCenter.appendChild(productDetail)
-        productCenter.appendChild(buttonContainer)
+        container.appendChild(productDetail)
+        container.appendChild(buttonContainer)
         productDetail.appendChild(containerImg)
         containerImg.appendChild(productImg)
         productDetail.appendChild(productInfo)
@@ -83,21 +84,11 @@ export function displayProductInfo(someList:Product []){
         productInfo.appendChild (btnContainer)
         buttonContainer.appendChild(backButton)
         backButton.appendChild(backAarrow)
+
         backButton.addEventListener("click",()=>{
             someList[i].showItem=false;
             loadToLocalStorage(someList);
         })
-        /* productInfo.appendChild(textContainer)
-        productText.appendChild(productText) */
-        
-            // for (let i = 0; i < someList.length; i++) {
-            //         backButton.addEventListener("click",()=>{
-            //         someList[i]["showItem"]=false
-            //         localStorage.setItem ("productList", JSON.stringify(productsList))
-            //     })
-
-                
-            // }
         }
     }
 }
