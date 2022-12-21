@@ -118,6 +118,7 @@ function displayProducts(someList: Product []) {
             someList[i]["showItem"] = true;
             displayProductInfo(someList, productinfo)
             productsBody.style.display = "none"
+            productinfo.style.display ="block"
             loadToLocalStorage(productList)
             });
 

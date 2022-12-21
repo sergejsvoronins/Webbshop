@@ -23,28 +23,28 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         buttonContainer.className = "productInfo__arrow"
         let backButton: HTMLAnchorElement = document.createElement ("a")
         backButton.className = "backButton"
-        backButton.href = "./products.html"
+        backButton.removeAttribute("href");
+        /* backButton.href = "./products.html" */
         let backAarrow: HTMLLIElement = document.createElement ("li")
         backAarrow.className = "fa-solid fa-arrow-left"
         
         let productInfo: HTMLDivElement = document.createElement ("div")
-        productInfo.className = "hero-detail-container";
+        productInfo.className = "detailContainer";
         
         let containerImg: HTMLDivElement = document.createElement ("div");
-        containerImg.className ="containerImg";
+        containerImg.className ="imgContainer";
         
         let productImg: HTMLImageElement = document.createElement ("img");
-        productImg.className = ("product-img")
         productDetail.appendChild(productImg)
         productImg.src = someList[i].url
         
         let productName: HTMLSpanElement = document.createElement ("span")
-        productName.className = ("hero-detail-name")
+        productName.className = ("detailContainer__name")
         productName.innerHTML = someList[i].title
         
         
         let productSub: HTMLSpanElement = document.createElement ("span")
-        productSub.className = ("hero-detail-sub")
+        productSub.className = ("detailContainer__price")
         productSub.innerHTML = someList[i].price
         productSub.innerHTML += " " + " SEK"
         
@@ -52,11 +52,11 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         productColor.className = ("productColor")
         
         let color1: HTMLAnchorElement = document.createElement ("a")
-        color1.className = ("color1")
+        color1.className = ("productColor__blue")
         let color2: HTMLAnchorElement = document.createElement ("a")
-        color2.className = ("color2")
+        color2.className = ("productColor__red")
         let color3: HTMLAnchorElement = document.createElement ("a")
-        color3.className = ("color3")
+        color3.className = ("productColor__green")
 
         
         let btnContainer: HTMLDivElement = document.createElement ("div")
@@ -87,7 +87,9 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
 
         backButton.addEventListener("click",()=>{
             someList[i].showItem=false;
+            displayProductInfo(someList, container)
             loadToLocalStorage(someList);
+            
         })
         }
     }

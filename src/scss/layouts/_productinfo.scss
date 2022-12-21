@@ -4,147 +4,104 @@
 
 .productInfo{
     position: relative;
-
+    
+    @include m.desktop{
+        padding: 5rem;
+    }
 
    &__Container{
-        width: 100%;
-        height: fit-content;
         display: flex;
+        width: 100%;
+        padding: 4rem;
+        height: 100%;
         flex-direction: column;
         align-items: center;
         
         @include m.desktop{
             flex-direction: row;
-            justify-content: start;
+            justify-content: center;
+            align-items: flex-start;
             height: auto;
         }
         
-        .product-img{
-            height: 350px;
-            width: 350px;
-            
-            @include m.productContainerShadow;
-            
-            @include m.desktop{
-                height: 500px;
-                width: 500px;
+        .imgContainer{
+            display: flex;
+            img{
+                height: 300px;
+                width: 300px;
+                
+                @include m.productContainerShadow;
+                
+                @include m.desktop{
+                    height: 450px;
+                    width: 450px;
+                    border-radius: 2px;
+                }
             }
         }
         
-        .hero-product{
+        .detailContainer{
             display: flex;
             flex-direction: column;
-            width: 100%;
-            align-items: center;
-            margin: 45px;
+            width: 300px;
+            height: 250px;
+            align-items: flex-start;
+            margin: 2rem;
             
             @include m.desktop{
                 display: flex;
-                flex-direction: row;
-                justify-content: center ;
-                margin: 6%;
-            }
-            
-            .hero-detail-container{
-                padding-top: 20px;
-                margin: 0px;
-                display: flex;
                 flex-direction: column;
-                align-items: flex-start;
-                margin-left: -195px;
-                
-                @include m.desktop{
-                    margin-left: 50px;
-                    width: 20%;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    margin-top: -265px;
-                }
-                
-                .hero-detail-name{
-                    font-weight: bold;
-                    padding: 10px;
-                }
-                
-                .hero-detail-sub{
-                    padding: 10px;
-                }
-                
-                .productColor{
-                    display: flex;
-                    justify-content: space-evenly;
-                    flex-direction: row;
-                    
-                    .color1,
-                    .blå {
+                justify-content: start;
+            }
+
+            &__name{
+                font-weight: bold;
+                padding: 10px   ;
+            }
+
+            &__price{
+                padding: 10px;
+            }
+
+            .productColor{
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: row;
+
+                    &__blue,&__red,&__green{
                         color: transparent;
                         margin: 10px;
-                        background-color: #29283D;
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        border: 2px solid black;
-                        display: block;
-                        
-                        @include m.desktop{
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
-                    .color2,
-                    .röd {
-                        margin: 10px;
-                        background-color: #e24a4a;
+                        background-color: rgb(198, 198, 204);
                         width: 35px;
                         height: 35px;
                         border-radius: 50%;
                         display: block;
-                        
-                        @include m.desktop{
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
-                    .color3,
-                    .grön {
-                        margin: 10px;
-                        background-color: #449263;
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        display: block;
-                        
-                        @include m.desktop{
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
                 }
-                
-                .buyButton{
+            }
+            .buyButton{
+                display: flex;
+
+                .blk--btn{
+                        
                     display: flex;
+                    background-color: black;
+                    color: white;
+                    width: 100px;
+                    height: 50px;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;
+                    margin-top: 35px;
                     
-                    .blk--btn{
-                        
-                        display: flex;
-                        background-color: black;
-                        color: white;
-                        width: 100px;
-                        height: 50px;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 5px;
-                        margin-top: 35px;
-                        
-                        @include m.productContainerShadow;
-                        
-                        @include m.desktop{
-                            width: 150px;
-                            height: 75px;
-                        }
+                    @include m.productContainerShadow;
+                    
+                    @include m.desktop{
+                        width: 150px;
+                        height: 75px;
                     }
-                    
                 }
+
+
             }
         }   
     }
@@ -153,11 +110,7 @@
         position: absolute;
         top: 1rem;
         left: 1rem;
-
-        @include m.desktop{
-            /* top: 11%;
-            left: 1%; */
-        }
+        
             a{
                 li{
                     font-size: 25px;   
