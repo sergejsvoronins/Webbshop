@@ -17,7 +17,7 @@
 @mixin checkoutSectionBorder {
   box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.3);
   border-radius: 0.1em;
-  padding: 1em 0.4em;
+  padding: 2em 1em;
 }
 @mixin submitGreenBtn {
   text-decoration: none;

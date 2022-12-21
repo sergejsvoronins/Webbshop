@@ -114,7 +114,6 @@ function displayProducts(someList: Product [], lsName: string) {
 
     let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
     productInfoLink.className = "product__infoLink";
-    productInfoLink.href="./productinfo.html";
 
     productInfoLink.addEventListener('click', () => {
         someList[i]["showItem"] = true

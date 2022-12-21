@@ -8,7 +8,7 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 2em;
   &__header {
     position: relative;
     display: flex;
@@ -181,7 +181,11 @@
         input {
           min-width: 10%;
           min-height: 1em;
+
+          #postOffice {
+          }
         }
+
         label {
           display: flex;
           width: 90%;
