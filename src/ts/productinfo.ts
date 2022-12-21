@@ -7,14 +7,15 @@ import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 let productsList : Product [] = loadFromlocalStorage("productList");
 
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
-displayProduct(productsList);
+displayProductInfo(productsList);
 
-export function displayProduct(someList:Product []){
+export function displayProductInfo(someList:Product []){
     for (let i = 0; i < someList.length; i++) {
 
         if (someList[i].showItem === true){
         
-        let productDetail: HTMLDivElement = document.createElement ("div");
+        /* let productDetail:HTMLDivElement = document.getElementById ("productInfo") as HTMLDivElement */
+        let productDetail: HTMLDivElement = document.createElement ("div")
         productDetail.className = "hero-product";
 
         let buttonContainer: HTMLDivElement = document.createElement ("div")
@@ -56,20 +57,6 @@ export function displayProduct(someList:Product []){
         let color3: HTMLAnchorElement = document.createElement ("a")
         color3.className = ("color3")
 
-        /* let textContainer: HTMLDivElement = document.createElement ("div")
-        textContainer.className = ("textContainer")
-        let bar1:HTMLDivElement = document.createElement ("div")
-        bar1.className = ("bar1")
-        let bar2:HTMLDivElement = document.createElement ("div")
-        bar2.className = ("bar2")
-        let bar3:HTMLDivElement = document.createElement ("div")
-        bar3.className = ("bar3") */
-        
-
-        let productText: HTMLSpanElement = document.createElement ("span")
-        productText.className =("productText")
-        productText.innerText = ("lorem ipsum")
-
         
         let btnContainer: HTMLDivElement = document.createElement ("div")
         btnContainer.className = ("buyButton")
@@ -99,8 +86,6 @@ export function displayProduct(someList:Product []){
         buttonContainer.appendChild(backButton)
         backButton.appendChild(backAarrow)
         
-        /* productInfo.appendChild(textContainer)
-        productText.appendChild(productText) */
         
             for (let i = 0; i < someList.length; i++) {
                     backButton.addEventListener("click",()=>{
@@ -116,13 +101,3 @@ export function displayProduct(someList:Product []){
 
 console.log(productsList);
 
-
-
-
-
-/* let productContainer: HTMLDivElement =document.createElement("div")
-let productImage: HTMLImageElement = document.createElement ("img") 
-let productName: HTMLHeadingElement = document.createElement ("h3") 
-let productSub: HTMLHeadingElement = document.createElement("h4") 
-let productColor: HTMLAnchorElement = document.createElement("a")
-let productInfo: HTMLSpanElement = document.createElement ("span") */

@@ -2,6 +2,7 @@
 @use "../library/mixins" as m;
 @use "../library/variables" as v;
 @use "../layouts/cart";
+@use "../layouts/productinfo";
 
 body {
   background-color: v.$body-color;
