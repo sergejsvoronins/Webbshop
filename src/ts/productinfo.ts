@@ -1,10 +1,10 @@
 import { Product } from "./models/product";
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
+import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 
 
 
 let productsList : Product [] = loadFromlocalStorage("productList");
-
 
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
 displayProduct(productsList);
@@ -55,21 +55,35 @@ export function displayProduct(someList:Product []){
         color2.className = ("color2")
         let color3: HTMLAnchorElement = document.createElement ("a")
         color3.className = ("color3")
+
+        /* let textContainer: HTMLDivElement = document.createElement ("div")
+        textContainer.className = ("textContainer")
+        let bar1:HTMLDivElement = document.createElement ("div")
+        bar1.className = ("bar1")
+        let bar2:HTMLDivElement = document.createElement ("div")
+        bar2.className = ("bar2")
+        let bar3:HTMLDivElement = document.createElement ("div")
+        bar3.className = ("bar3") */
+        
+
+        let productText: HTMLSpanElement = document.createElement ("span")
+        productText.className =("productText")
+        productText.innerText = ("lorem ipsum")
+
         
         let btnContainer: HTMLDivElement = document.createElement ("div")
-        
-        
+        btnContainer.className = ("buyButton")
         let buyButton: HTMLAnchorElement = document.createElement ("a")
         buyButton.className = ("blk--btn")
         buyButton.innerText = ("KÖP")
         buyButton.addEventListener( 'click', () => {
-            console.log("du klickade påknappen")
+            someList[i].buyAmount++;
+            
         })
-        
         productCenter.appendChild(productDetail)
-        productDetail.appendChild(buttonContainer)
-        buttonContainer.appendChild(backButton)
-        backButton.appendChild(backAarrow)
+        productCenter.appendChild(buttonContainer)
+        
+        
         productDetail.appendChild(containerImg)
         containerImg.appendChild(productImg)
         productDetail.appendChild(productInfo)
@@ -81,38 +95,29 @@ export function displayProduct(someList:Product []){
         productColor.appendChild(color1)
         productColor.appendChild(color2)
         productColor.appendChild(color3)
+        productInfo.appendChild (btnContainer)
+        buttonContainer.appendChild(backButton)
+        backButton.appendChild(backAarrow)
         
-            for (let i = 0; i < productsList.length; i++) {
+        /* productInfo.appendChild(textContainer)
+        productText.appendChild(productText) */
+        
+            for (let i = 0; i < someList.length; i++) {
                     backButton.addEventListener("click",()=>{
-                    productsList[i]["showItem"]=false
+                    someList[i]["showItem"]=false
                     localStorage.setItem ("productList", JSON.stringify(productsList))
                 })
 
                 
             }
         }
-
-
-        /* let productColorWraper: HTMLDivElement = document.createElement ("div")
-        productColorWraper.className = ("productColorWraper")
-        let productColor: HTMLDivElement = document.createElement ("div")
-        productColor.className = ("productColor")
-        
-        let color: HTMLAnchorElement = document.createElement ("a")
-        color.className = someList[i].color
-
-        productCenter.appendChild(productColorWraper)
-        productColorWraper.appendChild(productColor)
-        productColor.appendChild(color)
-
-        console.log(someList[i].color) */
-        
-        
-        
-
     }
 }
+
 console.log(productsList);
+
+
+
 
 
 /* let productContainer: HTMLDivElement =document.createElement("div")
