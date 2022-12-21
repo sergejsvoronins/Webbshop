@@ -4,7 +4,7 @@ import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 
 
 
-let productsList : Product [] = loadFromlocalStorage("productList");
+let productsList : Product [] = loadFromlocalStorage();
 
 let productCenter: HTMLDivElement = document.querySelector(".hero-container") as HTMLDivElement;
 displayProduct(productsList);
@@ -82,8 +82,6 @@ export function displayProduct(someList:Product []){
         })
         productCenter.appendChild(productDetail)
         productCenter.appendChild(buttonContainer)
-        
-        
         productDetail.appendChild(containerImg)
         containerImg.appendChild(productImg)
         productDetail.appendChild(productInfo)
@@ -98,18 +96,21 @@ export function displayProduct(someList:Product []){
         productInfo.appendChild (btnContainer)
         buttonContainer.appendChild(backButton)
         backButton.appendChild(backAarrow)
-        
+        backButton.addEventListener("click",()=>{
+            someList[i].showItem=false;
+            loadToLocalStorage(someList);
+        })
         /* productInfo.appendChild(textContainer)
         productText.appendChild(productText) */
         
-            for (let i = 0; i < someList.length; i++) {
-                    backButton.addEventListener("click",()=>{
-                    someList[i]["showItem"]=false
-                    localStorage.setItem ("productList", JSON.stringify(productsList))
-                })
+            // for (let i = 0; i < someList.length; i++) {
+            //         backButton.addEventListener("click",()=>{
+            //         someList[i]["showItem"]=false
+            //         localStorage.setItem ("productList", JSON.stringify(productsList))
+            //     })
 
                 
-            }
+            // }
         }
     }
 }
