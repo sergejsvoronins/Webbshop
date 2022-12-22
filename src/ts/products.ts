@@ -5,6 +5,7 @@ import { Product } from "./models/product";
 import { sortByPriceDown } from "./functions/sortbypricedown";
 import { sortByPriceUp } from "./functions/sortbypriceup";
 import { countOrderPrice } from "./functions/countorderprice";
+import { showNavFilteredItems } from "./functions/shownavfiltereditems";
 import { resetlist } from "./functions/resetlist";
 /* import { displayProductInfo } from "./productinfo"; */
 
@@ -41,13 +42,13 @@ let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
 //========================= Navigation section
 if (linkUrlMobile === location.href){
-    displayFilteredProducts(productList, "mobile");
+    showNavFilteredItems(productList,"mobile");
 }
 else if  (linkUrlTablet === location.href){
-    displayFilteredProducts(productList, "tablet");
+    showNavFilteredItems(productList,"tablet");
 }
 else if (linkUrlLaptop === location.href){
-    displayFilteredProducts(productList, "laptop");
+    showNavFilteredItems(productList,"laptop");
 }
 else {
     displayProducts(productList);
@@ -56,19 +57,19 @@ filterMobile.addEventListener("click", ()=>{
     resetlist(productList)
     productsBody.style.display = "block"
     productinfo.style.display = "none"
-    displayFilteredProducts(productList, "mobile");
+    showNavFilteredItems(productList,"mobile");
 })
 filterTablet.addEventListener("click", ()=>{
     resetlist(productList)
     productsBody.style.display = "block"
     productinfo.style.display = "none"
-    displayFilteredProducts(productList, "tablet");
+    showNavFilteredItems(productList,"tablet");
 })
 filterLaptop.addEventListener("click", ()=>{
     resetlist(productList)
     productsBody.style.display = "block"
     productinfo.style.display = "none"
-    displayFilteredProducts(productList, "laptop");
+    showNavFilteredItems(productList,"laptop");
 })
 //=========================Cart Section
 cartIcon.addEventListener("click", ()=>{
@@ -80,7 +81,6 @@ cartCloseBtn.addEventListener("click", ()=>{
     cartContainer.classList.remove("show");
     document.body.style.overflow ="auto";
 })
-
 //=========================Filter section
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
@@ -90,39 +90,41 @@ for (let i=0; i<sortBarAlt.length; i++){
         sortList[i].classList.remove("show");
     })
 }
-// let newList : Product [] = productList;
-// for (let i=0; i<sortList.length; i++){
-//     for(let j=0; j<sortList[i].children.length; j++){
-//         sortList[i].children[j].addEventListener("click", ()=>{
-//             if(i===0){
-//                 newList =  newList.filter(product => product.brand == sortList[i].children[j].innerHTML);
-//                 displayProducts(newList,"filtred");
-//             }
-//             else if (i===1){
-//                 newList =  newList.filter(product => product.color == sortList[i].children[j].innerHTML);
-//                 displayProducts(newList,"filtred");
-//             }
-//             else if (i===2){
-//                 if (j===0) {
-//                     newList.sort(sortByPriceUp);
-//                     displayProducts(newList,"filtred");
-//                 }
-//                 else {
-//                     newList.sort(sortByPriceDown);
-//                     displayProducts(newList,"filtred");
-//                 }
-//             }
-//         }) 
-//     }
-// }
+
+for (let i=0; i<sortList.length; i++){
+    for(let j=0; j<sortList[i].children.length; j++){
+        sortList[i].children[j].addEventListener("click", ()=>{
+
+            
+            if (i===2 && j===0){
+                productList.sort(sortByPriceUp);
+                displayProducts(productList);
+            }
+            else if (i===2 && j===1) {
+                productList.sort(sortByPriceDown);
+                displayProducts(productList);
+            }
+
+        }) 
+    }
+}
 //=========================Functions
-function displayProducts(someList: Product []) {
+export function displayProducts(someList: Product []) {
     resetlist(someList)
     productsCenter.innerHTML = "";
     cartN.innerHTML = cartItemAmount;
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
+        if(someList[i].productType==="mobile"){
+            productContainer.classList.add("mobile");
+        }
+        else if (someList[i].productType ==="tablet"){
+            productContainer.classList.add("tablet");
+        }
+        else {
+            productContainer.classList.add("laptop");
+        }
         let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
         productInfoLink.className = "product__infoLink";
         /* productInfoLink.href="./productinfo.html"; */
@@ -160,13 +162,22 @@ function displayProducts(someList: Product []) {
         let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
         addToCart.className = "icon-button"
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
+
+
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
+        for (let j=0; j<productList.length; j++){
+            if(someList[i].id===productList[j].id){
+                productList[j].buyAmount = someList[i].buyAmount;
+            }
+        }
+        cartItemAmount = updateCartAmount(productList);
         cartN.innerHTML = cartItemAmount.toString();
-        loadToLocalStorage(someList);
-        createCartHtml(someList);
+        loadToLocalStorage(productList);
+        createCartHtml(productList);
         });   
+
+
         productsCenter.appendChild(productContainer)
         productContainer.appendChild(productInfoLink);
         productInfoLink.appendChild(imgContainer);
@@ -181,71 +192,7 @@ function displayProducts(someList: Product []) {
 
     
 }
-function displayFilteredProducts(someList: Product [], filter: string) {
-    resetlist(someList)
-    productsCenter.innerHTML = "";
-    for(let i = 0; i < someList.length; i++){
-    if (someList[i].productType === filter){
-        let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        productContainer.className = "product";
-        let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
-        productInfoLink.className = "product__infoLink";
 
-        productInfoLink.addEventListener('click', () => {
-        someList[i]["showItem"] = true;
-        displayProductInfo(someList, productinfo)
-        productsBody.style.display = "none"
-        productinfo.style.display = "block"
-        loadToLocalStorage(productList);
-        });
-
-        let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        imgContainer.className = "product__picture";
-
-        let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-	    imgProduct.src = someList[i].url;
-
-	    let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        infoContainer.className = "product__info";
-	
-	    let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
-	    productTitle.innerHTML = someList[i].title;
-  
-        let productColor : HTMLParagraphElement = document.createElement("h4");
-        productColor.innerHTML = someList[i].color;
-        
-        let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
-	    productPrice.innerHTML = someList[i].price;
-        productPrice.innerHTML += " SEK";
-
-        let buttonDiv: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        buttonDiv.className = "buttonDiv";
-        let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
-        addToCart.className = "icon-button"
-        addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
-        addToCart.addEventListener('click', () => {
-        someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
-        cartN.innerHTML = (cartItemAmount || 0).toString();
-        loadToLocalStorage(someList);
-        createCartHtml(someList);
-        });   
-
-
-    productsCenter.appendChild(productContainer)
-    productContainer.appendChild(productInfoLink);
-    productInfoLink.appendChild(imgContainer);
-    imgContainer.appendChild(imgProduct);
-    productInfoLink.appendChild(infoContainer);
-    infoContainer.appendChild(productTitle);
-    infoContainer.appendChild(productColor);
-    infoContainer.appendChild(productPrice);
-    productContainer.appendChild(buttonDiv);
-    buttonDiv.appendChild(addToCart);
-    }
-    
-    }
-}
 function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
     cartN.innerHTML = cartItemAmount.toString();
@@ -301,7 +248,7 @@ function createCartHtml (products:Product []) {
                 if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount ++;
                     cartItemAmount = updateCartAmount(products);
-                    loadToLocalStorage(products);
+                    loadToLocalStorage(productList);
                     createCartHtml(products);
                 }     
             })
@@ -309,7 +256,7 @@ function createCartHtml (products:Product []) {
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
                     products[i].buyAmount = +productAmountNumber.value;
                     cartItemAmount = updateCartAmount(productList);
-                    loadToLocalStorage(products);
+                    loadToLocalStorage(productList);
                     createCartHtml(products);
                 } 
                 else {
@@ -320,7 +267,7 @@ function createCartHtml (products:Product []) {
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount --;
                     cartItemAmount = updateCartAmount(products);
-                    loadToLocalStorage(products);
+                    loadToLocalStorage(productList);
                     createCartHtml(products);
                 }  
             })
@@ -331,11 +278,8 @@ function createCartHtml (products:Product []) {
 //=========show product info====
 
 export function displayProductInfo(someList:Product[], container:HTMLDivElement){
-
     container.innerHTML=""
-
     for (let i = 0; i < someList.length; i++) {
-
         if (someList[i].showItem === true){
 
         let productDetail: HTMLDivElement = document.createElement ("div")
