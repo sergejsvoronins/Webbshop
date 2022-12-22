@@ -2,226 +2,195 @@
 @use "../library/variables" as v;
 @use "../base/reset";
 
-
-    .back-arrow{
-        
-        position: absolute;
-        top: 11%;
-        left: 2%;
-
-        @include m.desktop{
-            top: 11%;
-            left: 1%;
-        }
-        .backButton{
-
-                li{
-                    font-size: 35px;
-                    color: v.$dark-btn;
-
-                    @include m.desktop{
-                        font-size: 25px;
-                    }
-                }
-        }
+.productInfo{
+    position: relative;
+    
+    @include m.desktop{
+        padding: 5rem;
     }
 
-    .hero-container{
-        width: 100%;
-        height: fit-content;
+   &__Container{
         display: flex;
+        width: 100%;
+        padding: 4rem;
+        height: 100%;
         flex-direction: column;
         align-items: center;
-
+        
         @include m.desktop{
             flex-direction: row;
-            justify-content: start;
+            justify-content: center;
+            align-items: flex-start;
             height: auto;
         }
-
-        .product-img{
-            height: 350px;
-            width: 350px;
-
-            @include m.productContainerShadow;
-
-            @include m.desktop{
-                height: 500px;
-                width: 500px;
-            }
-        }
-
-        .hero-product{
+        
+        .imgContainer{
             display: flex;
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
-            margin: 45px;
-            
-            @include m.desktop{
-                display: flex;
-                flex-direction: row;
-                justify-content: center ;
-                margin: 6%;
-            }
-
-            .hero-detail-container{
-                padding-top: 20px;
-                margin: 0px;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                margin-left: -195px;
+            img{
+                height: 300px;
+                width: 300px;
+                
+                @include m.productContainerShadow;
                 
                 @include m.desktop{
-                    margin-left: 50px;
-                    width: 20%;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    margin-top: -265px;
-                }
-
-                .hero-detail-name{
-                    font-weight: bold;
-                    padding: 10px;
-                }
-
-                .hero-detail-sub{
-                    padding: 10px;
-                }
-
-                .productColor{
-                        display: flex;
-                        justify-content: space-evenly;
-                        flex-direction: row;
-
-                    .color1,
-                    .blå {
-                        color: transparent;
-                        margin: 10px;
-                        background-color: #29283D;
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        border: 2px solid black;
-                        display: block;
-
-                        @include m.desktop{
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
-                    .color2,
-                    .röd {
-                        margin: 10px;
-                        background-color: #e24a4a;
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        display: block;
-
-                        @include m.desktop{
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
-                    .color3,
-                    .grön {
-                        margin: 10px;
-                        background-color: #449263;
-                        width: 35px;
-                        height: 35px;
-                        border-radius: 50%;
-                        display: block;
-
-                        @include m.desktop{
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
-                }
-
-                .buyButton{
-                    display: flex;
-
-                    .blk--btn{
-                        
-                        display: flex;
-                        background-color: black;
-                        color: white;
-                        width: 100px;
-                        height: 50px;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 5px;
-                        margin-top: 35px;
-
-                        @include m.productContainerShadow;
-
-                        @include m.desktop{
-                            width: 150px;
-                            height: 75px;
-                        }
-                    }
-
+                    height: 450px;
+                    width: 450px;
+                    border-radius: 2px;
                 }
             }
         }
+        
+        .detailContainer{
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            height: 250px;
+            align-items: flex-start;
+            margin: 2rem;
+            
+            @include m.desktop{
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+            }
 
-        
-        //**==== Svarta knappen ====**//
-        /* .btn--black {
-            &:link,
-            &:visited {
-                text-transform: uppercase;
-                text-decoration: none;
-                padding: 1rem 2rem;
-                margin: 20px;
-                display: inline-block;
-                border-radius: 2px;
-                position: relative;
-                background-color: v.$dark-btn;
-                color: v.$light-btn;
-                font-weight: lighter;
-                
-                @include m.desktop {
-                    padding: 1.8rem 4rem;
-                    letter-spacing: 0.4rem;
+            &__name{
+                font-weight: bold;
+                padding: 10px   ;
+            }
+
+            &__price{
+                padding: 10px;
+            }
+
+            .productColor{
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: row;
+                cursor: pointer;
+
+                &__blue{
+                    color: transparent;
+                    margin: 10px;
+                    background-color: rgb(89, 89, 230);
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: block;
+
+                    &:hover{
+                        opacity: 70%;
+                        
+                    }
                 }
-            }
-            &:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-                
-                &::after {
-                    transform: scaleX(1.4) scaleY(1.6);
-                    opacity: 0;
+                &__red{
+                    color: transparent;
+                    margin: 10px;
+                    background-color: rgb(208, 78, 78);
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: block;
+
+                    &:hover{
+                        opacity: 70%;
+                    }
                 }
-            }
+                &__green{
+                    color: transparent;
+                    margin: 10px;
+                    background-color: rgb(86, 195, 106);
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: block;
+
+                    &:hover{
+                        opacity: 70%;
+                    }
+                }
+                &__black{
+                    color: transparent;
+                    margin: 10px;
+                    background-color: rgb(0, 0, 0);
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: block;
+
+                    &:hover{
+                        opacity: 70%;
+                    }
+                }
             
-            &:active {
-                transform: translateY(-1px);
-                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
             }
-            
-            &::after {
-                content: "";
-                display: inline-block;
-                height: 100%;
-                width: 100%;
-                border-radius: 10rem;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                transition: all 0.4s;
+            .buyButton{
+                display: flex;
+
+                .blk--btn{
+                        
+                    display: flex;
+                    background-color: black;
+                    color: white;
+                    width: 100px;
+                    height: 50px;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;
+                    margin-top: 35px;
+
+                    &:hover{
+                        opacity: 70%;
+                        cursor: pointer;
+                        transform: translateY(-3px);
+
+                        &::after {
+                            transform: scaleX(1.4) scaleY(1.6);
+                            opacity: 0;
+                        }
+                    }
+                    &:active {
+                        transform: translateY(-1px);
+                        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+                    }
+                    
+                    
+                    @include m.productContainerShadow;
+                    
+                    @include m.desktop{
+                        width: 150px;
+                        height: 75px;
+                    }
+                }
+
+
             }
-            
-            &--animated {
-                animation: moveInBottom 0.5s ease-out 0.75s;
-                animation-fill-mode: backwards;
-            }
-        } */
-        
+        }   
     }
-    
+    &__arrow{
+        
+        position: absolute;
+        top: 0rem;
+        left: 1rem;
+        
+        a{
+            li{
+                font-size: 25px;   
+                color: black; 
+                &:hover{
+                    opacity: 60%;
+                    cursor: pointer;
+
+                    &::after {
+                        transform: scaleX(1.4) scaleY(1.6);
+                        opacity: 0;
+                    }
+                }
+                &:active {
+                    transform: translateY(-1px);
+                    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+}
