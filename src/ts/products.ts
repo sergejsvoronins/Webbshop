@@ -119,6 +119,12 @@ function displayProducts(someList: Product []) {
 
         let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
 	    imgProduct.src = someList[i].url;
+        
+        let clone = imgProduct.cloneNode(false);
+        imgProduct.after(clone);
+        imgProduct.className = "originalImg";
+        imgProduct.appendChild(clone)
+        
 
 	    let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         infoContainer.className = "product__info";
@@ -146,8 +152,7 @@ function displayProducts(someList: Product []) {
         createCartHtml(someList);
         });   
 
-
-    productsCenter.appendChild(productContainer)
+    productsCenter.appendChild(productContainer);
     productContainer.appendChild(productInfoLink);
     productInfoLink.appendChild(imgContainer);
     imgContainer.appendChild(imgProduct);
