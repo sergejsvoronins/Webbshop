@@ -249,7 +249,7 @@ function createCartHtml (products:Product []) {
                     products[i].buyAmount ++;
                     cartItemAmount = updateCartAmount(products);
                     loadToLocalStorage(productList);
-                    createCartHtml(products);
+                    createCartHtml(productList);
                 }     
             })
             productAmountNumber.addEventListener("input", ()=>{
@@ -257,7 +257,7 @@ function createCartHtml (products:Product []) {
                     products[i].buyAmount = +productAmountNumber.value;
                     cartItemAmount = updateCartAmount(productList);
                     loadToLocalStorage(productList);
-                    createCartHtml(products);
+                    createCartHtml(productList);
                 } 
                 else {
                     productAmountNumber.value = products[i].buyAmount.toString();
