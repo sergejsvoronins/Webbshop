@@ -5,6 +5,11 @@ export function updateCartAmount (products : Product []) {
     for (let i = 0; i<products.length; i++){
         amount += products[i].buyAmount;
     }
-    return amount;
+    if (amount===0){
+        return "";
+    }
+    else {
+        return amount.toString();
+    }
 
 }
