@@ -1,6 +1,5 @@
 import { Product } from "./models/product";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
-import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { createProduct } from "./functions/createproduct";
 
 let productList : Product [] = [];

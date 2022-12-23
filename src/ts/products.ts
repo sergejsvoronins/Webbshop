@@ -17,16 +17,20 @@ cartItemAmount = updateCartAmount(productList);
 let productsBody: HTMLDivElement = document.getElementById ("products") as HTMLDivElement
 
 //====productInfo====declaration=
+
 let productinfo: HTMLDivElement = document.getElementById("productInfo") as HTMLDivElement
 
 //navigation filter elements
+
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
 let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
 let linkUrlMobile : string = "http://localhost:1234/pages/products.html#mobil";
 let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
 let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
+
 //cartPopUp
+
 let cartContainer = document.getElementById("cart") as HTMLDivElement;
 let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
 let cartProductPrice = document.getElementById("cartProductsPrice") as HTMLSpanElement;
@@ -34,13 +38,17 @@ let cartTotalPrice = document.getElementById("cartTotalPrice") as HTMLSpanElemen
 let cartCloseBtn = document.getElementById("cartCloseBtn") as HTMLDivElement;
 let cartIcon = document.getElementById("cartIcon") as HTMLDivElement;
 let submitBtn = document.getElementById("submitBtn") as HTMLAnchorElement;
+
 //filterbar elements
+
 let sortBarAlt = document.getElementsByClassName("filter__sortAlt");
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
+
 //========================= Navigation section
+
 if (linkUrlMobile === location.href){
     showNavFilteredItems(productList,"mobile");
 }
@@ -71,7 +79,9 @@ filterLaptop.addEventListener("click", ()=>{
     productinfo.style.display = "none"
     showNavFilteredItems(productList,"laptop");
 })
+
 //=========================Cart Section
+
 cartIcon.addEventListener("click", ()=>{
     cartContainer.classList.add("show");
     document.body.style.overflow ="hidden";
@@ -81,7 +91,9 @@ cartCloseBtn.addEventListener("click", ()=>{
     cartContainer.classList.remove("show");
     document.body.style.overflow ="auto";
 })
+
 //=========================Filter section
+
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
         sortList[i].classList.toggle("show");
@@ -90,25 +102,79 @@ for (let i=0; i<sortBarAlt.length; i++){
         sortList[i].classList.remove("show");
     })
 }
-
+let filteredListByBrand: Product [] = [];
+let filteredListByColor: Product [] = [];
+let filteredList: Product [] = []
 for (let i=0; i<sortList.length; i++){
     for(let j=0; j<sortList[i].children.length; j++){
         sortList[i].children[j].addEventListener("click", ()=>{
-
             
-            if (i===2 && j===0){
-                productList.sort(sortByPriceUp);
-                displayProducts(productList);
+            if (i===0){
+                if (j===0){
+                    filteredListByBrand = productList.filter((product)=>(product.brand ==="apple" || product.brand === "samsung"));
+                    displayProducts(filteredListByBrand);
+                    filteredList = filteredListByBrand;
+                }
+                else {
+                    if (filteredListByColor.length === 0){          
+                        filteredListByBrand = productList.filter((product)=>product.brand===sortList[i].children[j].innerHTML);
+                        displayProducts(filteredListByBrand);
+                        filteredList = filteredListByBrand;
+                    }
+                    else if (filteredListByColor.length > 0 && filteredListByBrand.length === 0){
+                        filteredListByBrand = filteredListByColor.filter((product)=>product.brand===sortList[i].children[j].innerHTML);
+                        displayProducts(filteredListByBrand);
+                        filteredList = filteredListByBrand;
+                    }
+                    else {
+                        filteredListByBrand = filteredListByColor;
+                        filteredListByBrand = filteredListByBrand.filter((product)=>product.brand===sortList[i].children[j].innerHTML);
+                        displayProducts(filteredListByBrand);
+                        filteredList = filteredListByBrand;
+                    }
+                }
+            }  
+            else if (i===1){
+                if (j===0){
+                    filteredListByColor = productList.filter((product)=>(product.color ==="röd" || product.color === "grön" || product.color === "blå" || product.color === "svart"));
+                    displayProducts(filteredListByColor);
+                    filteredList = filteredListByColor;
+                }
+                else {
+                    if (filteredListByBrand.length === 0){
+                        filteredListByColor = productList.filter((product)=>product.color===sortList[i].children[j].innerHTML);
+                        displayProducts(filteredListByColor);
+                        filteredList = filteredListByColor;
+                        
+                    }
+                    else if (filteredListByBrand.length > 0 && filteredListByColor.length === 0){
+                        filteredListByColor = filteredListByBrand.filter((product)=>product.color===sortList[i].children[j].innerHTML);
+                        displayProducts(filteredListByColor);
+                        filteredList = filteredListByColor;
+                    }
+                    else{
+                        filteredListByColor = filteredListByBrand;
+                        filteredListByColor = filteredListByColor.filter((product)=>product.color===sortList[i].children[j].innerHTML);
+                        displayProducts(filteredListByColor);
+                        filteredList = filteredListByColor;
+                    }
+                }
+            }
+            else if (i===2 && j===0){
+                filteredList.sort(sortByPriceUp);
+                displayProducts(filteredList);
             }
             else if (i===2 && j===1) {
-                productList.sort(sortByPriceDown);
-                displayProducts(productList);
+                filteredList.sort(sortByPriceDown);
+                displayProducts(filteredList);
             }
 
         }) 
     }
 }
+
 //=========================Functions
+
 export function displayProducts(someList: Product []) {
     resetlist(someList)
     productsCenter.innerHTML = "";
@@ -127,8 +193,6 @@ export function displayProducts(someList: Product []) {
         }
         let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
         productInfoLink.className = "product__infoLink";
-        /* productInfoLink.href="./productinfo.html"; */
-
         productInfoLink.addEventListener('click', () => {
             someList[i]["showItem"] = true;
             displayProductInfo(someList, productinfo)
@@ -136,7 +200,6 @@ export function displayProducts(someList: Product []) {
             productinfo.style.display ="block"
             loadToLocalStorage(productList)
             });
-
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         imgContainer.className = "product__picture";
@@ -163,7 +226,6 @@ export function displayProducts(someList: Product []) {
         addToCart.className = "icon-button"
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
 
-
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
         for (let j=0; j<productList.length; j++){
@@ -177,7 +239,6 @@ export function displayProducts(someList: Product []) {
         createCartHtml(productList);
         });   
 
-
         productsCenter.appendChild(productContainer)
         productContainer.appendChild(productInfoLink);
         productInfoLink.appendChild(imgContainer);
@@ -188,9 +249,7 @@ export function displayProducts(someList: Product []) {
         infoContainer.appendChild(productPrice);
         productContainer.appendChild(buttonDiv);
         buttonDiv.appendChild(addToCart);
-    }
-
-    
+    }  
 }
 
 function createCartHtml (products:Product []) {
@@ -275,8 +334,6 @@ function createCartHtml (products:Product []) {
     }
 }
 
-//=========show product info====
-
 export function displayProductInfo(someList:Product[], container:HTMLDivElement){
     container.innerHTML=""
     for (let i = 0; i < someList.length; i++) {
@@ -338,8 +395,6 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
                     if(someList[j].color==="blå" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
                     someList[j].showItem = true;
                     displayProductInfo(someList, container)
-                    loadToLocalStorage
-                    loadFromlocalStorage
                     }
                 }
             })
@@ -350,7 +405,6 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
                     if(someList[j].color==="röd" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
                     someList[j].showItem = true;
                     displayProductInfo(someList, container)
-                    loadToLocalStorage
                     }
                 }
             })
@@ -360,7 +414,6 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
                     if(someList[j].color==="grön" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
                     someList[j].showItem = true;
                     displayProductInfo(someList, container)
-                    loadToLocalStorage
                     }
                 }
             })
@@ -373,10 +426,15 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         buyButton.innerText = ("KÖP")
         buyButton.addEventListener( 'click', () => {
         someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
+        for (let j=0; j<productList.length; j++){
+            if(someList[i].id===productList[j].id){
+                productList[j].buyAmount = someList[i].buyAmount;
+            }
+        }
+        cartItemAmount = updateCartAmount(productList);
         cartN.innerHTML = (cartItemAmount || 0).toString();
-        loadToLocalStorage(someList);
-        createCartHtml(someList);
+        loadToLocalStorage(productList);
+        createCartHtml(productList);
             
         })
         container.appendChild(productDetail)
@@ -399,7 +457,6 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
             productinfo.style.display = "none"
             displayProductInfo(someList, container)
             loadToLocalStorage(someList);
-            
         })
         }
     }
