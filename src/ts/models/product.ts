@@ -7,6 +7,7 @@ export class Product {
         public price: string,
         public buyAmount: number,
         public showItem: boolean,
-        public productType: string
+        public productType: string,
+        public description: string
     ){}
 }
