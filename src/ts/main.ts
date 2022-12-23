@@ -141,7 +141,7 @@ createProduct(
 
 //=====laptop===
 createProduct(
-    "Thin Case",
+    "Laptop Case",
     "/assets/img/macbook-case.png",
     "apple",
     "svart",
@@ -152,7 +152,7 @@ createProduct(
     "Detta laptopfodral är skapat för att ge din dator ett perfekt skydd med en stilsäker vibe.",
     productList);
 createProduct(
-    "Thin Case",
+    "Laptop Case",
     "/assets/img/macbook-case.png",
     "samsung",
     "svart",
