@@ -45,6 +45,7 @@ let sortBarAlt = document.getElementsByClassName("filter__sortAlt");
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
+let filterContainer = document.getElementById("filterOption") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
 
 //========================= Navigation section
@@ -95,83 +96,56 @@ cartCloseBtn.addEventListener("click", ()=>{
 //=========================Filter section
 
 for (let i=0; i<sortBarAlt.length; i++){
-    sortBarAlt[i].addEventListener("click", ()=> {
+    sortBarAlt[i].addEventListener("mouseenter", ()=> {
         sortList[i].classList.toggle("show");
     })
     sortBarAlt[i].addEventListener("mouseleave", ()=> {
         sortList[i].classList.remove("show");
     })
 }
-let filteredListByBrand: Product [] = [];
-let filteredListByColor: Product [] = [];
-let filteredList: Product [] = []
-for (let i=0; i<sortList.length; i++){
-    for(let j=0; j<sortList[i].children.length; j++){
-        sortList[i].children[j].addEventListener("click", ()=>{
-            
-            if (i===0){
-                if (j===0){
-                    filteredListByBrand = productList.filter((product)=>(product.brand ==="apple" || product.brand === "samsung"));
-                    displayProducts(filteredListByBrand);
-                    filteredList = filteredListByBrand;
-                }
-                else {
-                    if (filteredListByColor.length === 0){          
-                        filteredListByBrand = productList.filter((product)=>product.brand===sortList[i].children[j].innerHTML);
-                        displayProducts(filteredListByBrand);
-                        filteredList = filteredListByBrand;
-                    }
-                    else if (filteredListByColor.length > 0 && filteredListByBrand.length === 0){
-                        filteredListByBrand = filteredListByColor.filter((product)=>product.brand===sortList[i].children[j].innerHTML);
-                        displayProducts(filteredListByBrand);
-                        filteredList = filteredListByBrand;
-                    }
-                    else {
-                        filteredListByBrand = filteredListByColor;
-                        filteredListByBrand = filteredListByBrand.filter((product)=>product.brand===sortList[i].children[j].innerHTML);
-                        displayProducts(filteredListByBrand);
-                        filteredList = filteredListByBrand;
-                    }
-                }
-            }  
-            else if (i===1){
-                if (j===0){
-                    filteredListByColor = productList.filter((product)=>(product.color ==="röd" || product.color === "grön" || product.color === "blå" || product.color === "svart"));
-                    displayProducts(filteredListByColor);
-                    filteredList = filteredListByColor;
-                }
-                else {
-                    if (filteredListByBrand.length === 0){
-                        filteredListByColor = productList.filter((product)=>product.color===sortList[i].children[j].innerHTML);
-                        displayProducts(filteredListByColor);
-                        filteredList = filteredListByColor;
-                        
-                    }
-                    else if (filteredListByBrand.length > 0 && filteredListByColor.length === 0){
-                        filteredListByColor = filteredListByBrand.filter((product)=>product.color===sortList[i].children[j].innerHTML);
-                        displayProducts(filteredListByColor);
-                        filteredList = filteredListByColor;
-                    }
-                    else{
-                        filteredListByColor = filteredListByBrand;
-                        filteredListByColor = filteredListByColor.filter((product)=>product.color===sortList[i].children[j].innerHTML);
-                        displayProducts(filteredListByColor);
-                        filteredList = filteredListByColor;
-                    }
-                }
-            }
-            else if (i===2 && j===0){
-                filteredList.sort(sortByPriceUp);
-                displayProducts(filteredList);
-            }
-            else if (i===2 && j===1) {
-                filteredList.sort(sortByPriceDown);
-                displayProducts(filteredList);
-            }
 
-        }) 
+let filterAddsList: string [] = ["","",""];
+
+    for (let i=0; i<sortList.length; i++){
+        let filterOption : HTMLDivElement = document.createElement("div");
+        let filterOptionTitle : HTMLSpanElement = document.createElement("span");
+        let filterOptionRemove : HTMLDivElement = document.createElement("div");
+        for(let j=0; j<sortList[i].children.length; j++){
+            sortList[i].children[j].addEventListener("click", ()=>{
+                filterContainer.appendChild(filterOption);
+                filterOption.appendChild(filterOptionTitle);
+                filterOption.appendChild(filterOptionRemove);
+                filterAddsList[i]=sortList[i].children[j].innerHTML;
+                displayFilteredItems(productList);
+                filterOptionRemove.innerHTML = "<i class='fa-solid fa-xmark'></i>";
+                if (i===0){
+                    filterOptionTitle.innerHTML = sortList[i].children[j].innerHTML;
+                    filterOption.addEventListener("click", ()=>{
+                        filterOption.remove();
+                        filterAddsList[0] = "";
+                        displayFilteredItems(productList);
+                    })
+                }  
+                else if (i===1){
+                    filterOptionTitle.innerHTML = sortList[i].children[j].innerHTML;
+                    filterOption.addEventListener("click", ()=>{
+                        filterOption.remove();
+                        filterAddsList[1] = "";
+                        displayFilteredItems(productList);
+                    })
+                } 
+                else if (i===2){
+                    filterOptionTitle.innerHTML = sortList[i].children[j].innerHTML;
+                    filterOption.addEventListener("click", ()=>{
+                        filterOption.remove();
+                        filterAddsList[2] = "";
+                        displayFilteredItems(productList);
+                    })
+                }    
+            }) 
+        }
     }
-}
+
 
 //=========================Functions
 
@@ -462,3 +436,19 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
     }
 }
 
+function displayFilteredItems (products: Product []) {
+    let filteredList = products;
+    if (filterAddsList[0]!==""){
+        filteredList = filteredList.filter((product)=>product.brand === filterAddsList[0]);
+    }
+    if (filterAddsList[1]!==""){
+        filteredList = filteredList.filter((product)=>product.color === filterAddsList[1]);
+    }
+    if (filterAddsList[2]!=="" && filterAddsList[2]==="sortera stigande") {
+        filteredList.sort(sortByPriceUp);
+    }
+    else if (filterAddsList[2]!=="" && filterAddsList[2]==="sortera fallande"){
+        filteredList.sort(sortByPriceDown);
+    }
+    displayProducts(filteredList);
+}

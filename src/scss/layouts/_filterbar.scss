@@ -1,0 +1,97 @@
+@use "../base/reset";
+@use "../library/mixins" as m;
+@use "../library/variables" as v;
+
+.filter {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    border-bottom: 1px solid v.$hr-line;
+    margin-bottom: 1rem;
+    gap: 1em;
+    position: relative;
+    @include m.desktop {
+      justify-content: flex-start;
+    }
+    &__sortAlt {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+
+      span {
+        text-transform: capitalize;
+        letter-spacing: 0.05em;
+        width: 100%;
+        height: 100%;
+        padding: 1em;
+        transition: all 0.2s ease-in-out;
+        background-color: v.$body-color;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.3);
+        }
+      }
+      &__content {
+        position: absolute;
+        display: none;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: white;
+        width: 200px;
+        top: 100%;
+        left: 0;
+        @include m.productContainerShadow;
+        z-index: 10;
+        > div {
+          width: 100%;
+          font-size: 0.8rem;
+          padding: 0.2em 0.5em;
+          &:hover {
+            background-color: rgb(212, 212, 212);
+            cursor: pointer;
+          }
+        }
+      }
+      .show {
+        display: flex;
+      }
+    }
+    &__activeFilter {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 1em;
+        gap: 0.4em;
+        > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.4em;
+            padding: 0.1em 0.2em;
+            border-radius: 2px;
+            border: 1px solid black;
+            span {
+                font-size: 0.7em;
+            }
+            > div {
+                display: flex;
+                align-items: center;
+                i {
+                    font-size: 0.7em;
+                }
+            }
+            &:hover {
+                cursor: pointer;
+                @include m.productContainerShadow;
+            }
+        }
+
+    }
+}
