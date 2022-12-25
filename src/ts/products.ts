@@ -41,12 +41,18 @@ let submitBtn = document.getElementById("submitBtn") as HTMLAnchorElement;
 
 //filterbar elements
 
-let sortBarAlt = document.getElementsByClassName("filter__sortAlt");
+let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
+let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
+let sortBarAlt = document.getElementsByClassName("filterContainer__sortAlt");
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
-let filterContainer = document.getElementById("filterOption") as HTMLDivElement;
+let resetFilterBtn = document.getElementById("resetFilter") as HTMLDivElement;
+let submitFilter = document.getElementById("submitFilter") as HTMLButtonElement;
+let filterCloseBtn = document.getElementById("filterCloseBtn") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
+
+
 
 //========================= Navigation section
 
@@ -96,56 +102,70 @@ cartCloseBtn.addEventListener("click", ()=>{
 //=========================Filter section
 
 for (let i=0; i<sortBarAlt.length; i++){
-    sortBarAlt[i].addEventListener("mouseenter", ()=> {
+    sortBarAlt[i].children[0].addEventListener("click", ()=> {
         sortList[i].classList.toggle("show");
-    })
-    sortBarAlt[i].addEventListener("mouseleave", ()=> {
-        sortList[i].classList.remove("show");
     })
 }
 
 let filterAddsList: string [] = ["","",""];
 
     for (let i=0; i<sortList.length; i++){
-        let filterOption : HTMLDivElement = document.createElement("div");
-        let filterOptionTitle : HTMLSpanElement = document.createElement("span");
-        let filterOptionRemove : HTMLDivElement = document.createElement("div");
         for(let j=0; j<sortList[i].children.length; j++){
             sortList[i].children[j].addEventListener("click", ()=>{
-                filterContainer.appendChild(filterOption);
-                filterOption.appendChild(filterOptionTitle);
-                filterOption.appendChild(filterOptionRemove);
-                filterAddsList[i]=sortList[i].children[j].innerHTML;
-                displayFilteredItems(productList);
-                filterOptionRemove.innerHTML = "<i class='fa-solid fa-xmark'></i>";
                 if (i===0){
-                    filterOptionTitle.innerHTML = sortList[i].children[j].innerHTML;
-                    filterOption.addEventListener("click", ()=>{
-                        filterOption.remove();
-                        filterAddsList[0] = "";
-                        displayFilteredItems(productList);
-                    })
+                    filterAddsList[0]=sortList[i].children[j].innerHTML;
+                    if (sortList[i].children[j].className === "activeFilter"){
+                        sortList[i].children[j].classList.remove("activeFilter");
+                        filterAddsList[i] = "";
+                        console.log(filterAddsList);  
+                    }
+                    else {
+                        removeChoosenFilter(0);
+                        sortList[i].children[j].classList.add("activeFilter");
+                        console.log(filterAddsList);
+                    }
                 }  
                 else if (i===1){
-                    filterOptionTitle.innerHTML = sortList[i].children[j].innerHTML;
-                    filterOption.addEventListener("click", ()=>{
-                        filterOption.remove();
-                        filterAddsList[1] = "";
-                        displayFilteredItems(productList);
-                    })
+                    filterAddsList[1]=sortList[i].children[j].innerHTML; 
+                    if (sortList[i].children[j].className === "activeFilter"){
+                        sortList[i].children[j].classList.remove("activeFilter");
+                        filterAddsList[i] = "";            
+                    }
+                    else {
+                        removeChoosenFilter(1);
+                        sortList[i].children[j].classList.add("activeFilter");
+                    }
                 } 
                 else if (i===2){
-                    filterOptionTitle.innerHTML = sortList[i].children[j].innerHTML;
-                    filterOption.addEventListener("click", ()=>{
-                        filterOption.remove();
-                        filterAddsList[2] = "";
-                        displayFilteredItems(productList);
-                    })
-                }    
+                    filterAddsList[2]=sortList[i].children[j].innerHTML;
+                    if (sortList[i].children[j].className === "activeFilter"){
+                        sortList[i].children[j].classList.remove("activeFilter");
+                        filterAddsList[i] = "";  
+                    }
+                    else {
+                        removeChoosenFilter(2);
+                        sortList[i].children[j].classList.add("activeFilter");
+                    }
+                } 
             }) 
         }
     }
-
+filterBarIcon.addEventListener("click", ()=>{
+    filterPopUp.style.opacity = "1";
+    filterPopUp.style.left = "0";
+})
+submitFilter.addEventListener("click", ()=>{
+    displayFilteredItems(productList);
+    filterPopUp.style.opacity = "0";
+    filterPopUp.style.left = "-300%";
+})
+filterCloseBtn.addEventListener("click", ()=>{
+    filterPopUp.style.opacity = "0";
+    filterPopUp.style.left = "-300%";
+})
+resetFilterBtn.addEventListener("click", ()=>{
+    resetFilter();
+})
 
 //=========================Functions
 
@@ -451,4 +471,22 @@ function displayFilteredItems (products: Product []) {
         filteredList.sort(sortByPriceDown);
     }
     displayProducts(filteredList);
+}
+
+function removeChoosenFilter (index:number) {
+    for (let i=0; i<sortList.length; i++){
+        for(let j=0; j<sortList[i].children.length; j++){
+            if (i===index){
+                sortList[index].children[j].classList.remove("activeFilter");   
+            }
+        }
+    }
+}
+function resetFilter () {
+    for (let i=0; i<sortList.length; i++){
+        filterAddsList[i]="";
+        for(let j=0; j<sortList[i].children.length; j++){
+                sortList[i].children[j].classList.remove("activeFilter");   
+        }
+    }
 }

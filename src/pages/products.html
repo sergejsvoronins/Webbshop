@@ -69,34 +69,40 @@
 
   <main>
     <section class="filter">
-      <div class="filter__sortAlt">
-        <span>tillverkare</span>
-        <div class="filter__sortAlt__content" id="sortBarBrand">
-          <div>apple</div>
-          <div>samsung</div>
+      <div class="filterbar" id="filterBarIcon"><i class="bi bi-filter-circle"></i></div>
+      <div class="filterContainer" id="filterContainer">
+        <div class="filterContainer__header">
+          <h2>Filtrera & Sortera</h2>
+          <div id="filterCloseBtn"><i class='fa-solid fa-xmark'></i></div>
         </div>
-      </div>
-      <div class="filter__sortAlt">
-        <span>färg</span>
-        <div class="filter__sortAlt__content" id="sortBarColor">
-          <div>röd</div>
-          <div>blå</div>
-          <div>grön</div>
-          <div>svart</div>
+        <div class="filterContainer__sortAlt">
+          <span>tillverkare</span>
+          <div class="filterContainer__sortAlt__content" id="sortBarBrand">
+            <div>apple</div>
+            <div>samsung</div>
+          </div>
         </div>
-      </div>
-      <div class="filter__sortAlt">
-        <span>pris</span>
-        <div class="filter__sortAlt__content" id="sortBarPrice">
-          <div>sortera stigande</div>
-          <div>sortera fallande</div>
+        <div class="filterContainer__sortAlt">
+          <span>färg</span>
+          <div class="filterContainer__sortAlt__content" id="sortBarColor">
+            <div>röd</div>
+            <div>blå</div>
+            <div>grön</div>
+            <div>svart</div>
+          </div>
         </div>
-      </div>
-      <div class="filter__activeFilter" id="filterOption">
-        <span>Filter: </span>
-
+        <div class="filterContainer__sortAlt">
+          <span>pris</span>
+          <div class="filterContainer__sortAlt__content" id="sortBarPrice">
+            <div>sortera stigande</div>
+            <div>sortera fallande</div>
+          </div>
+        </div>
+        <div class="resetBtn"><button id="resetFilter">Rensa filtret</button></div>
+        <div class="submitBtn"><button id="submitFilter">Visa resultat</button></div>
       </div>
     </section>
+
 
     <section id="products" class="products">
     <div class="products__title">
