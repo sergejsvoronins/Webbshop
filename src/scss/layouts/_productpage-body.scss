@@ -154,6 +154,7 @@ body {
         border: none;
       }
       @include m.productContainerShadow;
+      transition: 0.5s ease-in-out;
     }
 
     .bi-bag {
@@ -162,5 +163,28 @@ body {
       border: none;
       cursor: pointer;
     }
+  }
+}
+
+.imgCopy {
+  position: absolute;
+  animation-name: imgCopy;
+  animation-duration: 2s;
+}
+@keyframes imgCopy {
+  0% {
+    opacity: 1;
+    width: 100px;
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    width: 50px;
+    top: 0;
+    right: 0;
+    position: fixed;
+    //transform: translateX(500%) translateY(-500%);
+    //transform: translate3d(500px, -200%, 0);
   }
 }

@@ -117,14 +117,9 @@ function displayProducts(someList: Product []) {
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         imgContainer.className = "product__picture";
 
-        let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+        let imgProduct: HTMLImageElement = parent.document.createElement("img") as HTMLImageElement;
 	    imgProduct.src = someList[i].url;
-        
-        let clone = imgProduct.cloneNode(false);
-        imgProduct.after(clone);
         imgProduct.className = "originalImg";
-        imgProduct.appendChild(clone)
-        
 
 	    let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         infoContainer.className = "product__info";
@@ -150,6 +145,12 @@ function displayProducts(someList: Product []) {
         cartN.innerHTML = (cartItemAmount || 0).toString();
         loadToLocalStorage(someList);
         createCartHtml(someList);
+        
+        let imgCopy: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+	    imgCopy.src = someList[i].url;
+        imgCopy.className = "imgCopy";
+        imgCopy.style.animation = "imgCopy linear 1s 1 normal forwards";
+        imgContainer.appendChild(imgCopy);
         });   
 
     productsCenter.appendChild(productContainer);
@@ -305,3 +306,5 @@ function createCartHtml (products:Product []) {
         }
     }
 }
+
+
