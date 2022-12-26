@@ -63,8 +63,6 @@
     2px 2px 5px v.$color-shadow-dark;
 }
 
-<<<<<<< HEAD
-
 @mixin itemAmountInput {
   width: 40%;
   text-align: center;
@@ -73,12 +71,10 @@
   border: none;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
+    -webkit-appearance: none;
   }
 }
-=======
 @mixin paymentGreatingTitle {
   font-size: 1rem;
   font-weight: 400;
 }
->>>>>>> products-page
