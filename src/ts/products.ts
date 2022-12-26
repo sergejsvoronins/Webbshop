@@ -10,7 +10,7 @@ let productList : Product [] = loadFromlocalStorage();
 let cartItemAmount : number = 0;
 let productsCenter: HTMLDivElement = document.querySelector(".products__center") as HTMLDivElement;
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
-cartItemAmount = updateCartAmount(productList);
+cartItemAmount = +updateCartAmount(productList);
 
 //navigation filter elements
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
@@ -141,7 +141,7 @@ function displayProducts(someList: Product []) {
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
+        cartItemAmount = +updateCartAmount(someList);
         cartN.innerHTML = (cartItemAmount || 0).toString();
         loadToLocalStorage(someList);
         createCartHtml(someList);
@@ -184,7 +184,7 @@ function displayFilteredProducts(someList: Product [], filter: string) {
                 productList[j].buyAmount = someList[i].buyAmount;
             }
         }
-        cartItemAmount = updateCartAmount(productList);
+        cartItemAmount = +updateCartAmount(productList);
         cartN.innerHTML = cartItemAmount.toString();
         loadToLocalStorage(productList);
         });
@@ -215,7 +215,7 @@ function displayFilteredProducts(someList: Product [], filter: string) {
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
+        cartItemAmount = +updateCartAmount(someList);
         cartN.innerHTML = (cartItemAmount || 0).toString();
         loadToLocalStorage(someList);
         createCartHtml(someList);
@@ -287,7 +287,7 @@ function createCartHtml (products:Product []) {
             productAmountDiv.appendChild(increaseBtn);
             increaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount ++;
-                cartItemAmount = updateCartAmount(products);
+                cartItemAmount = +updateCartAmount(products);
                 if (cartItemAmount === 0){
                     cartN.innerHTML = "";
                 }
@@ -300,7 +300,7 @@ function createCartHtml (products:Product []) {
             })
             decreaseBtn.addEventListener("click", ()=>{
                 products[i].buyAmount --;
-                cartItemAmount = updateCartAmount(products);
+                cartItemAmount = +updateCartAmount(products);
                 if (cartItemAmount === 0){
                     cartN.innerHTML = "";
                 }
