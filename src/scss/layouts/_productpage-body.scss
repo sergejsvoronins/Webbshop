@@ -168,23 +168,20 @@ body {
 
 .imgCopy {
   position: absolute;
-  animation-name: imgCopy;
-  animation-duration: 2s;
+  animation-duration: 3s;
+  animation-name: slide;
 }
-@keyframes imgCopy {
+@keyframes slide {
   0% {
     opacity: 1;
     width: 100px;
     transform: translateX(0) translateY(0);
   }
-
   100% {
     opacity: 0;
-    width: 50px;
-    top: 0;
-    right: 0;
+    width: 20px;
+    top: 30px;
+    right: 30px;
     position: fixed;
-    //transform: translateX(500%) translateY(-500%);
-    //transform: translate3d(500px, -200%, 0);
   }
 }

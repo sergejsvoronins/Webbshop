@@ -149,7 +149,7 @@ function displayProducts(someList: Product []) {
         let imgCopy: HTMLImageElement = document.createElement("img") as HTMLImageElement;
 	    imgCopy.src = someList[i].url;
         imgCopy.className = "imgCopy";
-        imgCopy.style.animation = "imgCopy linear 1s 1 normal forwards";
+        imgCopy.style.animation = "slide linear 1s 1 normal forwards";
         imgContainer.appendChild(imgCopy);
         });   
 
@@ -306,5 +306,4 @@ function createCartHtml (products:Product []) {
         }
     }
 }
-
 
