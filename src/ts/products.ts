@@ -232,68 +232,69 @@ export function displayProducts(someList: Product []) {
 function displayFilteredProducts(someList: Product [], filter: string) {
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
-    if (someList[i].productType === filter){
-        let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        productContainer.className = "product";
-        let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
-        productInfoLink.className = "product__infoLink";
-        productInfoLink.href="./productinfo.html";
+        if (someList[i].productType === filter){
+            let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            productContainer.className = "product";
+            let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
+            productInfoLink.className = "product__infoLink";
+            productInfoLink.href="./productinfo.html";
 
-        productInfoLink.addEventListener('click', () => {
-        someList[i]["showItem"] = true;
-        for (let j=0; j<productList.length; j++){
-            if(someList[i].id===productList[j].id){
-                productList[j].buyAmount = someList[i].buyAmount;
+            productInfoLink.addEventListener('click', () => {
+            someList[i]["showItem"] = true;
+            for (let j=0; j<productList.length; j++){
+                if(someList[i].id===productList[j].id){
+                    productList[j].buyAmount = someList[i].buyAmount;
+                }
             }
-        }
-        cartItemAmount = updateCartAmount(productList);
-        cartN.innerHTML = cartItemAmount.toString();
-        loadToLocalStorage(productList);
-        });
+            cartItemAmount = updateCartAmount(productList);
+            cartN.innerHTML = cartItemAmount.toString();
+            loadToLocalStorage(productList);
+            });
 
-        let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        imgContainer.className = "product__picture";
+            let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            imgContainer.className = "product__picture";
 
-        let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-	    imgProduct.src = someList[i].url;
+            let imgProduct: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+            imgProduct.src = someList[i].url;
 
-	    let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        infoContainer.className = "product__info";
-	
-	    let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
-	    productTitle.innerHTML = someList[i].title;
-  
-        let productColor : HTMLParagraphElement = document.createElement("h4");
-        productColor.innerHTML = someList[i].color;
+            let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            infoContainer.className = "product__info";
         
-        let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
-	    productPrice.innerHTML = someList[i].price;
-        productPrice.innerHTML += " SEK";
+            let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
+            productTitle.innerHTML = someList[i].title;
+    
+            let productColor : HTMLParagraphElement = document.createElement("h4");
+            productColor.innerHTML = someList[i].color;
+            
+            let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
+            productPrice.innerHTML = someList[i].price;
+            productPrice.innerHTML += " SEK";
 
-        let buttonDiv: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-        buttonDiv.className = "buttonDiv";
-        let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
-        addToCart.className = "icon-button"
-        addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
-        addToCart.addEventListener('click', () => {
-        someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
-        cartN.innerHTML = (cartItemAmount || 0).toString();
-        loadToLocalStorage(someList);
-        createCartHtml(someList);
-        });   
+            let buttonDiv: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+            buttonDiv.className = "buttonDiv";
+            let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
+            addToCart.className = "icon-button"
+            addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
+            addToCart.addEventListener('click', () => {
+            someList[i].buyAmount++;
+            cartItemAmount = updateCartAmount(someList);
+            cartN.innerHTML = (cartItemAmount || 0).toString();
+            loadToLocalStorage(someList);
+            createCartHtml(someList);
+            });   
 
-        productsCenter.appendChild(productContainer)
-        productContainer.appendChild(productInfoLink);
-        productInfoLink.appendChild(imgContainer);
-        imgContainer.appendChild(imgProduct);
-        productInfoLink.appendChild(infoContainer);
-        infoContainer.appendChild(productTitle);
-        infoContainer.appendChild(productColor);
-        infoContainer.appendChild(productPrice);
-        productContainer.appendChild(buttonDiv);
-        buttonDiv.appendChild(addToCart);
-    }  
+            productsCenter.appendChild(productContainer)
+            productContainer.appendChild(productInfoLink);
+            productInfoLink.appendChild(imgContainer);
+            imgContainer.appendChild(imgProduct);
+            productInfoLink.appendChild(infoContainer);
+            infoContainer.appendChild(productTitle);
+            infoContainer.appendChild(productColor);
+            infoContainer.appendChild(productPrice);
+            productContainer.appendChild(buttonDiv);
+            buttonDiv.appendChild(addToCart);
+        }  
+    }
 }
 
 function createCartHtml (products:Product []) {
@@ -338,8 +339,8 @@ function createCartHtml (products:Product []) {
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
             decreaseBtn.innerHTML = "-";
-            let productAmountNumber : HTMLDivElement = document.createElement ("div");
-            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
+            let productAmountNumber : HTMLInputElement = document.createElement ("input");
+            productAmountNumber.value = (products[i].buyAmount).toString();
             let increaseBtn : HTMLButtonElement = document.createElement("button");
             increaseBtn.innerHTML = "+";
             productAmountDiv.appendChild(decreaseBtn);
@@ -524,7 +525,8 @@ function removeChoosenFilter (index:number) {
         }
     }
 }
-function resetFilter () {
+
+function resetFilter() {
     for (let i=0; i<sortList.length; i++){
         filterAddsList[i]="";
         for(let j=0; j<sortList[i].children.length; j++){
