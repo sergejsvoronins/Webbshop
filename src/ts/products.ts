@@ -100,7 +100,7 @@ let newList : Product [] = productList;
 //     }
 // }
 //=========================Functions
-function displayProducts(someList: Product []) {
+export function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;

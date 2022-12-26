@@ -44,7 +44,9 @@
       }
     }
   }
-  &__priceProducts, &__priceFreight, &__totalPrice {
+  &__priceProducts,
+  &__priceFreight,
+  &__totalPrice {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -137,7 +139,8 @@
       }
     }
   }
-  &__priceProducts, &__priceFreight {
+  &__priceProducts,
+  &__priceFreight {
     span {
       font-size: 1em;
     }
@@ -167,6 +170,7 @@
     }
     > div {
       @include m.checkoutSectionBorder;
+      @include m.productContainerShadow;
       > div {
         display: flex;
         width: 100%;
@@ -175,9 +179,6 @@
         input {
           min-width: 10%;
           min-height: 1em;
-
-          #postOffice {
-          }
         }
 
         label {
@@ -199,6 +200,7 @@
       display: flex;
       flex-wrap: wrap;
       @include m.checkoutSectionBorder;
+      @include m.productContainerShadow;
       div {
         width: 100%;
         padding: 0.3em;
@@ -230,6 +232,7 @@
     }
     > div {
       @include m.checkoutSectionBorder;
+      @include m.productContainerShadow;
       > span {
         @include m.checkoutPayOptionTitle;
       }
@@ -242,6 +245,7 @@
         padding: 1em 0;
         padding-left: 1em;
         align-items: center;
+        @include m.productContainerShadow;
         input {
           width: 10%;
           height: 1em;
@@ -278,7 +282,11 @@
       font-size: 2em;
     }
   }
-  &__moms, &__freightOption, &__formSection, &__payOption, &__priceToPay {
+  &__moms,
+  &__freightOption,
+  &__formSection,
+  &__payOption,
+  &__priceToPay {
     @include m.checkOutContainersDesktopWidth;
   }
   &__submitBtn {
