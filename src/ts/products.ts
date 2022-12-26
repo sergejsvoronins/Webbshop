@@ -5,19 +5,12 @@ import { Product } from "./models/product";
 import { sortByPriceDown } from "./functions/sortbypricedown";
 import { sortByPriceUp } from "./functions/sortbypriceup";
 import { countOrderPrice } from "./functions/countorderprice";
-import { showNavFilteredItems } from "./functions/shownavfiltereditems";
-import { resetlist } from "./functions/resetlist";
-/* import { displayProductInfo } from "./productinfo"; */
 
 let productList : Product [] = loadFromlocalStorage();
-let cartItemAmount : string;
+let cartItemAmount : number = 0;
 let productsCenter: HTMLDivElement = document.querySelector(".products__center") as HTMLDivElement;
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
 cartItemAmount = updateCartAmount(productList);
-let productsBody: HTMLDivElement = document.getElementById ("products") as HTMLDivElement
-
-//====productInfo====declaration=
-let productinfo: HTMLDivElement = document.getElementById("productInfo") as HTMLDivElement
 
 //navigation filter elements
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
@@ -42,45 +35,36 @@ let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
 //========================= Navigation section
 if (linkUrlMobile === location.href){
-    showNavFilteredItems(productList,"mobile");
+    displayFilteredProducts(productList, "mobile");
 }
 else if  (linkUrlTablet === location.href){
-    showNavFilteredItems(productList,"tablet");
+    displayFilteredProducts(productList, "tablet");
 }
 else if (linkUrlLaptop === location.href){
-    showNavFilteredItems(productList,"laptop");
+    displayFilteredProducts(productList, "laptop");
 }
 else {
     displayProducts(productList);
 }
 filterMobile.addEventListener("click", ()=>{
-    resetlist(productList)
-    productsBody.style.display = "block"
-    productinfo.style.display = "none"
-    showNavFilteredItems(productList,"mobile");
+    displayFilteredProducts(productList, "mobile");
 })
 filterTablet.addEventListener("click", ()=>{
-    resetlist(productList)
-    productsBody.style.display = "block"
-    productinfo.style.display = "none"
-    showNavFilteredItems(productList,"tablet");
+    displayFilteredProducts(productList, "tablet");
 })
 filterLaptop.addEventListener("click", ()=>{
-    resetlist(productList)
-    productsBody.style.display = "block"
-    productinfo.style.display = "none"
-    showNavFilteredItems(productList,"laptop");
+    displayFilteredProducts(productList, "laptop");
 })
 //=========================Cart Section
 cartIcon.addEventListener("click", ()=>{
     cartContainer.classList.add("show");
     document.body.style.overflow ="hidden";
-    
 })
 cartCloseBtn.addEventListener("click", ()=>{
     cartContainer.classList.remove("show");
-    document.body.style.overflow ="auto";
+    document.body.style.overflow ="auto"
 })
+createCartHtml(productList);
 //=========================Filter section
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].addEventListener("click", ()=> {
@@ -90,53 +74,120 @@ for (let i=0; i<sortBarAlt.length; i++){
         sortList[i].classList.remove("show");
     })
 }
-
-for (let i=0; i<sortList.length; i++){
-    for(let j=0; j<sortList[i].children.length; j++){
-        sortList[i].children[j].addEventListener("click", ()=>{
-
-            
-            if (i===2 && j===0){
-                productList.sort(sortByPriceUp);
-                displayProducts(productList);
-            }
-            else if (i===2 && j===1) {
-                productList.sort(sortByPriceDown);
-                displayProducts(productList);
-            }
-
-        }) 
-    }
-}
+let newList : Product [] = productList;
+// for (let i=0; i<sortList.length; i++){
+//     for(let j=0; j<sortList[i].children.length; j++){
+//         sortList[i].children[j].addEventListener("click", ()=>{
+//             if(i===0){
+//                 newList =  newList.filter(product => product.brand == sortList[i].children[j].innerHTML);
+//                 displayProducts(newList,"filtred");
+//             }
+//             else if (i===1){
+//                 newList =  newList.filter(product => product.color == sortList[i].children[j].innerHTML);
+//                 displayProducts(newList,"filtred");
+//             }
+//             else if (i===2){
+//                 if (j===0) {
+//                     newList.sort(sortByPriceUp);
+//                     displayProducts(newList,"filtred");
+//                 }
+//                 else {
+//                     newList.sort(sortByPriceDown);
+//                     displayProducts(newList,"filtred");
+//                 }
+//             }
+//         }) 
+//     }
+// }
 //=========================Functions
-export function displayProducts(someList: Product []) {
-    resetlist(someList)
+function displayProducts(someList: Product []) {
     productsCenter.innerHTML = "";
-    cartN.innerHTML = cartItemAmount;
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
-        if(someList[i].productType==="mobile"){
-            productContainer.classList.add("mobile");
-        }
-        else if (someList[i].productType ==="tablet"){
-            productContainer.classList.add("tablet");
-        }
-        else {
-            productContainer.classList.add("laptop");
-        }
         let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
         productInfoLink.className = "product__infoLink";
-        /* productInfoLink.href="./productinfo.html"; */
+        productInfoLink.href="./productinfo.html";
 
         productInfoLink.addEventListener('click', () => {
-            someList[i]["showItem"] = true;
-            displayProductInfo(someList, productinfo)
-            productsBody.style.display = "none"
-            productinfo.style.display ="block"
-            loadToLocalStorage(productList)
-            });
+        someList[i]["showItem"] = true;
+        loadToLocalStorage(productList);
+        });
 
+        let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+        imgContainer.className = "product__picture";
+
+        let imgProduct: HTMLImageElement = parent.document.createElement("img") as HTMLImageElement;
+	    imgProduct.src = someList[i].url;
+        imgProduct.className = "originalImg";
+
+	    let infoContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+        infoContainer.className = "product__info";
+	
+	    let productTitle: HTMLHeadingElement = document.createElement("h3") as HTMLHeadingElement;
+	    productTitle.innerHTML = someList[i].title;
+  
+        let productColor : HTMLParagraphElement = document.createElement("h4");
+        productColor.innerHTML = someList[i].color;
+        
+        let productPrice: HTMLHeadingElement = document.createElement("h4") as HTMLHeadingElement;
+	    productPrice.innerHTML = someList[i].price;
+        productPrice.innerHTML += " SEK";
+
+        let buttonDiv: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+        buttonDiv.className = "buttonDiv";
+        let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
+        addToCart.className = "icon-button"
+        addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
+        addToCart.addEventListener('click', () => {
+        someList[i].buyAmount++;
+        cartItemAmount = updateCartAmount(someList);
+        cartN.innerHTML = (cartItemAmount || 0).toString();
+        loadToLocalStorage(someList);
+        createCartHtml(someList);
+        
+        let imgCopy: HTMLImageElement = document.createElement("img") as HTMLImageElement;
+	    imgCopy.src = someList[i].url;
+        imgCopy.className = "imgCopy";
+        imgCopy.style.animation = "slide linear 1s 1 normal forwards";
+        imgContainer.appendChild(imgCopy);
+        });   
+
+    productsCenter.appendChild(productContainer);
+    productContainer.appendChild(productInfoLink);
+    productInfoLink.appendChild(imgContainer);
+    imgContainer.appendChild(imgProduct);
+    productInfoLink.appendChild(infoContainer);
+    infoContainer.appendChild(productTitle);
+    infoContainer.appendChild(productColor);
+    infoContainer.appendChild(productPrice);
+    productContainer.appendChild(buttonDiv);
+    buttonDiv.appendChild(addToCart);
+    }
+
+    
+}
+function displayFilteredProducts(someList: Product [], filter: string) {
+    productsCenter.innerHTML = "";
+    for(let i = 0; i < someList.length; i++){
+    if (someList[i].productType === filter){
+        let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
+        productContainer.className = "product";
+        let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
+        productInfoLink.className = "product__infoLink";
+        productInfoLink.href="./productinfo.html";
+
+        productInfoLink.addEventListener('click', () => {
+        someList[i]["showItem"] = true;
+        for (let j=0; j<productList.length; j++){
+            if(someList[i].id===productList[j].id){
+                productList[j].buyAmount = someList[i].buyAmount;
+            }
+        }
+        cartItemAmount = updateCartAmount(productList);
+        cartN.innerHTML = cartItemAmount.toString();
+        loadToLocalStorage(productList);
+        });
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         imgContainer.className = "product__picture";
@@ -162,42 +213,33 @@ export function displayProducts(someList: Product []) {
         let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
         addToCart.className = "icon-button"
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
-
-
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
-        for (let j=0; j<productList.length; j++){
-            if(someList[i].id===productList[j].id){
-                productList[j].buyAmount = someList[i].buyAmount;
-            }
-        }
-        cartItemAmount = updateCartAmount(productList);
-        cartN.innerHTML = cartItemAmount.toString();
-        loadToLocalStorage(productList);
-        createCartHtml(productList);
+        cartItemAmount = updateCartAmount(someList);
+        cartN.innerHTML = (cartItemAmount || 0).toString();
+        loadToLocalStorage(someList);
+        createCartHtml(someList);
         });   
 
 
-        productsCenter.appendChild(productContainer)
-        productContainer.appendChild(productInfoLink);
-        productInfoLink.appendChild(imgContainer);
-        imgContainer.appendChild(imgProduct);
-        productInfoLink.appendChild(infoContainer);
-        infoContainer.appendChild(productTitle);
-        infoContainer.appendChild(productColor);
-        infoContainer.appendChild(productPrice);
-        productContainer.appendChild(buttonDiv);
-        buttonDiv.appendChild(addToCart);
+    productsCenter.appendChild(productContainer)
+    productContainer.appendChild(productInfoLink);
+    productInfoLink.appendChild(imgContainer);
+    imgContainer.appendChild(imgProduct);
+    productInfoLink.appendChild(infoContainer);
+    infoContainer.appendChild(productTitle);
+    infoContainer.appendChild(productColor);
+    infoContainer.appendChild(productPrice);
+    productContainer.appendChild(buttonDiv);
+    buttonDiv.appendChild(addToCart);
     }
-
     
+    }
 }
-
 function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
-    cartN.innerHTML = cartItemAmount.toString();
     let cartPrice : number = 0;
-    if (cartItemAmount!==""){
+    if (cartItemAmount!==0){
         submitBtn.getAttribute("href");
         submitBtn.href = "./checkout.html";
         submitBtn.style.opacity = "1";
@@ -236,171 +278,38 @@ function createCartHtml (products:Product []) {
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
             decreaseBtn.innerHTML = "-";
-            let productAmountNumber : HTMLInputElement = document.createElement ("input");
-            productAmountNumber.value = (products[i].buyAmount).toString();
-            productAmountNumber.type = "number";
+            let productAmountNumber : HTMLDivElement = document.createElement ("div");
+            productAmountNumber.innerHTML = (products[i].buyAmount).toString();
             let increaseBtn : HTMLButtonElement = document.createElement("button");
             increaseBtn.innerHTML = "+";
             productAmountDiv.appendChild(decreaseBtn);
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(increaseBtn);
             increaseBtn.addEventListener("click", ()=>{
-                if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
-                    products[i].buyAmount ++;
-                    cartItemAmount = updateCartAmount(products);
-                    loadToLocalStorage(productList);
-                    createCartHtml(productList);
-                }     
-            })
-            productAmountNumber.addEventListener("input", ()=>{
-                if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
-                    products[i].buyAmount = +productAmountNumber.value;
-                    cartItemAmount = updateCartAmount(productList);
-                    loadToLocalStorage(productList);
-                    createCartHtml(productList);
-                } 
-                else {
-                    productAmountNumber.value = products[i].buyAmount.toString();
+                products[i].buyAmount ++;
+                cartItemAmount = updateCartAmount(products);
+                if (cartItemAmount === 0){
+                    cartN.innerHTML = "";
                 }
+                else {
+                    cartN.innerHTML = cartItemAmount.toString();
+                }
+                // cartN.innerHTML = (cartItemAmount || 0).toString();
+                loadToLocalStorage(products);
+                createCartHtml(products);     
             })
             decreaseBtn.addEventListener("click", ()=>{
-                if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
-                    products[i].buyAmount --;
-                    cartItemAmount = updateCartAmount(products);
-                    loadToLocalStorage(productList);
-                    createCartHtml(products);
-                }  
-            })
-        }
-    }
-}
-
-//=========show product info====
-
-export function displayProductInfo(someList:Product[], container:HTMLDivElement){
-    container.innerHTML=""
-    for (let i = 0; i < someList.length; i++) {
-        if (someList[i].showItem === true){
-
-        let productDetail: HTMLDivElement = document.createElement ("div")
-        productDetail.className = "productInfo__Container";
-
-        let buttonContainer: HTMLDivElement = document.createElement ("div")
-        buttonContainer.className = "productInfo__arrow"
-        let backButton: HTMLAnchorElement = document.createElement ("a")
-        backButton.className = "backButton"
-        backButton.removeAttribute("href");
-        let backAarrow: HTMLLIElement = document.createElement ("li")
-        backAarrow.className = "fa-solid fa-arrow-left"
-        
-        let productInfo: HTMLDivElement = document.createElement ("div")
-        productInfo.className = "detailContainer";
-        
-        let containerImg: HTMLDivElement = document.createElement ("div");
-        containerImg.className ="imgContainer";
-        
-        let productImg: HTMLImageElement = document.createElement ("img");
-        productDetail.appendChild(productImg)
-        productImg.src = someList[i].url
-        
-        let productName: HTMLSpanElement = document.createElement ("span")
-        productName.className = ("detailContainer__name")
-        productName.innerHTML = someList[i].title
-        
-        
-        let productSub: HTMLSpanElement = document.createElement ("span")
-        productSub.className = ("detailContainer__price")
-        productSub.innerHTML = someList[i].price
-        productSub.innerHTML += " " + " SEK"
-        
-        let productColor: HTMLDivElement = document.createElement ("div")
-        productColor.className = ("productColor")
-
-        if (someList[i].productType ==="laptop") {
-            let colorBlack: HTMLDivElement = document.createElement ("div")
-            colorBlack.className = ("productColor__black")
-            productColor.appendChild(colorBlack)
-        }
-        else {
-            let colorBlue: HTMLDivElement = document.createElement ("div")
-            colorBlue.className = ("productColor__blue")
-            productColor.appendChild(colorBlue)
-            let colorRed: HTMLDivElement = document.createElement ("div")
-            colorRed.className = ("productColor__red")
-            productColor.appendChild(colorRed)
-            let colorGreen: HTMLDivElement = document.createElement ("div")
-            colorGreen.className = ("productColor__green")
-            productColor.appendChild(colorGreen)
-
-            colorBlue.addEventListener ("click", ()=>{
-                someList[i].showItem = false;
-                for (let j = 0; j < someList.length; j++) {
-                    if(someList[j].color==="blå" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
-                    someList[j].showItem = true;
-                    displayProductInfo(someList, container)
-                    loadToLocalStorage
-                    loadFromlocalStorage
-                    }
+                products[i].buyAmount --;
+                cartItemAmount = updateCartAmount(products);
+                if (cartItemAmount === 0){
+                    cartN.innerHTML = "";
                 }
-            })
-
-            colorRed.addEventListener ("click", ()=>{
-                someList[i].showItem = false;
-                for (let j = 0; j < someList.length; j++) {
-                    if(someList[j].color==="röd" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
-                    someList[j].showItem = true;
-                    displayProductInfo(someList, container)
-                    loadToLocalStorage
-                    }
+                else {
+                    cartN.innerHTML = cartItemAmount.toString();
                 }
+                loadToLocalStorage(products);
+                createCartHtml(products);
             })
-            colorGreen.addEventListener ("click", ()=>{
-                someList[i].showItem = false;
-                for (let j = 0; j < someList.length; j++) {
-                    if(someList[j].color==="grön" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
-                    someList[j].showItem = true;
-                    displayProductInfo(someList, container)
-                    loadToLocalStorage
-                    }
-                }
-            })
-        }
-        
-        let btnContainer: HTMLDivElement = document.createElement ("div")
-        btnContainer.className = ("buyButton")
-        let buyButton: HTMLAnchorElement = document.createElement ("a")
-        buyButton.className = ("blk--btn")
-        buyButton.innerText = ("KÖP")
-        buyButton.addEventListener( 'click', () => {
-        someList[i].buyAmount++;
-        cartItemAmount = updateCartAmount(someList);
-        cartN.innerHTML = (cartItemAmount || 0).toString();
-        loadToLocalStorage(someList);
-        createCartHtml(someList);
-            
-        })
-        container.appendChild(productDetail)
-        container.appendChild(buttonContainer)
-        productDetail.appendChild(containerImg)
-        containerImg.appendChild(productImg)
-        productDetail.appendChild(productInfo)
-        productInfo.appendChild(productName)
-        productInfo.appendChild(productSub)
-        productInfo.appendChild(productColor)
-        productInfo.appendChild(btnContainer)
-        btnContainer.appendChild(buyButton)
-        productInfo.appendChild (btnContainer)
-        buttonContainer.appendChild(backButton)
-        backButton.appendChild(backAarrow)
-
-        backButton.addEventListener("click",()=>{
-            someList[i].showItem=false;
-            productsBody.style.display = "block"
-            productinfo.style.display = "none"
-            displayProductInfo(someList, container)
-            loadToLocalStorage(someList);
-            
-        })
         }
     }
 }
