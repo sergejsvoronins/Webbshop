@@ -347,23 +347,29 @@ function createCartHtml (products:Product []) {
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(increaseBtn);
             increaseBtn.addEventListener("click", ()=>{
-                products[i].buyAmount ++;
-                cartItemAmount = updateCartAmount(products);
-                if (cartItemAmount === ""){
-                    cartN.innerHTML = "";
-                }
+                if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
+                    products[i].buyAmount ++;
+                    cartItemAmount = updateCartAmount(products);
+                    loadToLocalStorage(products);
+                    createCartHtml(products);
+                }     
+            })
+            productAmountNumber.addEventListener("input", ()=>{
+                if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
+                    products[i].buyAmount = +productAmountNumber.value;
+                    cartItemAmount = updateCartAmount(productList);
+                    loadToLocalStorage(products);
+                    createCartHtml(products);
+                } 
                 else {
-                    cartN.innerHTML = cartItemAmount.toString();
+                    productAmountNumber.value = products[i].buyAmount.toString();
                 }
-                // cartN.innerHTML = (cartItemAmount || 0).toString();
-                loadToLocalStorage(products);
-                createCartHtml(products);     
             })
             decreaseBtn.addEventListener("click", ()=>{
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount --;
                     cartItemAmount = updateCartAmount(products);
-                    loadToLocalStorage(productList);
+                    loadToLocalStorage(products);
                     createCartHtml(products);
                 }  
             })
@@ -469,7 +475,7 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
             }
         }
         cartItemAmount = updateCartAmount(productList);
-        cartN.innerHTML = (cartItemAmount || 0).toString();
+        cartN.innerHTML = cartItemAmount;
         loadToLocalStorage(productList);
         createCartHtml(productList);
             
