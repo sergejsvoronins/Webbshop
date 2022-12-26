@@ -43,11 +43,12 @@ let submitBtn = document.getElementById("submitBtn") as HTMLAnchorElement;
 
 let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
 let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
-let sortBarAlt = document.getElementsByClassName("filterContainer__sortAlt");
+let filterContainerBg = document.getElementById("lockedBg") as HTMLDivElement;
+let sortBarAlt = document.getElementsByClassName("filterContainer__sortAlt") as HTMLCollectionOf<Element>;
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
-let resetFilterBtn = document.getElementById("resetFilter") as HTMLDivElement;
+let resetFilterBtn = document.getElementById("resetFilter") as HTMLButtonElement;
 let submitFilter = document.getElementById("submitFilter") as HTMLButtonElement;
 let filterCloseBtn = document.getElementById("filterCloseBtn") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
@@ -91,12 +92,16 @@ filterLaptop.addEventListener("click", ()=>{
 
 cartIcon.addEventListener("click", ()=>{
     cartContainer.classList.add("show");
-    document.body.style.overflow ="hidden";
+    filterContainerBg.style.display = "block";
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = "18px";
     
 })
 cartCloseBtn.addEventListener("click", ()=>{
     cartContainer.classList.remove("show");
-    document.body.style.overflow ="auto";
+    filterContainerBg.style.display = "none";
+    document.body.style.overflow = "auto";
+    document.body.style.paddingRight = "0px";
 })
 
 //=========================Filter section
@@ -117,12 +122,10 @@ let filterAddsList: string [] = ["","",""];
                     if (sortList[i].children[j].className === "activeFilter"){
                         sortList[i].children[j].classList.remove("activeFilter");
                         filterAddsList[i] = "";
-                        console.log(filterAddsList);  
                     }
                     else {
                         removeChoosenFilter(0);
                         sortList[i].children[j].classList.add("activeFilter");
-                        console.log(filterAddsList);
                     }
                 }  
                 else if (i===1){
@@ -153,15 +156,19 @@ let filterAddsList: string [] = ["","",""];
 filterBarIcon.addEventListener("click", ()=>{
     filterPopUp.style.opacity = "1";
     filterPopUp.style.left = "0";
+    filterContainerBg.style.display = "block";
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = "18px";
 })
 submitFilter.addEventListener("click", ()=>{
     displayFilteredItems(productList);
-    filterPopUp.style.opacity = "0";
-    filterPopUp.style.left = "-300%";
 })
 filterCloseBtn.addEventListener("click", ()=>{
     filterPopUp.style.opacity = "0";
     filterPopUp.style.left = "-300%";
+    filterContainerBg.style.display = "none";
+    document.body.style.overflow = "auto";
+    document.body.style.paddingRight = "0px";
 })
 resetFilterBtn.addEventListener("click", ()=>{
     resetFilter();

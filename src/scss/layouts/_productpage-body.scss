@@ -3,13 +3,32 @@
 @use "../library/variables" as v;
 @use "../layouts/cart";
 @use "../layouts/productinfo";
-@use "../layouts/filterbar";
+@use "../layouts/filtercontainer";
+@use "../layouts/lockedbackground";
 
 body {
   background-color: v.$body-color;
-
+  .filterBar {
+    width: 90vw;
+    margin: 0 auto;
+    padding: 0.4em 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    border-bottom: v.$horisontalLine;
+    margin-bottom: 1em;
+    div {
+      transition: opacity 0.1s ease-in;
+      &:hover {
+        opacity: 0.3;
+      }
+      i {
+        font-size: 1.5em;
+      }
+    }
+  }
     /*------Products-----*/
-
+  
   .products {
     &__title {
       text-align: center;
