@@ -45,9 +45,7 @@ header {
       &:hover {
         cursor: pointer;
       }
-      .hamburgerLogo__topBun,
-      .hamburgerLogo__middleBun,
-      .hamburgerLogo__bottomBun {
+      &__topBun, &__middleBun, &__bottomBun {
         position: relative;
         width: 2em;
         height: 2px;

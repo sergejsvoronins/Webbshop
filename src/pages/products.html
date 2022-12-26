@@ -35,6 +35,40 @@
           <button type="button">Betala köp</button>
       </a>
   </section>
+  <section class="filterContainer" id="filterContainer">
+    <div class="filterContainer__header">
+      <h2>Filtrera & Sortera</h2>
+      <div id="filterCloseBtn"><i class='fa-solid fa-xmark'></i></div>
+    </div>
+    <div class="filterContainer__sortAlt">
+      <span>tillverkare</span>
+      <div class="filterContainer__sortAlt__content" id="sortBarBrand">
+        <div>apple</div>
+        <div>samsung</div>
+      </div>
+    </div>
+    <div class="filterContainer__sortAlt">
+      <span>färg</span>
+      <div class="filterContainer__sortAlt__content" id="sortBarColor">
+        <div>röd</div>
+        <div>blå</div>
+        <div>grön</div>
+        <div>svart</div>
+      </div>
+    </div>
+    <div class="filterContainer__sortAlt">
+      <span>pris</span>
+      <div class="filterContainer__sortAlt__content" id="sortBarPrice">
+        <div>sortera stigande</div>
+        <div>sortera fallande</div>
+      </div>
+    </div>
+    <div class="filterContainer__buttons">
+      <button id="resetFilter">Rensa filtret</button>
+      <button id="submitFilter">Visa resultat</button>
+    </div>
+  </section>
+  <section id="lockedBg"></section>
   <header>
     <a href="./../index.html"><h2>Case it</h2></a>
     <nav>
@@ -66,36 +100,11 @@
         </div>
     </section>
   </header>
-
   <main>
-    <section class="filter">
-      <div class="filter__sortAlt">
-        <span>tillverkare</span>
-        <div><i class="fa fa-caret-down"></i></div>
-        <div class="filter__sortAlt__content" id="sortBarBrand">
-          <div>apple</div>
-          <div>samsung</div>
-        </div>
-      </div>
-      <div class="filter__sortAlt">
-        <span>färg</span>
-        <div><i class="fa fa-caret-down"></i></div>
-        <div class="filter__sortAlt__content" id="sortBarColor">
-          <div>röd</div>
-          <div>blå</div>
-          <div>grön</div>
-        </div>
-      </div>
-      <div class="filter__sortAlt">
-        <span>pris</span>
-        <div><i class="fa fa-caret-down"></i></div>
-        <div class="filter__sortAlt__content" id="sortBarPrice">
-          <div>sortera stigande</div>
-          <div>sortera fallande</div>
-        </div>
-      </div>
+    <section class="filterBar" id="filterBarIcon">
+      <span>Filtrera </span>
+      <div><i class="bi bi-filter"></i></div>
     </section>
-
     <section id="products" class="products">
     <div class="products__title">
       <h2>Våra Produkter</h2>
@@ -106,11 +115,8 @@
   
   <section id="productInfo" class="productInfo"></section>      
   </main>
-
-
-
-    <footer>
-      <div class="footer">
+  <footer>
+    <div class="footer">
           <div class="footer__primary">
               <h3>Support</h3>
               <ul>
@@ -139,7 +145,7 @@
               </a>
               
           </div>
-      </div>
+    </div>
 
   </footer>
     
