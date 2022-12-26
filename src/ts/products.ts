@@ -278,7 +278,7 @@ function displayFilteredProducts(someList: Product [], filter: string) {
             addToCart.addEventListener('click', () => {
             someList[i].buyAmount++;
             cartItemAmount = updateCartAmount(someList);
-            cartN.innerHTML = (cartItemAmount || 0).toString();
+            cartN.innerHTML = cartItemAmount;
             loadToLocalStorage(someList);
             createCartHtml(someList);
             });   
@@ -300,6 +300,7 @@ function displayFilteredProducts(someList: Product [], filter: string) {
 function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
     let cartPrice : number = 0;
+    cartN.innerHTML = cartItemAmount;
     if (cartItemAmount!== ""){
         submitBtn.getAttribute("href");
         submitBtn.href = "./checkout.html";
