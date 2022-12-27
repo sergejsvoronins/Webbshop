@@ -409,29 +409,29 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
 
             colorBlue.addEventListener ("click", ()=>{
                 someList[i].showItem = false;
-                for (let j = 0; j < someList.length; j++) {
-                    if(someList[j].color==="blå" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
-                    someList[j].showItem = true;
-                    displayProductInfo(someList, container)
+                for (let j = 0; j < productList.length; j++) {
+                    if(productList[j].color==="blå" && (someList[i].productType===productList[j].productType) && (someList[i].brand===productList[j].brand)){
+                        productList[j].showItem = true;
+                    displayProductInfo(productList, container)
                     }
                 }
             })
 
             colorRed.addEventListener ("click", ()=>{
                 someList[i].showItem = false;
-                for (let j = 0; j < someList.length; j++) {
-                    if(someList[j].color==="röd" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
-                    someList[j].showItem = true;
-                    displayProductInfo(someList, container)
+                for (let j = 0; j < productList.length; j++) {
+                    if(productList[j].color==="röd" && (someList[i].productType===productList[j].productType) && (someList[i].brand===productList[j].brand)){
+                        productList[j].showItem = true;
+                    displayProductInfo(productList, container)
                     }
                 }
             })
             colorGreen.addEventListener ("click", ()=>{
                 someList[i].showItem = false;
-                for (let j = 0; j < someList.length; j++) {
-                    if(someList[j].color==="grön" && (someList[i].productType===someList[j].productType) && (someList[i].brand===someList[j].brand)){
-                    someList[j].showItem = true;
-                    displayProductInfo(someList, container)
+                for (let j = 0; j < productList.length; j++) {
+                    if(productList[j].color==="grön" && (someList[i].productType===productList[j].productType) && (someList[i].brand===productList[j].brand)){
+                        productList[j].showItem = true;
+                    displayProductInfo(productList, container)
                     }
                 }
             })
