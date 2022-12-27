@@ -225,6 +225,8 @@ export function displayProducts(someList: Product []) {
         let addToCart: HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
         addToCart.className = "icon-button"
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
+
+        // Adds selected product to cart and activates product image animation 
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
         cartItemAmount = updateCartItemAmount(someList);
