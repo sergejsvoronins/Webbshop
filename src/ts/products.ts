@@ -209,9 +209,9 @@ export function displayProducts(someList: Product []) {
         productInfoLink.addEventListener('click', () => {
             someList[i]["showItem"] = true;
             displayProductInfo(someList, productinfo)
-            productsBody.style.display = "none"
-            productinfo.style.display ="block"
-            loadToLocalStorage(productList);
+            productsBody.style.display = "none";
+            productinfo.style.display ="block";
+            // loadToLocalStorage(productList);
         });
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -244,7 +244,7 @@ export function displayProducts(someList: Product []) {
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
         cartItemAmount = updateCartItemAmount(someList);
-        cartN.innerHTML = (cartItemAmount || 0).toString();
+        cartN.innerHTML = cartItemAmount;
         loadToLocalStorage(someList);
         createCartHtml(someList);
         
@@ -274,6 +274,7 @@ function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
     let cartPrice : number = 0;
     cartN.innerHTML = cartItemAmount;
+    //Checking if cartItemAmount is "0" submitBtn is not active
     if (cartItemAmount!== ""){
         submitBtn.getAttribute("href");
         submitBtn.href = "./checkout.html";
