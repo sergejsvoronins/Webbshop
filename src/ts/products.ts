@@ -46,14 +46,15 @@ let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
 let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
 let filterContainerBg = document.getElementById("lockedBg") as HTMLDivElement;
 let sortBarAlt = document.getElementsByClassName("filterContainer__sortAlt") as HTMLCollectionOf<Element>;
+let sortBarType = document.getElementById("sortBarType") as HTMLDivElement;
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
 let sortBarPrice = document.getElementById("sortBarPrice") as HTMLDivElement;
 let resetFilterBtn = document.getElementById("resetFilter") as HTMLButtonElement;
 let submitFilter = document.getElementById("submitFilter") as HTMLButtonElement;
 let filterCloseBtn = document.getElementById("filterCloseBtn") as HTMLDivElement;
-let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
-let activeFilterList: string [] = ["","",""];
+let sortList = [sortBarType,sortBarBrand,sortBarColor,sortBarPrice];
+let activeFilterList: string [] = ["","","",""];
 
 //========================= Navigation section
 
@@ -146,6 +147,17 @@ for (let i=0; i<sortList.length; i++){
                 }
                 else {
                     removeActivefilter(2, sortList);
+                    sortList[i].children[j].classList.add("activeFilter");
+                }
+            } 
+            else if (i===3){
+                activeFilterList[3]=sortList[i].children[j].innerHTML;
+                if (sortList[i].children[j].className === "activeFilter"){
+                    sortList[i].children[j].classList.remove("activeFilter");
+                    activeFilterList[i] = "";  
+                }
+                else {
+                    removeActivefilter(3, sortList);
                     sortList[i].children[j].classList.add("activeFilter");
                 }
             } 
@@ -478,15 +490,18 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
 function displayFilteredItems (products: Product []) {
     let filteredList = products;
     if (activeFilterList[0]!==""){
-        filteredList = filteredList.filter((product)=>product.brand === activeFilterList[0]);
+        filteredList = filteredList.filter((product)=>product.productType === activeFilterList[0]);
     }
     if (activeFilterList[1]!==""){
-        filteredList = filteredList.filter((product)=>product.color === activeFilterList[1]);
+        filteredList = filteredList.filter((product)=>product.brand === activeFilterList[1]);
     }
-    if (activeFilterList[2]!=="" && activeFilterList[2]==="sortera stigande") {
+    if (activeFilterList[2]!==""){
+        filteredList = filteredList.filter((product)=>product.color === activeFilterList[2]);
+    }
+    if (activeFilterList[3]!=="" && activeFilterList[2]==="sortera stigande") {
         filteredList.sort(sortByPriceUp);
     }
-    else if (activeFilterList[2]!=="" && activeFilterList[2]==="sortera fallande"){
+    else if (activeFilterList[3]!=="" && activeFilterList[2]==="sortera fallande"){
         filteredList.sort(sortByPriceDown);
     }
     displayProducts(filteredList);
