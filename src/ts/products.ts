@@ -42,6 +42,7 @@ let submitBtn = document.getElementById("submitBtn") as HTMLAnchorElement;
 
 //filterbar elements declarations
 
+let filterBar = document.getElementById("filterBar") as HTMLDivElement;
 let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
 let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
 let filterContainerBg = document.getElementById("lockedBg") as HTMLDivElement;
@@ -197,6 +198,7 @@ filterContainerBg.addEventListener("click", ()=>{
 export function displayProducts(someList: Product []) {
     resetlist(someList)
     productsCenter.innerHTML = "";
+    filterBar.style.opacity = "1";
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
@@ -209,7 +211,7 @@ export function displayProducts(someList: Product []) {
             displayProductInfo(someList, productinfo)
             productsBody.style.display = "none"
             productinfo.style.display ="block"
-            loadToLocalStorage(productList)
+            loadToLocalStorage(productList);
         });
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -350,7 +352,8 @@ function createCartHtml (products:Product []) {
 }
     //Function that create html for productInfo PopUp
 export function displayProductInfo(someList:Product[], container:HTMLDivElement){
-    container.innerHTML=""
+    container.innerHTML="";
+    filterBar.style.opacity = "0";
     for (let i = 0; i < someList.length; i++) {
         if (someList[i].showItem === true){
 
@@ -480,8 +483,7 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
             someList[i].showItem=false;
             productsBody.style.display = "block"
             productinfo.style.display = "none"
-            displayProductInfo(someList, container)
-            loadToLocalStorage(someList);
+            filterBar.style.opacity = "1";
         })
         }
     }
