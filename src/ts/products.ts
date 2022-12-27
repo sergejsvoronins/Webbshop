@@ -7,19 +7,18 @@ import { sortByPriceUp } from "./functions/sortbypriceup";
 import { countOrderPrice } from "./functions/countorderprice";
 import { resetlist } from "./functions/resetlist";
 import { showNavFilteredItems } from "./functions/shownavfiltereditems";
+import { removeActivefilter } from "./functions/resetactivefilter";
 
+//products page declarations
 let productList : Product [] = loadFromlocalStorage();
-let cartItemAmount : string = "";
 let productsCenter: HTMLDivElement = document.querySelector(".products__center") as HTMLDivElement;
-let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
-cartItemAmount = updateCartItemAmount(productList);
 let productsBody: HTMLDivElement = document.getElementById ("products") as HTMLDivElement
 
 //====productInfo====declaration=
 
 let productinfo: HTMLDivElement = document.getElementById("productInfo") as HTMLDivElement
 
-//navigation filter elements
+//navigation menu elements declarations
 
 let filterMobile = document.getElementById("menuMobile") as HTMLUListElement;
 let filterTablet = document.getElementById("menuTablet") as HTMLUListElement;
@@ -27,8 +26,11 @@ let filterLaptop = document.getElementById("menuLaptop") as HTMLUListElement;
 let linkUrlMobile : string = "http://localhost:1234/pages/products.html#mobil";
 let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
 let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
+let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
+let cartItemAmount : string = "";
+cartItemAmount = updateCartItemAmount(productList);
 
-//cartPopUp
+//cartPopUp declarations
 
 let cartContainer = document.getElementById("cart") as HTMLDivElement;
 let cartProductsCont = document.getElementById("cartProductsCont") as HTMLDivElement;
@@ -38,7 +40,7 @@ let cartCloseBtn = document.getElementById("cartCloseBtn") as HTMLDivElement;
 let cartIcon = document.getElementById("cartIcon") as HTMLDivElement;
 let submitBtn = document.getElementById("submitBtn") as HTMLAnchorElement;
 
-//filterbar elements
+//filterbar elements declarations
 
 let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
 let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
@@ -51,8 +53,7 @@ let resetFilterBtn = document.getElementById("resetFilter") as HTMLButtonElement
 let submitFilter = document.getElementById("submitFilter") as HTMLButtonElement;
 let filterCloseBtn = document.getElementById("filterCloseBtn") as HTMLDivElement;
 let sortList = [sortBarBrand,sortBarColor,sortBarPrice];
-
-
+let activeFilterList: string [] = ["","",""];
 
 //========================= Navigation section
 
@@ -68,6 +69,9 @@ else if (linkUrlLaptop === location.href){
 else {
     displayProducts(productList);
 }
+//=====EVENTS SECTION
+//Event for navmenu
+
 filterMobile.addEventListener("click", ()=>{
     resetlist(productList)
     productsBody.style.display = "block"
@@ -87,14 +91,12 @@ filterLaptop.addEventListener("click", ()=>{
     showNavFilteredItems(productList,"laptop");
 })
 
-//=========================Cart Section
-
+//Events for cartPop 
 cartIcon.addEventListener("click", ()=>{
     cartContainer.classList.add("show");
     filterContainerBg.style.display = "block";
     document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "18px";
-    
+    document.body.style.paddingRight = "18px";       
 })
 cartCloseBtn.addEventListener("click", ()=>{
     cartContainer.classList.remove("show");
@@ -102,56 +104,54 @@ cartCloseBtn.addEventListener("click", ()=>{
     document.body.style.overflow = "auto";
     document.body.style.paddingRight = "0px";
 })
-
-//=========================Filter section
-
+//Events for filterPopUp
+    //Event that show/hide filterTitles content
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].children[0].addEventListener("click", ()=> {
         sortList[i].classList.toggle("show");
+
     })
 }
-
-let filterAddsList: string [] = ["","",""];
-
-    for (let i=0; i<sortList.length; i++){
-        for(let j=0; j<sortList[i].children.length; j++){
-            sortList[i].children[j].addEventListener("click", ()=>{
-                if (i===0){
-                    filterAddsList[0]=sortList[i].children[j].innerHTML;
-                    if (sortList[i].children[j].className === "activeFilter"){
-                        sortList[i].children[j].classList.remove("activeFilter");
-                        filterAddsList[i] = "";
-                    }
-                    else {
-                        removeChoosenFilter(0);
-                        sortList[i].children[j].classList.add("activeFilter");
-                    }
-                }  
-                else if (i===1){
-                    filterAddsList[1]=sortList[i].children[j].innerHTML; 
-                    if (sortList[i].children[j].className === "activeFilter"){
-                        sortList[i].children[j].classList.remove("activeFilter");
-                        filterAddsList[i] = "";            
-                    }
-                    else {
-                        removeChoosenFilter(1);
-                        sortList[i].children[j].classList.add("activeFilter");
-                    }
-                } 
-                else if (i===2){
-                    filterAddsList[2]=sortList[i].children[j].innerHTML;
-                    if (sortList[i].children[j].className === "activeFilter"){
-                        sortList[i].children[j].classList.remove("activeFilter");
-                        filterAddsList[i] = "";  
-                    }
-                    else {
-                        removeChoosenFilter(2);
-                        sortList[i].children[j].classList.add("activeFilter");
-                    }
-                } 
-            }) 
-        }
+    //Event that steer the ActiveFilterList(this list helps to create filterList of productList by comparing AFL values with PL) and steer adding/remove class activefitler
+for (let i=0; i<sortList.length; i++){
+    for(let j=0; j<sortList[i].children.length; j++){
+        sortList[i].children[j].addEventListener("click", ()=>{
+            if (i===0){
+                activeFilterList[0]=sortList[i].children[j].innerHTML;
+                if (sortList[i].children[j].className === "activeFilter"){
+                    sortList[i].children[j].classList.remove("activeFilter");
+                    activeFilterList[i] = "";
+                }
+                else {
+                    removeActivefilter(0, sortList);
+                    sortList[i].children[j].classList.add("activeFilter");
+                }
+            }  
+            else if (i===1){
+                activeFilterList[1]=sortList[i].children[j].innerHTML; 
+                if (sortList[i].children[j].className === "activeFilter"){
+                    sortList[i].children[j].classList.remove("activeFilter");
+                    activeFilterList[i] = "";            
+                }
+                else {
+                    removeActivefilter(1, sortList);
+                    sortList[i].children[j].classList.add("activeFilter");
+                }
+            } 
+            else if (i===2){
+                activeFilterList[2]=sortList[i].children[j].innerHTML;
+                if (sortList[i].children[j].className === "activeFilter"){
+                    sortList[i].children[j].classList.remove("activeFilter");
+                    activeFilterList[i] = "";  
+                }
+                else {
+                    removeActivefilter(2, sortList);
+                    sortList[i].children[j].classList.add("activeFilter");
+                }
+            } 
+        }) 
     }
+}
 filterBarIcon.addEventListener("click", ()=>{
     filterPopUp.style.opacity = "1";
     filterPopUp.style.left = "0";
@@ -180,9 +180,8 @@ filterContainerBg.addEventListener("click", ()=>{
     document.body.style.paddingRight = "0px";
     cartContainer.classList.remove("show");
 })
-
-//=========================Functions
-
+//=====FUNCTIONS SECTION
+    // Function that create html for all products in main section
 export function displayProducts(someList: Product []) {
     resetlist(someList)
     productsCenter.innerHTML = "";
@@ -254,7 +253,7 @@ export function displayProducts(someList: Product []) {
 
     
 }
-
+    //Function that create html for cartPopUp
 function createCartHtml (products:Product []) {
     cartProductsCont.innerHTML = "";
     let cartPrice : number = 0;
@@ -335,7 +334,7 @@ function createCartHtml (products:Product []) {
         }
     }
 }
-
+    //Function that create html for productInfo PopUp
 export function displayProductInfo(someList:Product[], container:HTMLDivElement){
     container.innerHTML=""
     for (let i = 0; i < someList.length; i++) {
@@ -473,37 +472,27 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         }
     }
 }
-
+    //Function that make filter by clicking and display filtered items.
 function displayFilteredItems (products: Product []) {
     let filteredList = products;
-    if (filterAddsList[0]!==""){
-        filteredList = filteredList.filter((product)=>product.brand === filterAddsList[0]);
+    if (activeFilterList[0]!==""){
+        filteredList = filteredList.filter((product)=>product.brand === activeFilterList[0]);
     }
-    if (filterAddsList[1]!==""){
-        filteredList = filteredList.filter((product)=>product.color === filterAddsList[1]);
+    if (activeFilterList[1]!==""){
+        filteredList = filteredList.filter((product)=>product.color === activeFilterList[1]);
     }
-    if (filterAddsList[2]!=="" && filterAddsList[2]==="sortera stigande") {
+    if (activeFilterList[2]!=="" && activeFilterList[2]==="sortera stigande") {
         filteredList.sort(sortByPriceUp);
     }
-    else if (filterAddsList[2]!=="" && filterAddsList[2]==="sortera fallande"){
+    else if (activeFilterList[2]!=="" && activeFilterList[2]==="sortera fallande"){
         filteredList.sort(sortByPriceDown);
     }
     displayProducts(filteredList);
 }
-
-function removeChoosenFilter (index:number) {
-    for (let i=0; i<sortList.length; i++){
-        for(let j=0; j<sortList[i].children.length; j++){
-            if (i===index){
-                sortList[index].children[j].classList.remove("activeFilter");   
-            }
-        }
-    }
-}
-
+    //Function that reset all filter by removing class "activeFilter"
 function resetFilter() {
     for (let i=0; i<sortList.length; i++){
-        filterAddsList[i]="";
+        activeFilterList[i]="";
         for(let j=0; j<sortList[i].children.length; j++){
                 sortList[i].children[j].classList.remove("activeFilter");   
         }
