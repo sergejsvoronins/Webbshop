@@ -161,6 +161,14 @@ filterCloseBtn.addEventListener("click", ()=>{
 resetFilterBtn.addEventListener("click", ()=>{
     resetFilter();
 })
+filterContainerBg.addEventListener("click", ()=>{
+    filterPopUp.style.opacity = "0";
+    filterPopUp.style.left = "-300%";
+    filterContainerBg.style.display = "none";
+    document.body.style.overflow = "auto";
+    document.body.style.paddingRight = "0px";
+    cartContainer.classList.remove("show");
+})
 
 //=========================Functions
 
