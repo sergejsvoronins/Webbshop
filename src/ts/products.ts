@@ -68,12 +68,21 @@ else {
     displayProducts(productList);
 }
 filterMobile.addEventListener("click", ()=>{
+    resetlist(productList)
+    productsBody.style.display = "block"
+    productinfo.style.display = "none"
     displayFilteredProducts(productList, "mobile");
 })
 filterTablet.addEventListener("click", ()=>{
+    resetlist(productList)
+    productsBody.style.display = "block"
+    productinfo.style.display = "none"
     displayFilteredProducts(productList, "tablet");
 })
 filterLaptop.addEventListener("click", ()=>{
+    resetlist(productList)
+    productsBody.style.display = "block"
+    productinfo.style.display = "none"
     displayFilteredProducts(productList, "laptop");
 })
 
@@ -166,6 +175,7 @@ resetFilterBtn.addEventListener("click", ()=>{
 //=========================Functions
 
 export function displayProducts(someList: Product []) {
+    resetlist(someList)
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
