@@ -198,7 +198,7 @@ filterContainerBg.addEventListener("click", ()=>{
 export function displayProducts(someList: Product []) {
     resetlist(someList)
     productsCenter.innerHTML = "";
-    filterBar.style.opacity = "1";
+    filterBar.style.display = "flex";
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
@@ -353,7 +353,7 @@ function createCartHtml (products:Product []) {
     //Function that create html for productInfo PopUp
 export function displayProductInfo(someList:Product[], container:HTMLDivElement){
     container.innerHTML="";
-    filterBar.style.opacity = "0";
+    filterBar.style.display = "none";
     for (let i = 0; i < someList.length; i++) {
         if (someList[i].showItem === true){
 
@@ -483,7 +483,7 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
             someList[i].showItem=false;
             productsBody.style.display = "block"
             productinfo.style.display = "none"
-            filterBar.style.opacity = "1";
+            filterBar.style.display = "flex";
         })
         }
     }
