@@ -185,8 +185,11 @@ export function displayProducts(someList: Product []) {
         /* productInfoLink.href="./productinfo.html"; */
 
         productInfoLink.addEventListener('click', () => {
-        someList[i]["showItem"] = true;
-        loadToLocalStorage(productList);
+            someList[i]["showItem"] = true;
+            displayProductInfo(someList, productinfo)
+            productsBody.style.display = "none"
+            productinfo.style.display ="block"
+            loadToLocalStorage(productList)
         });
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
