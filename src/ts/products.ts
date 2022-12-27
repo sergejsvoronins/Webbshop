@@ -5,6 +5,7 @@ import { Product } from "./models/product";
 import { sortByPriceDown } from "./functions/sortbypricedown";
 import { sortByPriceUp } from "./functions/sortbypriceup";
 import { countOrderPrice } from "./functions/countorderprice";
+import { resetlist } from "./functions/resetlist";
 
 let productList : Product [] = loadFromlocalStorage();
 let cartItemAmount : string = "";
@@ -67,12 +68,21 @@ else {
     displayProducts(productList);
 }
 filterMobile.addEventListener("click", ()=>{
+    resetlist(productList)
+    productsBody.style.display = "block"
+    productinfo.style.display = "none"
     displayFilteredProducts(productList, "mobile");
 })
 filterTablet.addEventListener("click", ()=>{
+    resetlist(productList)
+    productsBody.style.display = "block"
+    productinfo.style.display = "none"
     displayFilteredProducts(productList, "tablet");
 })
 filterLaptop.addEventListener("click", ()=>{
+    resetlist(productList)
+    productsBody.style.display = "block"
+    productinfo.style.display = "none"
     displayFilteredProducts(productList, "laptop");
 })
 
@@ -173,15 +183,21 @@ filterContainerBg.addEventListener("click", ()=>{
 //=========================Functions
 
 export function displayProducts(someList: Product []) {
+    resetlist(someList)
     productsCenter.innerHTML = "";
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
         let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
         productInfoLink.className = "product__infoLink";
+        /* productInfoLink.href="./productinfo.html"; */
+
         productInfoLink.addEventListener('click', () => {
-        someList[i]["showItem"] = true;
-        loadToLocalStorage(productList);
+            someList[i]["showItem"] = true;
+            displayProductInfo(someList, productinfo)
+            productsBody.style.display = "none"
+            productinfo.style.display ="block"
+            loadToLocalStorage(productList)
         });
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -415,7 +431,10 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         let productName: HTMLSpanElement = document.createElement ("span")
         productName.className = ("detailContainer__name")
         productName.innerHTML = someList[i].title
-        
+
+        let productBrand: HTMLSpanElement = document.createElement ("span")
+        productBrand.className = ("detailContainer__brand")
+        productBrand.innerHTML = someList[i].brand
         
         let productSub: HTMLSpanElement = document.createElement ("span")
         productSub.className = ("detailContainer__price")
@@ -470,6 +489,11 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
                 }
             })
         }
+
+        let descriptionContainer: HTMLDivElement = document.createElement ("div") as HTMLDivElement;
+        descriptionContainer.className = ("descriptionContainer")
+        descriptionContainer.innerHTML = productList[i].description
+
         
         let btnContainer: HTMLDivElement = document.createElement ("div")
         btnContainer.className = ("buyButton")
@@ -495,8 +519,10 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         containerImg.appendChild(productImg)
         productDetail.appendChild(productInfo)
         productInfo.appendChild(productName)
+        productInfo.appendChild(productBrand)
         productInfo.appendChild(productSub)
         productInfo.appendChild(productColor)
+        productInfo.appendChild(descriptionContainer)
         productInfo.appendChild(btnContainer)
         btnContainer.appendChild(buyButton)
         productInfo.appendChild (btnContainer)
