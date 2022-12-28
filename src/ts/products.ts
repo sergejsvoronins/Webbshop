@@ -243,10 +243,15 @@ export function displayProducts(someList: Product []) {
         // Adds selected product to cart and activates product image animation 
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
-        cartItemAmount = updateCartItemAmount(someList);
+        for(let k=0; k<productList.length; k++){
+            if(someList[i].id === productList[k].id){
+                productList[k].buyAmount === someList[i].buyAmount;
+            }
+        }
+        loadToLocalStorage(productList);
+        cartItemAmount = updateCartItemAmount(productList);
         cartN.innerHTML = cartItemAmount;
-        loadToLocalStorage(someList);
-        createCartHtml(someList);
+        createCartHtml(productList);
         
         let imgCopy: HTMLImageElement = document.createElement("img") as HTMLImageElement;
 	    imgCopy.src = someList[i].url;
