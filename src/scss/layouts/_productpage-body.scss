@@ -47,7 +47,15 @@ body {
       grid-column-gap: 1.5rem;
       grid-row-gap: 2rem;
       overflow: hidden;
+      @include m.tablet {
+        width: 90vw;
+        grid-template-columns: 1fr 1fr;
+      }
       @include m.desktop {
+        width: 90vw;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      @include m.desktopBig {
         width: 90vw;
         grid-template-columns: 1fr 1fr 1fr 1fr;
       }
