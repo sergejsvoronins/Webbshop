@@ -28,7 +28,8 @@ createProduct(
     "Förstärk din telefons originalkänsla med Thin Case, framtaget ner till minsta detalj. Det ultimata skalet för att lyfta fram och skydda din telefon med en stilren och tunn design.",
     productList);
 createProduct(
-    "id03","Thin Case",
+    "id03",
+    "Thin Case",
     "/assets/img/iphone-blue.png",
     "apple",
     "blå",
@@ -39,7 +40,8 @@ createProduct(
     "Förstärk din telefons originalkänsla med Thin Case, framtaget ner till minsta detalj. Det ultimata skalet för att lyfta fram och skydda din telefon med en stilren och tunn design.",
     productList);
 createProduct(
-    "id04","Thin Case",
+    "id04",
+    "Thin Case",
     "/assets/img/galaxy-green.png",
     "samsung",
     "grön",
@@ -50,7 +52,8 @@ createProduct(
     "Förstärk din telefons originalkänsla med Thin Case, framtaget ner till minsta detalj. Det ultimata skalet för att lyfta fram och skydda din telefon med en stilren och tunn design.",
     productList);
 createProduct(
-    "id05","Thin Case",
+    "id05",
+    "Thin Case",
     "/assets/img/galaxy-red.png",
     "samsung",
     "röd",
@@ -85,7 +88,8 @@ createProduct(
     "Med Smart Cover Sevilla ger du din iPad både ett praktiskt och trendigt skydd. Baksidan är av hårdplast vilket ger maximalt skydd och framsidan är vikbar för att ställa upp paddan på önskat sätt.",
     productList);
 createProduct(
-    "id08","Smart Cover",
+    "id08",
+    "Smart Cover",
     "/assets/img/ipad-blue.png",
     "apple",
     "blå",
@@ -96,7 +100,8 @@ createProduct(
     "Med Smart Cover Sevilla ger du din iPad både ett praktiskt och trendigt skydd. Baksidan är av hårdplast vilket ger maximalt skydd och framsidan är vikbar för att ställa upp paddan på önskat sätt.",
     productList);
 createProduct(
-    "id09","Smart Cover",
+    "id09",
+    "Smart Cover",
     "/assets/img/ipad-red.png",
     "apple",
     "röd",
@@ -107,7 +112,8 @@ createProduct(
     "Med Smart Cover Sevilla ger du din iPad både ett praktiskt och trendigt skydd. Baksidan är av hårdplast vilket ger maximalt skydd och framsidan är vikbar för att ställa upp paddan på önskat sätt.",
     productList);
 createProduct(
-    "id10","Smart Cover",
+    "id10",
+    "Smart Cover",
     "/assets/img/tab-green.png",
     "samsung",
     "grön",
@@ -118,7 +124,8 @@ createProduct(
     "Med Smart Cover Alicante ger du din Samsung Tablet både ett praktiskt och trendigt skydd. Baksidan är av hårdplast vilket ger maximalt skydd och framsidan är vikbar för att ställa upp paddan på önskat sätt.",
     productList);
 createProduct(
-    "id11","Smart Cover",
+    "id11",
+    "Smart Cover",
     "/assets/img/tab-blue.png",
     "samsung",
     "blå",
@@ -129,7 +136,8 @@ createProduct(
     "Med Smart Cover Alicante ger du din Samsung Tablet både ett praktiskt och trendigt skydd. Baksidan är av hårdplast vilket ger maximalt skydd och framsidan är vikbar för att ställa upp paddan på önskat sätt.",
     productList);
 createProduct(
-    "id12","Smart Cover",
+    "id12",
+    "Smart Cover",
     "/assets/img/tab-rose.png",
     "samsung",
     "röd",
@@ -142,7 +150,8 @@ createProduct(
 
 //=====laptop===
 createProduct(
-    "id13","Laptop Case",
+    "id13",
+    "Laptop Case",
     "/assets/img/macbook-case.png",
     "apple",
     "svart",
@@ -153,7 +162,8 @@ createProduct(
     "Detta laptopfodral är skapat för att ge din dator ett perfekt skydd med en stilsäker vibe.",
     productList);
 createProduct(
-    "id14","Laptop Case",
+    "id14",
+    "Laptop Case",
     "/assets/img/macbook-case.png",
     "samsung",
     "svart",

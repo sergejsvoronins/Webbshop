@@ -47,12 +47,13 @@
             width: 300px;
             height: 250px;
             align-items: flex-start;
-            margin: 1rem;
+            margin-top: 1rem;
             
             @include m.desktop{
                 display: flex;
                 flex-direction: column;
                 justify-content: start;
+                margin-left: 2rem;
             }
 
             &__name{
@@ -62,11 +63,11 @@
             }
 
             &__brand{
-                padding: 10px;
+                padding: 5px;
             }
 
             &__price{
-                padding: 10px;
+                padding: 5px;
             }
 
             .productColor{
@@ -179,9 +180,13 @@
     &__arrow{
         
         position: absolute;
-        top: 0rem;
-        left: 1rem;
+        top: 4px;
+        left: 4px;
         
+        @include m.desktop{
+            top: 1rem;
+            left: 1rem;
+        }
         a{
             li{
                 font-size: 25px;   
