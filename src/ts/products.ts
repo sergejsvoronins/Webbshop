@@ -259,6 +259,7 @@ export function displayProducts(someList: Product []) {
         imgCopy.style.animation = "slide linear 1s 1 normal forwards";
         buttonDiv.appendChild(imgCopy);
         });   
+        
 
     productsCenter.appendChild(productContainer);
     productContainer.appendChild(productInfoLink);
