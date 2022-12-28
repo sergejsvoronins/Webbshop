@@ -291,5 +291,6 @@
   }
   &__submitBtn {
     @include m.submitGreenBtn;
+    @include m.checkOutContainersDesktopWidth;
   }
 }
