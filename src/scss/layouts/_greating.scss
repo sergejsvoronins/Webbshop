@@ -8,6 +8,7 @@
   align-items: center;
   height: 90vh;
   border: 1px solid black;
+  position: relative;
   div {
     padding: 5rem;
     border-radius: 2px;
@@ -23,6 +24,16 @@
       @include m.paymentGreatingTitle;
       line-height: 2rem;
       letter-spacing: 0.2rem;
+    }
+  }
+  .btn-text {
+    font-size: 0.8rem;
+    color: v.$green-btn;
+    position: absolute;
+    margin-top: 10rem;
+    right: 20rem;
+    &:hover {
+      color: v.$nav-color;
     }
   }
 }
