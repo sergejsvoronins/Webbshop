@@ -252,7 +252,7 @@ export function displayProducts(someList: Product []) {
 	    imgCopy.src = someList[i].url;
         imgCopy.className = "imgCopy";
         imgCopy.style.animation = "slide linear 1s 1 normal forwards";
-        imgContainer.appendChild(imgCopy);
+        buttonDiv.appendChild(imgCopy);
         });   
 
     productsCenter.appendChild(productContainer);
