@@ -12,7 +12,6 @@ import { removeActivefilter } from "./functions/resetactivefilter";
 //products page declarations
 let productList : Product [] = loadFromlocalStorage();
 let productsCenter: HTMLDivElement = document.querySelector(".products__center") as HTMLDivElement;
-let productsBody: HTMLDivElement = document.getElementById ("products") as HTMLDivElement
 
 //====productInfo====declaration=
 
@@ -41,7 +40,7 @@ let submitBtn = document.getElementById("submitBtn") as HTMLAnchorElement;
 
 //filterbar elements declarations
 
-let filterBar = document.getElementById("filterBar") as HTMLDivElement;
+
 let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
 let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
 let filterContainerBg = document.getElementById("lockedBg") as HTMLDivElement;
