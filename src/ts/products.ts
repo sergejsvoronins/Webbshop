@@ -441,7 +441,7 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
 
         let descriptionContainer: HTMLDivElement = document.createElement ("div") as HTMLDivElement;
         descriptionContainer.className = ("descriptionContainer")
-        descriptionContainer.innerHTML = productList[i].description
+        descriptionContainer.innerHTML = someList[i].description
 
         
         let btnContainer: HTMLDivElement = document.createElement ("div")
