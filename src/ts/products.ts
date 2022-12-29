@@ -78,20 +78,14 @@ createCartHtml(productList);
 
 filterMobile.addEventListener("click", ()=>{
     resetlist(productList)
-    productsBody.style.display = "block"
-    productinfo.style.display = "none"
     showNavFilteredItems(productList,"mobile");
 })
 filterTablet.addEventListener("click", ()=>{
     resetlist(productList)
-    productsBody.style.display = "block"
-    productinfo.style.display = "none"
     showNavFilteredItems(productList,"tablet");
 })
 filterLaptop.addEventListener("click", ()=>{
     resetlist(productList)
-    productsBody.style.display = "block"
-    productinfo.style.display = "none"
     showNavFilteredItems(productList,"laptop");
 })
 
@@ -183,26 +177,28 @@ filterContainerBg.addEventListener("click", ()=>{
     }
     hidePopUp(cartContainer, showCartPopUpClass);
     hidePopUp(filterPopUp, showFilterPopUpClass);
+    productinfo.classList.remove("showPopupProductInfo")
+    resetlist(productList)
 })
 //=====FUNCTIONS SECTION
     // Function that create html for all products in main section
 export function displayProducts(someList: Product []) {
     resetlist(someList)
     productsCenter.innerHTML = "";
-    filterBar.style.display = "flex";
+    
     for(let i = 0; i < someList.length; i++){
         let productContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
         productContainer.className = "product";
         let productInfoLink : HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement ;
         productInfoLink.className = "product__infoLink";
-        /* productInfoLink.href="./productinfo.html"; */
+        
 
         productInfoLink.addEventListener('click', () => {
             someList[i]["showItem"] = true;
             displayProductInfo(someList, productinfo)
-            productsBody.style.display = "none";
-            productinfo.style.display ="block";
-            // loadToLocalStorage(productList);
+            filterContainerBg.style.display = "block"
+            productinfo.classList.add ("showPopupProductInfo")
+            document.body.style.overflow = "hidden";
         });
 
         let imgContainer : HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -357,7 +353,7 @@ function createCartHtml (products:Product []) {
     //Function that create html for productInfo PopUp
 export function displayProductInfo(someList:Product[], container:HTMLDivElement){
     container.innerHTML="";
-    filterBar.style.display = "none";
+
     for (let i = 0; i < someList.length; i++) {
         if (someList[i].showItem === true){
 
@@ -365,12 +361,12 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
         productDetail.className = "productInfo__Container";
 
         let buttonContainer: HTMLDivElement = document.createElement ("div")
-        buttonContainer.className = "productInfo__arrow"
+        buttonContainer.className = "productInfo__close"
         let backButton: HTMLAnchorElement = document.createElement ("a")
         backButton.className = "backButton"
         backButton.removeAttribute("href");
         let backAarrow: HTMLLIElement = document.createElement ("li")
-        backAarrow.className = "fa-solid fa-arrow-left"
+        backAarrow.className = "fa-solid fa-x"
         
         let productInfo: HTMLDivElement = document.createElement ("div")
         productInfo.className = "detailContainer";
@@ -485,9 +481,9 @@ export function displayProductInfo(someList:Product[], container:HTMLDivElement)
 
         backButton.addEventListener("click",()=>{
             someList[i].showItem=false;
-            productsBody.style.display = "block"
-            productinfo.style.display = "none"
-            filterBar.style.display = "flex";
+            filterContainerBg.style.display = "none"
+            productinfo.classList.remove("showPopupProductInfo")
+            document.body.style.overflow = "auto";
         })
         }
     }
