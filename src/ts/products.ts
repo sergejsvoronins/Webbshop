@@ -28,7 +28,6 @@ let linkUrlTablet : string = "http://localhost:1234/pages/products.html#tablet";
 let linkUrlLaptop : string = "http://localhost:1234/pages/products.html#Laptop";
 let cartN : HTMLSpanElement = document.getElementById("cartCount") as HTMLSpanElement;
 let cartItemAmount : string = "";
-cartItemAmount = updateCartItemAmount(productList);
 
 //cartPopUp declarations
 
@@ -46,7 +45,7 @@ let filterBar = document.getElementById("filterBar") as HTMLDivElement;
 let filterBarIcon = document.getElementById("filterBarIcon") as HTMLDivElement;
 let filterPopUp = document.getElementById("filterContainer") as HTMLDivElement;
 let filterContainerBg = document.getElementById("lockedBg") as HTMLDivElement;
-let sortBarAlt = document.getElementsByClassName("filterContainer__sortAlt") as HTMLCollectionOf<Element>;
+let sortBarAlt = document.getElementsByClassName("filterContainer__sortOptions__sortAlt") as HTMLCollectionOf<Element>;
 let sortBarType = document.getElementById("sortBarType") as HTMLDivElement;
 let sortBarBrand = document.getElementById("sortBarBrand") as HTMLDivElement;
 let sortBarColor = document.getElementById("sortBarColor") as HTMLDivElement;
@@ -71,6 +70,9 @@ else if (linkUrlLaptop === location.href){
 else {
     displayProducts(productList);
 }
+cartItemAmount = updateCartItemAmount(productList);
+cartN.innerHTML = cartItemAmount;
+createCartHtml(productList);
 //=====EVENTS SECTION
 //Event for navmenu
 
@@ -94,24 +96,19 @@ filterLaptop.addEventListener("click", ()=>{
 })
 
 //Events for cartPop 
+let showCartPopUpClass : string = "showCartPopUp";
 cartIcon.addEventListener("click", ()=>{
-    cartContainer.classList.add("show");
-    filterContainerBg.style.display = "block";
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "18px";       
+    showPopUp(cartContainer, showCartPopUpClass);     
 })
 cartCloseBtn.addEventListener("click", ()=>{
-    cartContainer.classList.remove("show");
-    filterContainerBg.style.display = "none";
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "0px";
+    hidePopUp(cartContainer, showCartPopUpClass);
 })
 //Events for filterPopUp
+let showFilterPopUpClass : string = "showFilterPopUp";
     //Event that show/hide filterTitles content
 for (let i=0; i<sortBarAlt.length; i++){
     sortBarAlt[i].children[0].addEventListener("click", ()=> {
-        sortList[i].classList.toggle("show");
-
+        sortList[i].classList.toggle("showContent");
     })
 }
     //Event that steer the ActiveFilterList(this list helps to create filterList of productList by comparing AFL values with PL) and steer adding/remove class activefitler
@@ -166,32 +163,26 @@ for (let i=0; i<sortList.length; i++){
     }
 }
 filterBarIcon.addEventListener("click", ()=>{
-    filterPopUp.style.opacity = "1";
-    filterPopUp.style.left = "0";
-    filterContainerBg.style.display = "block";
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "18px";
+    showPopUp(filterPopUp, showFilterPopUpClass);
 })
 submitFilter.addEventListener("click", ()=>{
     displayFilteredItems(productList);
 })
 filterCloseBtn.addEventListener("click", ()=>{
-    filterPopUp.style.opacity = "0";
-    filterPopUp.style.left = "-300%";
-    filterContainerBg.style.display = "none";
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "0px";
+    for (let i=0; i<sortBarAlt.length; i++){
+        sortList[i].classList.remove("showContent");
+    }
+    hidePopUp(filterPopUp, showFilterPopUpClass);
 })
 resetFilterBtn.addEventListener("click", ()=>{
     resetFilter();
 })
 filterContainerBg.addEventListener("click", ()=>{
-    filterPopUp.style.opacity = "0";
-    filterPopUp.style.left = "-300%";
-    filterContainerBg.style.display = "none";
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "0px";
-    cartContainer.classList.remove("show");
+    for (let i=0; i<sortBarAlt.length; i++){
+        sortList[i].classList.remove("showContent");
+    }
+    hidePopUp(cartContainer, showCartPopUpClass);
+    hidePopUp(filterPopUp, showFilterPopUpClass);
 })
 //=====FUNCTIONS SECTION
     // Function that create html for all products in main section
@@ -344,7 +335,7 @@ function createCartHtml (products:Product []) {
             productAmountNumber.addEventListener("input", ()=>{
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
                     products[i].buyAmount = +productAmountNumber.value;
-                    cartItemAmount = updateCartItemAmount(productList);
+                    cartItemAmount = updateCartItemAmount(products);
                     loadToLocalStorage(products);
                     createCartHtml(products);
                 } 
@@ -513,10 +504,10 @@ function displayFilteredItems (products: Product []) {
     if (activeFilterList[2]!==""){
         filteredList = filteredList.filter((product)=>product.color === activeFilterList[2]);
     }
-    if (activeFilterList[3]!=="" && activeFilterList[2]==="sortera stigande") {
+    if (activeFilterList[3]!=="" && activeFilterList[3]==="sortera stigande") {
         filteredList.sort(sortByPriceUp);
     }
-    else if (activeFilterList[3]!=="" && activeFilterList[2]==="sortera fallande"){
+    else if (activeFilterList[3]!=="" && activeFilterList[3]==="sortera fallande"){
         filteredList.sort(sortByPriceDown);
     }
     displayProducts(filteredList);
@@ -529,4 +520,18 @@ function resetFilter() {
                 sortList[i].children[j].classList.remove("activeFilter");   
         }
     }
+}
+    //Function that hide cartPopUp and FilterPopUp
+function hidePopUp (container:HTMLDivElement, className:string){
+    container.classList.remove(className);
+    filterContainerBg.style.display = "none";
+    document.body.style.overflow = "auto";
+    document.body.style.paddingRight = "0px";
+}
+    //Function that show cartPopUp and FilterPopUp
+function showPopUp (container:HTMLDivElement, className:string) {
+   container.classList.add(className);
+    filterContainerBg.style.display = "block";
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = "18px";
 }
