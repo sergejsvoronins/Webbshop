@@ -4,10 +4,11 @@ import { loadToLocalStorage } from "./functions/loadtolocalstorage";
 import { Product } from "./models/product";
 import { sortByPriceDown } from "./functions/sortbypricedown";
 import { sortByPriceUp } from "./functions/sortbypriceup";
-import { countOrderPrice } from "./functions/countorderprice";
+
 import { resetlist } from "./functions/resetlist";
 import { showNavFilteredItems } from "./functions/shownavfiltereditems";
 import { removeActivefilter } from "./functions/resetactivefilter";
+import { countProductsPrice } from "./functions/countproductsprice";
 
 //products page declarations
 let productList : Product [] = loadFromlocalStorage();
@@ -307,7 +308,7 @@ function createCartHtml (products:Product []) {
             productTitle.innerHTML = products[i].title;
             productColor.innerHTML = products[i].color;
             productPrice.innerHTML = products[i].price+":-";
-            cartPrice = countOrderPrice(cartPrice,products,i);
+            cartPrice = countProductsPrice(products);
             cartProductPrice.innerHTML = cartPrice.toString()+":-";
             cartTotalPrice.innerHTML = cartPrice.toString()+":-";
             let decreaseBtn : HTMLButtonElement = document.createElement("button");
@@ -323,16 +324,28 @@ function createCartHtml (products:Product []) {
                 if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount ++;
                     cartItemAmount = updateCartItemAmount(products);
+                    cartN.innerHTML = cartItemAmount;
                     loadToLocalStorage(products);
-                    createCartHtml(products);
+                    productAmountNumber.value = products[i].buyAmount.toString();
+                    cartPrice = countProductsPrice(products);
+                    cartProductPrice.innerHTML = cartPrice.toString()+":-";
+                    cartTotalPrice.innerHTML = cartPrice.toString()+":-";
                 }     
             })
             productAmountNumber.addEventListener("input", ()=>{
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
                     products[i].buyAmount = +productAmountNumber.value;
                     cartItemAmount = updateCartItemAmount(products);
+                    cartN.innerHTML = cartItemAmount;
                     loadToLocalStorage(products);
-                    createCartHtml(products);
+                    if (products[i].buyAmount === 0){
+                        createCartHtml(products);
+                    }
+                    else {
+                        cartPrice = countProductsPrice(products);
+                        cartProductPrice.innerHTML = cartPrice.toString()+":-";
+                        cartTotalPrice.innerHTML = cartPrice.toString()+":-";
+                    }
                 } 
                 else {
                     productAmountNumber.value = products[i].buyAmount.toString();
@@ -342,8 +355,17 @@ function createCartHtml (products:Product []) {
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount --;
                     cartItemAmount = updateCartItemAmount(products);
+                    cartN.innerHTML = cartItemAmount;
                     loadToLocalStorage(products);
-                    createCartHtml(products);
+                    if (products[i].buyAmount === 0){
+                        createCartHtml(products);
+                    }
+                    else {
+                        productAmountNumber.value = products[i].buyAmount.toString();
+                        cartPrice = countProductsPrice(products);
+                        cartProductPrice.innerHTML = cartPrice.toString()+":-";
+                        cartTotalPrice.innerHTML = cartPrice.toString()+":-";
+                    }
                 }  
             })
         }
