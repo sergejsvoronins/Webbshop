@@ -1,7 +1,8 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { Product } from "./models/product";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
-import { countOrderPrice } from "./functions/countorderprice";
+// import { countOrderPrice } from "./functions/countorderprice";
+import { countProductsPrice } from "./functions/countproductsprice";
 
 
 let checkOutContainer = document.getElementById("checkOutContainer") as HTMLDivElement;
@@ -68,8 +69,7 @@ function createCheckOutHtml (products: Product []) {
             productAmountDiv.appendChild(decreaseBtn);
             productAmountDiv.appendChild(productAmountNumber);
             productAmountDiv.appendChild(increaseBtn);
-            // checkOutPrice += (+products[i].price*products[i].buyAmount);
-            checkOutPrice = countOrderPrice(checkOutPrice, products, i)
+            checkOutPrice = +countProductsPrice(products);
             checkOutProductsPrice.innerHTML = checkOutPrice.toString()+":-";
             checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
             checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
@@ -81,26 +81,50 @@ function createCheckOutHtml (products: Product []) {
             increaseBtn.addEventListener("click", ()=>{
                 if (+productAmountNumber.value < 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount ++;
+                    productAmountNumber.value = products[i].buyAmount.toString();
                     loadToLocalStorage(products);
-                    createCheckOutHtml(products);
+                    checkOutPrice = countProductsPrice(products);
+                    checkOutProductsPrice.innerHTML = checkOutPrice.toString();
+                    checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
+                    checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
                 }
             })
             productAmountNumber.addEventListener("input", ()=>{
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
                     products[i].buyAmount = +productAmountNumber.value;
                     loadToLocalStorage(products);
-                    createCheckOutHtml(products);
+                    if (products[i].buyAmount === 0){
+                        createCheckOutHtml(products);
+                    }
+                    else {
+                        productAmountNumber.value = products[i].buyAmount.toString();
+                        checkOutPrice = countProductsPrice(products);
+                        checkOutProductsPrice.innerHTML = checkOutPrice.toString();
+                        checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
+                        checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
+                    }
                 } 
                 else {
                     productAmountNumber.value = products[i].buyAmount.toString();
                 }
             })
-            decreaseBtn.addEventListener("click", ()=>{
+            decreaseBtn.addEventListener("click", ()=>{ 
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value > 0){
                     products[i].buyAmount --;
                     loadToLocalStorage(products);
-                    createCheckOutHtml(products);
-                }  
+                    if (products[i].buyAmount === 0){
+                        createCheckOutHtml(products);
+                    }
+                    else {
+                        productAmountNumber.value = products[i].buyAmount.toString();
+                        checkOutPrice = countProductsPrice(products);
+                        checkOutProductsPrice.innerHTML = checkOutPrice.toString();
+                        checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
+                        checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
+                    }
+
+                } 
+
             })
         }
     }
@@ -113,13 +137,15 @@ postBoxOption.addEventListener("change", ()=> {
         freightPrice = 49;
     }
     checkOutFreightPrice.innerHTML = freightPrice.toString()+":-"
-    createCheckOutHtml(productList);
+    checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
+    checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
 })
 postOfficeOption.addEventListener("change", ()=> {
     if (postOfficeOption.checked){
         freightPrice = 0;
     }
     checkOutFreightPrice.innerHTML = freightPrice.toString()+":-"
-    createCheckOutHtml(productList);
+    checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
+    checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
 })
 // 
