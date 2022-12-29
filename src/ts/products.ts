@@ -240,6 +240,10 @@ export function displayProducts(someList: Product []) {
         addToCart.className = "icon-button"
         addToCart.innerHTML += "LÄGG TILL " + `<i class="bi bi-bag"></i>`;
 
+        let imgDiv: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+        imgDiv.className = "imgDiv";
+       
+        
         // Adds selected product to cart and activates product image animation 
         addToCart.addEventListener('click', () => {
         someList[i].buyAmount++;
@@ -252,15 +256,17 @@ export function displayProducts(someList: Product []) {
         cartItemAmount = updateCartItemAmount(productList);
         cartN.innerHTML = cartItemAmount;
         createCartHtml(productList);
-        
+
+        imgDiv.innerHTML = "";
         let imgCopy: HTMLImageElement = document.createElement("img") as HTMLImageElement;
-	    imgCopy.src = someList[i].url;
+        imgCopy.src = someList[i].url;
         imgCopy.className = "imgCopy";
-        imgCopy.style.animation = "slide linear 1s 1 normal forwards";
-        buttonDiv.appendChild(imgCopy);
+        imgDiv.style.animation = "slide linear 1s 1 normal forwards";
+        imgDiv.appendChild(imgCopy);
+
         });   
         
-
+    buttonDiv.appendChild(imgDiv);
     productsCenter.appendChild(productContainer);
     productContainer.appendChild(productInfoLink);
     productInfoLink.appendChild(imgContainer);
