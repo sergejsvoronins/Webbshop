@@ -29,7 +29,7 @@ function createCheckOutHtml (products: Product []) {
     cartItemAmount = updateCartItemAmount(products);
     if (cartItemAmount!== ""){
         submitCheckOutBtn.getAttribute("href");
-        submitCheckOutBtn.href = "./checkout.html";
+        submitCheckOutBtn.href = "./greating.html";
         submitCheckOutBtn.style.opacity = "1";
     }
     else {
