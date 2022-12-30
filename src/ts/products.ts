@@ -332,7 +332,7 @@ function createCartHtml (products:Product []) {
                     cartTotalPrice.innerHTML = cartPrice.toString()+":-";
                 }     
             })
-            productAmountNumber.addEventListener("input", ()=>{
+            productAmountNumber.addEventListener("change", ()=>{
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
                     products[i].buyAmount = +productAmountNumber.value;
                     cartItemAmount = updateCartItemAmount(products);

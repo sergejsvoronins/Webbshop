@@ -101,7 +101,7 @@ function createCheckOutHtml (products: Product []) {
                     checkOutOrderPrice.innerHTML = checkOutTotalPrice.innerHTML;
                 }
             })
-            productAmountNumber.addEventListener("input", ()=>{
+            productAmountNumber.addEventListener("change", ()=>{
                 if (+productAmountNumber.value <= 50 && +productAmountNumber.value >= 0){
                     products[i].buyAmount = +productAmountNumber.value;
                     loadToLocalStorage(products);

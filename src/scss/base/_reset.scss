@@ -1,4 +1,4 @@
-@use "../library/mixins";
+@use "../library/mixins" as m;
 @use "../library/variables" as v;
 
 * {
@@ -10,6 +10,12 @@
   font-size: 18px;
 }
 body {
-    background-color: v.$body-color;
-    position: relative;
+  background-color: v.$body-color;
+  position: relative;
+
+  main {
+    @include m.desktop {
+      min-height: 90vh;
+    }
+  }
 }
