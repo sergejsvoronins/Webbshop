@@ -1,8 +1,8 @@
 import { loadFromlocalStorage } from "./functions/loadfromlocalstorage";
 import { Product } from "./models/product";
 import { loadToLocalStorage } from "./functions/loadtolocalstorage";
-// import { countOrderPrice } from "./functions/countorderprice";
 import { countProductsPrice } from "./functions/countproductsprice";
+import { updateCartItemAmount } from "./functions/updatecartitemamount";
 
 
 let checkOutContainer = document.getElementById("checkOutContainer") as HTMLDivElement;
@@ -13,8 +13,10 @@ let checkOutOrderPrice = document.getElementById("checkOutOrderPrice") as HTMLSp
 let postOfficeOption = document.getElementById("postOffice") as HTMLInputElement;
 let postBoxOption = document.getElementById("postBox") as HTMLInputElement;
 let klarnaPayOption = document.getElementById("klarna") as HTMLInputElement;
+let submitCheckOutBtn = document.getElementById("submitCheckOutBtn") as HTMLAnchorElement;
 let checkOutPrice : number = 0;
 let freightPrice : number = 0;
+let cartItemAmount : string = "";
 klarnaPayOption.checked = true;
 postOfficeOption.checked = true;
 
@@ -24,6 +26,16 @@ createCheckOutHtml(productList);
 function createCheckOutHtml (products: Product []) {
     checkOutContainer.innerHTML = "";
     checkOutPrice = 0;
+    cartItemAmount = updateCartItemAmount(products);
+    if (cartItemAmount!== ""){
+        submitCheckOutBtn.getAttribute("href");
+        submitCheckOutBtn.href = "./checkout.html";
+        submitCheckOutBtn.style.opacity = "1";
+    }
+    else {
+        submitCheckOutBtn.removeAttribute("href");
+        submitCheckOutBtn.style.opacity = ".3";
+    }
     for (let i=0; i<products.length; i++){
         checkOutProductsPrice. innerHTML = checkOutPrice.toString();
         checkOutTotalPrice.innerHTML = (checkOutPrice+freightPrice).toString()+":-";
